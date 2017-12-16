@@ -7,15 +7,19 @@
 //
 
 #include <iostream>
-#include "time.h"
 #include "block.h"
 #include "blockChain.h"
+#include "talk.h"
 
 using namespace std;
 
 int main(int argc, const char * argv[]) {
 
     cout << "Blockchain demo program." << endl;
+
+    talk t;
+    t.connect();
+
 /*
     blockChain bc;
     cout << bc.getLatestBlock()->getData() << ", len = " << bc.length() << " " << blockChain::isValidChain(&bc) << endl;

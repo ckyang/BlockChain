@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A816C34C1FE555BE00A2B0B1 /* talk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A816C34A1FE555BE00A2B0B1 /* talk.cpp */; };
 		A8EA7FAA1FE4C083003F4E89 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8EA7FA91FE4C083003F4E89 /* main.cpp */; };
 		A8EA7FB41FE4C3EF003F4E89 /* block.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8EA7FB21FE4C3EF003F4E89 /* block.cpp */; };
 		A8EA7FB71FE4C9F3003F4E89 /* crypto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8EA7FB51FE4C9F3003F4E89 /* crypto.cpp */; };
@@ -26,6 +27,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A816C34A1FE555BE00A2B0B1 /* talk.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = talk.cpp; sourceTree = "<group>"; };
+		A816C34D1FE555D400A2B0B1 /* talk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = talk.h; sourceTree = "<group>"; };
 		A8EA7FA61FE4C083003F4E89 /* ClarkChain */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ClarkChain; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8EA7FA91FE4C083003F4E89 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		A8EA7FB11FE4C2F4003F4E89 /* block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = block.h; sourceTree = "<group>"; };
@@ -73,6 +76,8 @@
 				A8EA7FB81FE4CA06003F4E89 /* crypto.h */,
 				A8EA7FB91FE4D220003F4E89 /* blockChain.cpp */,
 				A8EA7FBB1FE4D230003F4E89 /* blockChain.h */,
+				A816C34A1FE555BE00A2B0B1 /* talk.cpp */,
+				A816C34D1FE555D400A2B0B1 /* talk.h */,
 			);
 			path = ClarkChain;
 			sourceTree = "<group>";
@@ -137,6 +142,7 @@
 				A8EA7FAA1FE4C083003F4E89 /* main.cpp in Sources */,
 				A8EA7FBA1FE4D220003F4E89 /* blockChain.cpp in Sources */,
 				A8EA7FB71FE4C9F3003F4E89 /* crypto.cpp in Sources */,
+				A816C34C1FE555BE00A2B0B1 /* talk.cpp in Sources */,
 				A8EA7FB41FE4C3EF003F4E89 /* block.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -192,9 +198,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-levent";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -241,8 +250,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-levent";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -251,7 +263,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = "-levent";
+				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -259,7 +276,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = "-levent";
+				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};
