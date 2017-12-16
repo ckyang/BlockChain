@@ -1,0 +1,290 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A8EA7FAA1FE4C083003F4E89 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8EA7FA91FE4C083003F4E89 /* main.cpp */; };
+		A8EA7FB41FE4C3EF003F4E89 /* block.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8EA7FB21FE4C3EF003F4E89 /* block.cpp */; };
+		A8EA7FB71FE4C9F3003F4E89 /* crypto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8EA7FB51FE4C9F3003F4E89 /* crypto.cpp */; };
+		A8EA7FBA1FE4D220003F4E89 /* blockChain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8EA7FB91FE4D220003F4E89 /* blockChain.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A8EA7FA41FE4C083003F4E89 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A8EA7FA61FE4C083003F4E89 /* ClarkChain */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ClarkChain; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8EA7FA91FE4C083003F4E89 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		A8EA7FB11FE4C2F4003F4E89 /* block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = block.h; sourceTree = "<group>"; };
+		A8EA7FB21FE4C3EF003F4E89 /* block.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = block.cpp; sourceTree = "<group>"; };
+		A8EA7FB51FE4C9F3003F4E89 /* crypto.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = crypto.cpp; sourceTree = "<group>"; };
+		A8EA7FB81FE4CA06003F4E89 /* crypto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = crypto.h; sourceTree = "<group>"; };
+		A8EA7FB91FE4D220003F4E89 /* blockChain.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = blockChain.cpp; sourceTree = "<group>"; };
+		A8EA7FBB1FE4D230003F4E89 /* blockChain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = blockChain.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A8EA7FA31FE4C083003F4E89 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A8EA7F9D1FE4C083003F4E89 = {
+			isa = PBXGroup;
+			children = (
+				A8EA7FA81FE4C083003F4E89 /* ClarkChain */,
+				A8EA7FA71FE4C083003F4E89 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A8EA7FA71FE4C083003F4E89 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A8EA7FA61FE4C083003F4E89 /* ClarkChain */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A8EA7FA81FE4C083003F4E89 /* ClarkChain */ = {
+			isa = PBXGroup;
+			children = (
+				A8EA7FA91FE4C083003F4E89 /* main.cpp */,
+				A8EA7FB11FE4C2F4003F4E89 /* block.h */,
+				A8EA7FB21FE4C3EF003F4E89 /* block.cpp */,
+				A8EA7FB51FE4C9F3003F4E89 /* crypto.cpp */,
+				A8EA7FB81FE4CA06003F4E89 /* crypto.h */,
+				A8EA7FB91FE4D220003F4E89 /* blockChain.cpp */,
+				A8EA7FBB1FE4D230003F4E89 /* blockChain.h */,
+			);
+			path = ClarkChain;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A8EA7FA51FE4C083003F4E89 /* ClarkChain */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A8EA7FAD1FE4C083003F4E89 /* Build configuration list for PBXNativeTarget "ClarkChain" */;
+			buildPhases = (
+				A8EA7FA21FE4C083003F4E89 /* Sources */,
+				A8EA7FA31FE4C083003F4E89 /* Frameworks */,
+				A8EA7FA41FE4C083003F4E89 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ClarkChain;
+			productName = ClarkChain;
+			productReference = A8EA7FA61FE4C083003F4E89 /* ClarkChain */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A8EA7F9E1FE4C083003F4E89 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Chung-kaiYang";
+				TargetAttributes = {
+					A8EA7FA51FE4C083003F4E89 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = A8EA7FA11FE4C083003F4E89 /* Build configuration list for PBXProject "ClarkChain" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A8EA7F9D1FE4C083003F4E89;
+			productRefGroup = A8EA7FA71FE4C083003F4E89 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A8EA7FA51FE4C083003F4E89 /* ClarkChain */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A8EA7FA21FE4C083003F4E89 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8EA7FAA1FE4C083003F4E89 /* main.cpp in Sources */,
+				A8EA7FBA1FE4D220003F4E89 /* blockChain.cpp in Sources */,
+				A8EA7FB71FE4C9F3003F4E89 /* crypto.cpp in Sources */,
+				A8EA7FB41FE4C3EF003F4E89 /* block.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A8EA7FAB1FE4C083003F4E89 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A8EA7FAC1FE4C083003F4E89 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A8EA7FAE1FE4C083003F4E89 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A8EA7FAF1FE4C083003F4E89 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A8EA7FA11FE4C083003F4E89 /* Build configuration list for PBXProject "ClarkChain" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A8EA7FAB1FE4C083003F4E89 /* Debug */,
+				A8EA7FAC1FE4C083003F4E89 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A8EA7FAD1FE4C083003F4E89 /* Build configuration list for PBXNativeTarget "ClarkChain" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A8EA7FAE1FE4C083003F4E89 /* Debug */,
+				A8EA7FAF1FE4C083003F4E89 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A8EA7F9E1FE4C083003F4E89 /* Project object */;
+}
