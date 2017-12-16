@@ -16,10 +16,13 @@ using namespace std;
 class block
 {
 public:
+    block(block * const b);
     block(const int index, const string& preHash, const time_t& timeStamp, const string& data, const string& hash);
     int getIndex() {return m_index;}
-    string getHash() {return m_hash;}
+    string getPreHash() {return m_preHash;}
+    time_t getTimeStamp() {return m_timeStamp;}
     string getData() {return m_data;}
+    string getHash() {return m_hash;}
     
 private:
     int m_index;

@@ -6,6 +6,7 @@
 //  Copyright © 2017 Chung-kaiYang. All rights reserved.
 //
 
+#include <iostream>
 #include "blockChain.h"
 #include "crypto.h"
 #include "block.h"
@@ -22,8 +23,10 @@ string blockChain::calculateHash(const int index, const string& preHash, const t
 
 blockChain::blockChain()
 {
-    head = new blockNode(getGenesisBlock(), NULL);
+    head = getGenesisBlock();
     tail = head;
+    len = 1;
+    hashList[head->getHash()] = head;
 }
 
 block* blockChain::getGenesisBlock()
@@ -35,5 +38,93 @@ block* blockChain::generateNextBlock(const string& data)
 {
     time_t timeStamp;
     time(&timeStamp);
-    return new block(tail->m_cur->getIndex() + 1, tail->m_cur->getHash(), timeStamp, data, calculateHash(tail->m_cur->getIndex() + 1, tail->m_cur->getHash(), timeStamp, data));
+    return new block(tail->getIndex() + 1, tail->getHash(), timeStamp, data, calculateHash(tail->getIndex() + 1, tail->getHash(), timeStamp, data));
+}
+
+void blockChain::addBlock(block *newBlock)
+{
+    tail = newBlock;
+    hashList[newBlock->getHash()] = newBlock;
+    ++len;
+}
+
+bool blockChain::isValidBlock(block* newBlock, block* preBlock)
+{
+    if(preBlock->getIndex() + 1 != newBlock->getIndex())
+    {
+        cout << "Invalid index" << endl;
+        return false;
+    }
+
+    if(preBlock->getHash() != newBlock->getPreHash())
+    {
+        cout << "Invalid previoushash" << endl;
+        return false;
+    }
+
+    string newHash = calculateHash(newBlock->getIndex(), newBlock->getPreHash(), newBlock->getTimeStamp(), newBlock->getData());
+
+    if(newHash != newBlock->getHash())
+    {
+        cout << "Invalid hash: " << newHash << " " << newBlock->getHash() << endl;
+        return false;
+    }
+
+    return true;
+}
+
+bool blockChain::isValidChain(blockChain * const chain)
+{
+    block *cur = chain->getLatestBlock();
+
+    while(cur)
+    {
+        block *pre = chain->getBlock(cur->getPreHash());
+
+        if(!pre)
+            return true;
+
+        if(!isValidBlock(cur, pre))
+            return false;
+
+        cur = pre;
+    }
+
+    return true;
+}
+
+void blockChain::replaceChain(blockChain * const newChain)
+{
+    if(!isValidChain(newChain) || newChain->length() <= len)
+    {
+        cout << "Received blockchain invalid, not replaced." << endl;
+        return;
+    }
+
+    cout << "Received blockchain is valid. Replacing current blockchain with received blockchain." << endl;
+
+    block *cur = getLatestBlock();
+
+    while(cur)
+    {
+        block *pre = hashList[cur->getPreHash()];
+        delete cur;
+        cur = pre;
+    }
+
+    hashList.clear();
+
+    tail = newChain->getLatestBlock();
+    cur = tail;
+
+    while(cur)
+    {
+        block *pre = newChain->getBlock(cur->getPreHash());
+        hashList[cur->getHash()] = new block(cur);
+        head = cur;
+        cur = pre;
+    }
+
+    len = newChain->length();
+//    broadcast(responseLatestMsg());
 }

@@ -8,6 +8,15 @@
 
 #include "block.h"
 
+block::block(block* const b)
+{
+    m_index = b->getIndex();
+    m_preHash = b->getPreHash();
+    m_timeStamp = b->getTimeStamp();
+    m_data = b->getData();
+    m_hash = b->getHash();
+}
+
 block::block(const int index, const string& preHash, const time_t& timeStamp, const string& data, const string& hash)
 {
     m_index = index;

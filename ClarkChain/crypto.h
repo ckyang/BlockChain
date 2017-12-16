@@ -23,7 +23,7 @@ typedef struct {
 class crypto
 {
 public:
-    static string SHA256(char *dat);
+    static string SHA256(char *data);
 
 private:
     static void SHA256Transform(SHA256_CTX *ctx, unsigned char data[]);

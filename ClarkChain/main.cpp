@@ -15,15 +15,24 @@ using namespace std;
 
 int main(int argc, const char * argv[]) {
 
-    cout << "abc" << endl;
-
-    time_t t;
-    time(&t);
-    block *b = new block(5, "prehash", t, "data", "hash");
-//    cout << "calhash = " << blockChain::calculateHash(9, "ab", t, "cd") << endl;
-    cout << "index = " << b->getIndex() << endl;
+    cout << "Blockchain demo program." << endl;
+/*
     blockChain bc;
-    cout << bc.getLatestBlock()->getData() << endl;
-    cout << bc.generateNextBlock("nnnnnclark")->getData() << endl;
+    cout << bc.getLatestBlock()->getData() << ", len = " << bc.length() << " " << blockChain::isValidChain(&bc) << endl;
+    bc.addBlock(bc.generateNextBlock("nnnnnclark"));
+    bc.addBlock(bc.generateNextBlock("nnclark"));
+    bc.addBlock(bc.generateNextBlock("nclark"));
+    cout << bc.getLatestBlock()->getData() << ", len = " << bc.length() << " " << blockChain::isValidChain(&bc) << endl;
+
+    blockChain bd;
+    cout << bd.getLatestBlock()->getData() << ", len = " << bd.length() << " " << blockChain::isValidChain(&bd) << endl;
+    bd.addBlock(bd.generateNextBlock("clark2"));
+    bd.addBlock(bd.generateNextBlock("clark3"));
+    cout << bd.getLatestBlock()->getData() << ", len = " << bd.length() << " " << blockChain::isValidChain(&bd) << endl;
+
+    bd.replaceChain(&bc);
+    cout << bd.getLatestBlock()->getData() << ", len = " << bd.length() << " " << blockChain::isValidChain(&bd) << endl;
+*/
+    
     return 0;
 }
