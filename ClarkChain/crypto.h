@@ -9,8 +9,6 @@
 #ifndef crypto_h
 #define crypto_h
 
-#include <string>
-
 using namespace std;
 
 typedef struct {

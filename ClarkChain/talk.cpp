@@ -13,24 +13,28 @@
 #include "sys/socket.h"
 #include "sys/types.h"
 #include "event.h"
+#include "factory.h"
+#include "blockChain.h"
+#include "block.h"
 
 using namespace std;
 
 static void connection_time(int fd, short event, void *arg)
 {
     char buf[32];
-    struct tm t;
-    time_t now;
 
     char rbuf[1500];
     read(fd,rbuf,1500);
     cout << "Received message : "<< rbuf << endl;
 
-    time(&now);
-    localtime_r(&now, &t);
-    asctime_r(&t, buf);
+    //NEW blockInfo
+
+    //GET LAST
+
+    //GET ALL
     
-    write(fd, buf, strlen(buf));
+    blockChain* blockChainObject = factory::GetBlockChain();
+    write(fd, blockChainObject->getLatestBlock()->getData().c_str(), blockChainObject->getLatestBlock()->getData().length());
     shutdown(fd, SHUT_RDWR);
     
     free(arg);
@@ -56,7 +60,7 @@ static void connection_accept(int fd, short event, void *arg)
     event_add(ev, NULL);
 }
 
-void talk::connect()
+void talk::connect(int port)
 {
     /* Request socket. */
     int s = socket(PF_INET, SOCK_STREAM, 0);
@@ -64,12 +68,12 @@ void talk::connect()
         perror("socket");
         exit(1);
     }
-    
+
     /* bind() */
     struct sockaddr_in s_in;
     bzero(&s_in, sizeof(s_in));
     s_in.sin_family = AF_INET;
-    s_in.sin_port = htons(7000);
+    s_in.sin_port = htons(port);
     s_in.sin_addr.s_addr = INADDR_ANY;
     if (::bind(s, (struct sockaddr *) &s_in, sizeof(s_in)) < 0) {
         perror("bind");
@@ -88,11 +92,15 @@ void talk::connect()
     /* Create event. */
     struct event ev;
     event_set(&ev, s, EV_READ | EV_PERSIST, connection_accept, &ev);
-    
+
     /* Add event. */
     event_add(&ev, NULL);
-    
+
     event_dispatch();
-    cout << "event_dispatch" << endl;
+    close(s);
 }
 
+void talk::broadcast(const string& message)
+{
+    
+}

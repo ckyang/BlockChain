@@ -9,11 +9,16 @@
 #ifndef talk_h
 #define talk_h
 
+using namespace std;
+
+class blockChain;
+
 class talk
 {
 public:
     talk(){};
-    void connect();
+    void connect(int port);
+    void broadcast(const string& message);
 };
 
 #endif /* talk_h */

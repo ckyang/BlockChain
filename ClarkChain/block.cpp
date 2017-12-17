@@ -25,3 +25,8 @@ block::block(const int index, const string& preHash, const time_t& timeStamp, co
     m_data = data;
     m_hash = hash;
 }
+
+block::block(const string& totalInfo)
+{
+    
+}
