@@ -21,20 +21,24 @@ class blockChain
 public:
     blockChain();
 
+    static bool isValidChain(blockChain * const chain);
+    static bool isValidBlock(const int index, const string& preHash, const time_t& timeStamp, const string& data, const string& hash, block *preBlock);
+    static blockChain* generateChain(const string& chainInfo);
+
     block* generateNextBlock(const string& data);
     void addBlock(block *newBlock);
     unsigned long long length(){return len;}
     block *getLatestBlock(){return tail;}
     block *getBlock(const string& hash){return hashList[hash];}
     void replaceChain(blockChain * const chain);
-
-    static bool isValidChain(blockChain * const chain);
+    string getChainInfo();
+    ~blockChain();
 
 private:
-    block *getGenesisBlock();
-
     static string calculateHash(const int index, const string& preHash, const time_t& timeStamp, const string& data);
-    static bool isValidBlock(block *newBlock, block *preBlock);
+
+    block *getGenesisBlock();
+    void removeAll();
 
     block *head;
     block *tail;

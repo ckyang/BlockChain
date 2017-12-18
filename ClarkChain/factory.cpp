@@ -29,3 +29,18 @@ talk* factory::GetTalk()
     
     return m_talk;
 }
+
+factory::~factory(void)
+{
+    if(m_blockChain)
+    {
+        delete m_blockChain;
+        m_blockChain = NULL;
+    }
+
+    if(m_talk)
+    {
+        delete m_talk;
+        m_talk = NULL;
+    }
+}

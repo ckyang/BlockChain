@@ -12,13 +12,14 @@
 using namespace std;
 
 class blockChain;
+class block;
 
 class talk
 {
 public:
     talk(){};
     void connect(int port);
-    void broadcast(const string& message);
+    void broadcast(block* const bk);
 };
 
 #endif /* talk_h */

@@ -26,7 +26,22 @@ block::block(const int index, const string& preHash, const time_t& timeStamp, co
     m_hash = hash;
 }
 
-block::block(const string& totalInfo)
+void block::TransferInfo(const string& totalInfo, int& index, string& preHash, time_t& timeStamp, string& data, string& hash)
 {
-    
+    string info = totalInfo;
+    size_t found = info.find(" ");
+    index = stoi(info.substr(0, found));
+
+    info = info.substr(found + 1);
+    found = info.find(" ");
+    preHash = info.substr(0, found);
+
+    info = info.substr(found + 1);
+    found = info.find(" ");
+    timeStamp = stoll(info.substr(0, found));
+
+    info = info.substr(found + 1);
+    found = info.find(" ");
+    data = info.substr(0, found);
+    hash = info.substr(found + 1);
 }

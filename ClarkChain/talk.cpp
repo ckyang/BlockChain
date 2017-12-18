@@ -19,32 +19,83 @@
 
 using namespace std;
 
-static void connection_time(int fd, short event, void *arg)
-{
-    char buf[32];
+#define REMOTE_COMMAND_NEW "NEW"
+#define REMOTE_COMMAND_GET_LAST "GET LAST"
+#define REMOTE_COMMAND_GET_ALL "GET ALL"
+#define REMOTE_COMMAND_REPLY_LAST "REPLY LAST"
+#define REMOTE_COMMAND_REPLY_ALL "REPLY ALL"
 
-    char rbuf[1500];
+static void response(int fd, short event, void *arg)
+{
+    char rbuf[1500] = {'\0'};
     read(fd,rbuf,1500);
-    cout << "Received message : "<< rbuf << endl;
+    string readBuf(rbuf), writeBuf;
+    readBuf = readBuf.substr(0, readBuf.size() - 2);
+//    cout << "Received message : " << readBuf.size() << "=" << readBuf << "..." << endl;
+    
+    if(readBuf.size() < 7)
+    {
+        writeBuf = "Invalid command!";
+        write(fd, writeBuf.c_str(), writeBuf.size());
+        shutdown(fd, SHUT_RDWR);
+        free(arg);
+        return;
+    }
+
+    blockChain* blockChainObject = factory::GetBlockChain();
 
     //NEW blockInfo
+    if(readBuf.substr(0, 3) == REMOTE_COMMAND_NEW)
+    {
+        int index;
+        string preHash, data, hash;
+        time_t timeStamp;
+        block::TransferInfo(readBuf.substr(4), index, preHash, timeStamp, data, hash);
 
+        //If this block is already the top of blockchain, do nothing
+        if(blockChainObject->getLatestBlock()->getIndex() != index || blockChainObject->getLatestBlock()->getPreHash() != preHash || blockChainObject->getLatestBlock()->getTimeStamp() != timeStamp || blockChainObject->getLatestBlock()->getData() != data || blockChainObject->getLatestBlock()->getHash() != hash)
+        {
+            //If this block (coming from remote) is valid, just add into currnet blockchain.
+            //If it's invalid, ignore this block and request other node's blockchain
+            if(blockChain::isValidBlock(index, preHash, timeStamp, data, hash, blockChainObject->getLatestBlock()))
+                blockChainObject->addBlock(new block(index, preHash, timeStamp, data, hash));
+            else
+                writeBuf = REMOTE_COMMAND_GET_ALL;
+        }
+        else
+            cout << "This block already in the top of blockchain, do nothing." << endl;
+    }
     //GET LAST
-
+    else if(readBuf == REMOTE_COMMAND_GET_LAST)
+        writeBuf = string(REMOTE_COMMAND_REPLY_LAST) + " " + blockChainObject->getLatestBlock()->getBlockInfo();
     //GET ALL
-    
-    blockChain* blockChainObject = factory::GetBlockChain();
-    write(fd, blockChainObject->getLatestBlock()->getData().c_str(), blockChainObject->getLatestBlock()->getData().length());
+    else if(readBuf == REMOTE_COMMAND_GET_ALL)
+        writeBuf = string(REMOTE_COMMAND_REPLY_ALL) + " " + blockChainObject->getChainInfo();
+    //REPLY LAST ...
+    else if(readBuf.substr(0, 10) == REMOTE_COMMAND_REPLY_LAST)
+    {
+        //TBD
+
+    }
+    //REPLY ALL ...
+    else if(readBuf.substr(0, 9) == REMOTE_COMMAND_REPLY_ALL)
+    {
+        blockChain* newChain = blockChain::generateChain(readBuf.substr(10));
+
+        //If other node's blockchain is longer than current, use this one
+        if(newChain->length() > blockChainObject->length())
+            blockChainObject->replaceChain(newChain);
+
+        delete newChain;
+    }
+
+    write(fd, writeBuf.c_str(), writeBuf.size());
     shutdown(fd, SHUT_RDWR);
-    
     free(arg);
 }
 
 static void connection_accept(int fd, short event, void *arg)
 {
-    /* for debugging */
-    fprintf(stderr, "%s(): fd = %d, event = %d.\n", __func__, fd, event);
-
     struct sockaddr_in s_in;
     socklen_t len = sizeof(s_in);
     int ns = accept(fd, (struct sockaddr *) &s_in, &len);
@@ -56,7 +107,7 @@ static void connection_accept(int fd, short event, void *arg)
     }
 
     struct event *ev = (struct event*)malloc(sizeof(struct event));
-    event_set(ev, ns, EV_WRITE, connection_time, ev);
+    event_set(ev, ns, EV_WRITE, response, ev);
     event_add(ev, NULL);
 }
 
@@ -100,7 +151,9 @@ void talk::connect(int port)
     close(s);
 }
 
-void talk::broadcast(const string& message)
+void talk::broadcast(block* const bk)
 {
-    
+    //TBD
+    string message = string("NEW ") + bk->getBlockInfo();
+    cout << "Broadcast " << message << endl;
 }

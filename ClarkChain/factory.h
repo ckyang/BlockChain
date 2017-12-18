@@ -17,6 +17,7 @@ class factory
 public:
     static blockChain* GetBlockChain();
     static talk* GetTalk();
+    ~factory();
 
 private:
     static blockChain* m_blockChain;

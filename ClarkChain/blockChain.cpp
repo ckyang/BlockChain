@@ -7,9 +7,12 @@
 //
 
 #include <iostream>
+#include <stack>
 #include "blockChain.h"
 #include "crypto.h"
 #include "block.h"
+#include "factory.h"
+#include "talk.h"
 
 string blockChain::calculateHash(const int index, const string& preHash, const time_t& timeStamp, const string& data)
 {
@@ -31,7 +34,7 @@ blockChain::blockChain()
 
 block* blockChain::getGenesisBlock()
 {
-    return new block(0, "0", 1465154705, "Clark Chain Genesis Block", "816534932c2b7154836da6afc367695e6337db8a921823784c14378abed4f7d7");
+    return new block(0, "816534932c2b7154836da6afc367695e6337db8a921823784c14378abed4f7d7", 1513598789, "Clark_Chain_Genesis_Block", "a8b407b3c63fed132d8313960335c63c25a705e4fe558ba2e70e5bde6e10abfc");
 }
 
 block* blockChain::generateNextBlock(const string& data)
@@ -46,27 +49,28 @@ void blockChain::addBlock(block *newBlock)
     tail = newBlock;
     hashList[newBlock->getHash()] = newBlock;
     ++len;
+    factory::GetTalk()->broadcast(newBlock);
 }
 
-bool blockChain::isValidBlock(block* newBlock, block* preBlock)
+bool blockChain::isValidBlock(const int index, const string& preHash, const time_t& timeStamp, const string& data, const string& hash, block* preBlock)
 {
-    if(preBlock->getIndex() + 1 != newBlock->getIndex())
+    if(preBlock->getIndex() + 1 != index)
     {
         cout << "Invalid index" << endl;
         return false;
     }
 
-    if(preBlock->getHash() != newBlock->getPreHash())
+    if(preBlock->getHash() != preHash)
     {
         cout << "Invalid previoushash" << endl;
         return false;
     }
 
-    string newHash = calculateHash(newBlock->getIndex(), newBlock->getPreHash(), newBlock->getTimeStamp(), newBlock->getData());
+    string newHash = calculateHash(index, preHash, timeStamp, data);
 
-    if(newHash != newBlock->getHash())
+    if(newHash != hash)
     {
-        cout << "Invalid hash: " << newHash << " " << newBlock->getHash() << endl;
+        cout << "Invalid hash: " << newHash << " " << hash << endl;
         return false;
     }
 
@@ -84,7 +88,7 @@ bool blockChain::isValidChain(blockChain * const chain)
         if(!pre)
             return true;
 
-        if(!isValidBlock(cur, pre))
+        if(!isValidBlock(cur->getIndex(), cur->getPreHash(), cur->getTimeStamp(), cur->getData(), cur->getHash(), pre))
             return false;
 
         cur = pre;
@@ -103,19 +107,10 @@ void blockChain::replaceChain(blockChain * const newChain)
 
     cout << "Received blockchain is valid. Replacing current blockchain with received blockchain." << endl;
 
-    block *cur = getLatestBlock();
-
-    while(cur)
-    {
-        block *pre = hashList[cur->getPreHash()];
-        delete cur;
-        cur = pre;
-    }
-
-    hashList.clear();
+    removeAll();
 
     tail = newChain->getLatestBlock();
-    cur = tail;
+    block* cur = tail;
 
     while(cur)
     {
@@ -126,5 +121,73 @@ void blockChain::replaceChain(blockChain * const newChain)
     }
 
     len = newChain->length();
-//    broadcast(responseLatestMsg());
 }
+
+string blockChain::getChainInfo()
+{
+    string res;
+    block* cur = getLatestBlock();
+    
+    while(cur)
+    {
+        if(!res.empty())
+            res += ",";
+
+        res += cur->getBlockInfo();
+        cur = getBlock(cur->getPreHash());
+    }
+
+    return res;
+}
+
+blockChain* blockChain::generateChain(const string& chainInfo)
+{
+    string info = chainInfo;
+    size_t found = info.find(",");
+    int index;
+    string preHash, data, hash;
+    time_t timeStamp;
+    stack<block*> s;
+
+    while(found != string::npos)
+    {
+        block::TransferInfo(info.substr(0, found), index, preHash, timeStamp, data, hash);
+        s.push(new block(index, preHash, timeStamp, data, hash));
+        info = info.substr(found + 1);
+        found = info.find(",");
+    }
+
+    block::TransferInfo(info, index, preHash, timeStamp, data, hash);
+    s.push(new block(index, preHash, timeStamp, data, hash));
+    
+    blockChain* newChain = new blockChain();
+
+    while(!s.empty())
+    {
+        newChain->addBlock(s.top());
+        s.pop();
+    }
+
+    return newChain;
+}
+
+blockChain::~blockChain()
+{
+    removeAll();
+}
+
+void blockChain::removeAll()
+{
+    block *cur = getLatestBlock();
+    
+    while(cur)
+    {
+        block *pre = hashList[cur->getPreHash()];
+        delete cur;
+        cur = pre;
+    }
+    
+    hashList.clear();
+    len = 0;
+}
+

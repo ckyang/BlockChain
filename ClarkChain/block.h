@@ -18,13 +18,14 @@ class block
 public:
     block(block * const b);
     block(const int index, const string& preHash, const time_t& timeStamp, const string& data, const string& hash);
-    block(const string& blockInfo);
     int getIndex() {return m_index;}
     string getPreHash() {return m_preHash;}
     time_t getTimeStamp() {return m_timeStamp;}
     string getData() {return m_data;}
     string getHash() {return m_hash;}
-    string getBlockInfo(){return to_string(m_index) + "" + m_preHash + " " + to_string(m_timeStamp) + " " + m_data + " " + m_hash;}
+    string getBlockInfo(){return to_string(m_index) + " " + m_preHash + " " + to_string(m_timeStamp) + " " + m_data + " " + m_hash;}
+
+    static void TransferInfo(const string& totalInfo, int& index, string& preHash, time_t& timeStamp, string& data, string& hash);
 
 private:
     int m_index;

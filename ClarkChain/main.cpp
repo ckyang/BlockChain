@@ -14,12 +14,12 @@
 
 using namespace std;
 
-enum COMMAND
+enum USER_COMMAND
 {
-    COMMAND_QUIT = 0,
-    COMMAND_ADD_BLOCK = 1,
-    COMMAND_LIST_BLOCKCHAIN = 2,
-    COMMAND_MAX
+    USER_COMMAND_QUIT = 0,
+    USER_COMMAND_ADD_BLOCK = 1,
+    USER_COMMAND_LIST_BLOCKCHAIN = 2,
+    USER_COMMAND_MAX
 };
 
 void* create_talk(void *talkClass)
@@ -35,64 +35,50 @@ int main(int argc, const char * argv[]) {
     cout << "Initialize blockchain..." << endl;
     blockChain* blockChainObject = factory::GetBlockChain();
     cout << "Blockchain initialized." << endl;
-/*
-    cout << blockChainObject->getLatestBlock()->getData() << ", len = " << blockChainObject->length() << " " << blockChain::isValidChain(blockChainObject) << endl;
-    blockChainObject->addBlock(blockChainObject->generateNextBlock("nnnnnclark"));
-    blockChainObject->addBlock(blockChainObject->generateNextBlock("nnclark"));
-    blockChainObject->addBlock(blockChainObject->generateNextBlock("nclark"));
-    cout << blockChainObject->getLatestBlock()->getData() << ", len = " << blockChainObject->length() << " " << blockChain::isValidChain(blockChainObject) << endl;
-*/
 
     pthread_t thread;
     talk* talkObject = factory::GetTalk();
     pthread_create(&thread, NULL , create_talk, (void*) talkObject);
 
+    //Handle user input
     while(true)
     {
         int input = 0;
         cout << "Please input your choice:" << endl;
-        cout << COMMAND_QUIT << ") : Quit" << endl;
-        cout << COMMAND_ADD_BLOCK << ") : Add block" << endl;
-        cout << COMMAND_LIST_BLOCKCHAIN << ") : List blockchain" << endl;
+        cout << USER_COMMAND_QUIT << ") : Quit" << endl;
+        cout << USER_COMMAND_ADD_BLOCK << ") : Add block" << endl;
+        cout << USER_COMMAND_LIST_BLOCKCHAIN << ") : List blockchain" << endl;
         cin >> input;
 
         switch(input)
         {
-            case COMMAND_QUIT:
+            case USER_COMMAND_QUIT:
                 return 0;
-            case COMMAND_ADD_BLOCK:
+            case USER_COMMAND_ADD_BLOCK:
             {
                 char str[20] = {'\0'};
                 cout << "Please input your block content:" << endl;
                 scanf("%s", str);
                 blockChainObject->addBlock(blockChainObject->generateNextBlock(string(str)));
-                talkObject->broadcast(string("NEW ") + blockChainObject->getLatestBlock()->getBlockInfo());
                 break;
+            }
+            case USER_COMMAND_LIST_BLOCKCHAIN:
+            {
+                block* cur = blockChainObject->getLatestBlock();
+
+                if(cur)
+                    cout << "Index PreHash TimeStamp Data Hash" << endl;
+
+                while(cur)
+                {
+                    cout << cur->getIndex() << " " << cur->getPreHash() << " " << cur->getTimeStamp() << " " << cur->getData() << " " << cur->getHash() << endl;
+                    cur = blockChainObject->getBlock(cur->getPreHash());
+                }
             }
             default:
                 break;
         }
-
-        
     }
-//    cin >> input;
-/*
-    blockChain bc;
-    cout << bc.getLatestBlock()->getData() << ", len = " << bc.length() << " " << blockChain::isValidChain(&bc) << endl;
-    bc.addBlock(bc.generateNextBlock("nnnnnclark"));
-    bc.addBlock(bc.generateNextBlock("nnclark"));
-    bc.addBlock(bc.generateNextBlock("nclark"));
-    cout << bc.getLatestBlock()->getData() << ", len = " << bc.length() << " " << blockChain::isValidChain(&bc) << endl;
-
-    blockChain bd;
-    cout << bd.getLatestBlock()->getData() << ", len = " << bd.length() << " " << blockChain::isValidChain(&bd) << endl;
-    bd.addBlock(bd.generateNextBlock("clark2"));
-    bd.addBlock(bd.generateNextBlock("clark3"));
-    cout << bd.getLatestBlock()->getData() << ", len = " << bd.length() << " " << blockChain::isValidChain(&bd) << endl;
-
-    bd.replaceChain(&bc);
-    cout << bd.getLatestBlock()->getData() << ", len = " << bd.length() << " " << blockChain::isValidChain(&bd) << endl;
-*/
     
     return 0;
 }
