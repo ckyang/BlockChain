@@ -17,7 +17,7 @@ talk* factory::m_talk = NULL;
 blockChain* factory::GetBlockChain()
 {
     if(!m_blockChain)
-        m_blockChain = new blockChain();
+        m_blockChain = new blockChain(true);
 
     return m_blockChain;
 }

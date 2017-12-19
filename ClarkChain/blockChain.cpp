@@ -24,12 +24,14 @@ string blockChain::calculateHash(const int index, const string& preHash, const t
     return s;
 }
 
-blockChain::blockChain()
+blockChain::blockChain(bool bGenerateGenesis)
 {
-    head = getGenesisBlock();
-    tail = head;
-    len = 1;
-    hashList[head->getHash()] = head;
+    head = NULL;
+    tail = NULL;
+    len = 0;
+
+    if(bGenerateGenesis)
+        addBlock(getGenesisBlock());
 }
 
 block* blockChain::getGenesisBlock()
@@ -46,10 +48,10 @@ block* blockChain::generateNextBlock(const string& data)
 
 void blockChain::addBlock(block *newBlock)
 {
+    head = !head ? newBlock : head;
     tail = newBlock;
     hashList[newBlock->getHash()] = newBlock;
     ++len;
-    factory::GetTalk()->broadcast(newBlock);
 }
 
 bool blockChain::isValidBlock(const int index, const string& preHash, const time_t& timeStamp, const string& data, const string& hash, block* preBlock)
@@ -109,14 +111,14 @@ void blockChain::replaceChain(blockChain * const newChain)
 
     removeAll();
 
-    tail = newChain->getLatestBlock();
-    block* cur = tail;
+    block* cur = newChain->getLatestBlock();
 
     while(cur)
     {
         block *pre = newChain->getBlock(cur->getPreHash());
         hashList[cur->getHash()] = new block(cur);
-        head = cur;
+        tail = !tail ? hashList[cur->getHash()] : tail;
+        head = hashList[cur->getHash()];
         cur = pre;
     }
 
@@ -149,6 +151,7 @@ blockChain* blockChain::generateChain(const string& chainInfo)
     time_t timeStamp;
     stack<block*> s;
 
+    cout << "generateChain " << chainInfo << endl;
     while(found != string::npos)
     {
         block::TransferInfo(info.substr(0, found), index, preHash, timeStamp, data, hash);
@@ -189,5 +192,6 @@ void blockChain::removeAll()
     
     hashList.clear();
     len = 0;
+    tail = NULL;
 }
 

@@ -8,7 +8,7 @@
 
 #include "block.h"
 
-block::block(block* const b)
+block::block(block * const b)
 {
     m_index = b->getIndex();
     m_preHash = b->getPreHash();

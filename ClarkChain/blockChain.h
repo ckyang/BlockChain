@@ -19,7 +19,7 @@ class block;
 class blockChain
 {
 public:
-    blockChain();
+    blockChain(bool bGenerateGenesis = false);
 
     static bool isValidChain(blockChain * const chain);
     static bool isValidBlock(const int index, const string& preHash, const time_t& timeStamp, const string& data, const string& hash, block *preBlock);
