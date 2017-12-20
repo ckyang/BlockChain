@@ -25,7 +25,7 @@ enum USER_COMMAND
 void* create_talk(void *talkClass)
 {
     pthread_detach(pthread_self());
-    ((talk*)talkClass)->connect(7000);
+    ((talk*)talkClass)->connect();
     pthread_exit(0);
 }
 
@@ -60,6 +60,7 @@ int main(int argc, const char * argv[]) {
                 cout << "Please input your block content:" << endl;
                 scanf("%s", str);
                 blockChainObject->addBlock(blockChainObject->generateNextBlock(string(str)));
+                talk::broadcast(blockChainObject->getLatestBlock());
                 break;
             }
             case USER_COMMAND_LIST_BLOCKCHAIN:

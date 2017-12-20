@@ -18,8 +18,10 @@ class talk
 {
 public:
     talk(){};
-    void connect(int port);
-    void broadcast(block* const bk);
+
+    static void broadcast(block* const bk);
+
+    void connect();
 };
 
 #endif /* talk_h */

@@ -19,7 +19,7 @@ string blockChain::calculateHash(const int index, const string& preHash, const t
     string s(to_string(index) + data + to_string(timeStamp) + preHash);
     char *tmp = new char[s.length() + 1];
     strcpy(tmp, s.c_str());
-    s = crypto::SHA256(tmp);
+    s = crypto::HASH(tmp);
     delete []tmp;
     return s;
 }

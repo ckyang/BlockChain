@@ -1,12 +1,12 @@
 //
-//  crypto.cpp
+//  sha.cpp
 //  ClarkChain
 //
-//  Created by Chung-kaiYang on 12/16/17.
+//  Created by Chung-kaiYang on 12/20/17.
 //  Copyright © 2017 Chung-kaiYang. All rights reserved.
 //
-#include <string>
-#include "crypto.h"
+
+#include "sha.h"
 
 #define DBL_INT_ADD(a,b,c) if (a > 0xffffffff - (c)) ++b; a += c;
 #define ROTLEFT(a,b) (((a) << (b)) | ((a) >> (32-(b))))
@@ -19,6 +19,8 @@
 #define SIG0(x) (ROTRIGHT(x,7) ^ ROTRIGHT(x,18) ^ ((x) >> 3))
 #define SIG1(x) (ROTRIGHT(x,17) ^ ROTRIGHT(x,19) ^ ((x) >> 10))
 
+using namespace std;
+
 unsigned int k[64] = {
     0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
     0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
@@ -30,7 +32,14 @@ unsigned int k[64] = {
     0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2
 };
 
-void crypto::SHA256Transform(SHA256_CTX *ctx, unsigned char data[])
+typedef struct {
+    unsigned char data[64];
+    unsigned int datalen;
+    unsigned int bitlen[2];
+    unsigned int state[8];
+} SHA256_CTX;
+
+void SHA256Transform(SHA256_CTX *ctx, unsigned char data[])
 {
     unsigned int a, b, c, d, e, f, g, h, i, j, t1, t2, m[64];
     
@@ -71,7 +80,7 @@ void crypto::SHA256Transform(SHA256_CTX *ctx, unsigned char data[])
     ctx->state[7] += h;
 }
 
-void crypto::SHA256Init(SHA256_CTX *ctx)
+void SHA256Init(SHA256_CTX *ctx)
 {
     ctx->datalen = 0;
     ctx->bitlen[0] = 0;
@@ -86,7 +95,7 @@ void crypto::SHA256Init(SHA256_CTX *ctx)
     ctx->state[7] = 0x5be0cd19;
 }
 
-void crypto::SHA256Update(SHA256_CTX *ctx, unsigned char data[], unsigned int len)
+void SHA256Update(SHA256_CTX *ctx, unsigned char data[], unsigned int len)
 {
     for (unsigned int i = 0; i < len; ++i) {
         ctx->data[ctx->datalen] = data[i];
@@ -99,7 +108,7 @@ void crypto::SHA256Update(SHA256_CTX *ctx, unsigned char data[], unsigned int le
     }
 }
 
-void crypto::SHA256Final(SHA256_CTX *ctx, unsigned char hash[])
+void SHA256Final(SHA256_CTX *ctx, unsigned char hash[])
 {
     unsigned int i = ctx->datalen;
     
@@ -142,13 +151,13 @@ void crypto::SHA256Final(SHA256_CTX *ctx, unsigned char hash[])
     }
 }
 
-string crypto::SHA256(char *data)
+string SHA256(char *data)
 {
     int strLen = (int)strlen(data);
     SHA256_CTX ctx;
     unsigned char hash[32];
     string hashStr = "";
-
+    
     SHA256Init(&ctx);
     SHA256Update(&ctx, (unsigned char*)data, strLen);
     SHA256Final(&ctx, hash);
@@ -161,3 +170,4 @@ string crypto::SHA256(char *data)
     
     return hashStr;
 }
+

@@ -17,15 +17,33 @@
 #include "blockChain.h"
 #include "block.h"
 
-using namespace std;
-
 #define REMOTE_COMMAND_NEW "NEW"
 #define REMOTE_COMMAND_GET_LAST "GET LAST"
 #define REMOTE_COMMAND_GET_ALL "GET ALL"
 #define REMOTE_COMMAND_REPLY_LAST "REPLY LAST"
 #define REMOTE_COMMAND_REPLY_ALL "REPLY ALL"
 
+#define DEBUG_MODE 0
+
+#if DEBUG_MODE
+#define SENDER_PORT 7000
+#define RECEIVER_PORT 7001
+#else
+#define SENDER_PORT 7000
+#define RECEIVER_PORT 7000
+#endif
+
 #define MAX_BUF_SIZE 1500
+
+using namespace std;
+
+static bool startWith(const string& str, const string& start)
+{
+    if(str.size() < start.size())
+        return false;
+
+    return str.substr(0, start.size()) == start;
+}
 
 static void response(int sock_fd, short event, void *arg)
 {
@@ -42,7 +60,11 @@ static void response(int sock_fd, short event, void *arg)
     }
 
     string readBuf(rbuf), writeBuf;
-    readBuf = readBuf.substr(0, readBuf.size() - 1);
+
+    if('\n' == readBuf[readBuf.size() - 1])
+        readBuf = readBuf.substr(0, readBuf.size() - 1);
+
+//    cout << "receive " << readBuf.size() << "," << readBuf << endl;
 
     if(readBuf.size() < 7)
     {
@@ -54,7 +76,7 @@ static void response(int sock_fd, short event, void *arg)
     blockChain* blockChainObject = factory::GetBlockChain();
 
     //NEW blockInfo
-    if(readBuf.substr(0, 3) == REMOTE_COMMAND_NEW)
+    if(startWith(readBuf, REMOTE_COMMAND_NEW))
     {
         int index;
         string preHash, data, hash;
@@ -64,7 +86,7 @@ static void response(int sock_fd, short event, void *arg)
         //If this block is already the top of blockchain, do nothing
         if(blockChainObject->getLatestBlock()->getIndex() == index && blockChainObject->getLatestBlock()->getPreHash() == preHash && blockChainObject->getLatestBlock()->getTimeStamp() == timeStamp && blockChainObject->getLatestBlock()->getData() == data && blockChainObject->getLatestBlock()->getHash() == hash)
         {
-            cout << "This block already in the top of blockchain, do nothing." << endl;
+//            cout << "This block already in the top of blockchain, do nothing." << endl;
             return;
         }
 
@@ -82,7 +104,7 @@ static void response(int sock_fd, short event, void *arg)
     }
 
     //GET LAST
-    if(readBuf == REMOTE_COMMAND_GET_LAST)
+    if(startWith(readBuf, REMOTE_COMMAND_GET_LAST))
     {
         writeBuf = string(REMOTE_COMMAND_REPLY_LAST) + " " + blockChainObject->getLatestBlock()->getBlockInfo();
 
@@ -91,7 +113,7 @@ static void response(int sock_fd, short event, void *arg)
     }
 
     //GET ALL
-    if(readBuf == REMOTE_COMMAND_GET_ALL)
+    if(startWith(readBuf, REMOTE_COMMAND_GET_ALL))
     {
         writeBuf = string(REMOTE_COMMAND_REPLY_ALL) + " " + blockChainObject->getChainInfo();
 
@@ -100,7 +122,7 @@ static void response(int sock_fd, short event, void *arg)
     }
 
     //REPLY LAST ...
-    if(readBuf.substr(0, 10) == REMOTE_COMMAND_REPLY_LAST)
+    if(startWith(readBuf, REMOTE_COMMAND_REPLY_LAST))
     {
         //TBD
 
@@ -108,7 +130,7 @@ static void response(int sock_fd, short event, void *arg)
     }
 
     //REPLY ALL ...
-    if(readBuf.substr(0, 9) == REMOTE_COMMAND_REPLY_ALL)
+    if(startWith(readBuf, REMOTE_COMMAND_REPLY_ALL))
     {
         blockChain* newChain = blockChain::generateChain(readBuf.substr(10));
 
@@ -121,24 +143,7 @@ static void response(int sock_fd, short event, void *arg)
     }
 }
 
-static void connection_accept(int fd, short event, void *arg)
-{
-    struct sockaddr_in s_in;
-    socklen_t len = sizeof(s_in);
-    int ns = accept(fd, (struct sockaddr *) &s_in, &len);
-
-    if(ns < 0)
-    {
-        perror("accept");
-        return;
-    }
-
-    struct event *ev = (struct event*)malloc(sizeof(struct event));
-    event_set(ev, ns, EV_WRITE, response, ev);
-    event_add(ev, NULL);
-}
-
-void talk::connect(int port)
+void talk::connect()
 {
     int sock_fd = socket(AF_INET, SOCK_DGRAM, 0);
     if (sock_fd < 0) {
@@ -146,38 +151,64 @@ void talk::connect(int port)
         exit(1);
     }
 
-    int flag = 1;
+    int yes = 1;
 
-    if (setsockopt(sock_fd, SOL_SOCKET, SO_REUSEADDR, &flag, sizeof(int)) < 0) {
+    if (setsockopt(sock_fd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int)) < 0) {
         perror("setsockopt()");
         exit(1);
     }
 
-    struct sockaddr_in s_in;
-    bzero(&s_in, sizeof(s_in));
-    s_in.sin_family = AF_INET;
-    s_in.sin_port = htons(port);
-    s_in.sin_addr.s_addr = INADDR_ANY;
-    if (::bind(sock_fd, (struct sockaddr *) &s_in, sizeof(s_in)) < 0) {
+    struct sockaddr_in sock_in;
+    bzero(&sock_in, sizeof(sock_in));
+    sock_in.sin_family = AF_INET;
+    sock_in.sin_port = htons(RECEIVER_PORT);
+    sock_in.sin_addr.s_addr = INADDR_ANY;
+    if (::bind(sock_fd, (struct sockaddr *) &sock_in, sizeof(sock_in)) < 0) {
         perror("bind");
         exit(1);
     }
 
     event_init();
-    
+
     struct event ev;
     event_set(&ev, sock_fd, EV_READ | EV_PERSIST, response, &ev);
 
     event_add(&ev, NULL);
 
     event_dispatch();
+    shutdown(sock_fd, 2);
     close(sock_fd);
 }
 
 void talk::broadcast(block* const bk)
 {
-    //TBD
+    int sock_fd;
+    struct sockaddr_in sock_in;
+    int yes = 1;
+
+    memset(&sock_in, 0, sizeof(struct sockaddr_in));
+
+    sock_fd = socket (PF_INET, SOCK_DGRAM, IPPROTO_UDP);
+    sock_in.sin_addr.s_addr = htonl(INADDR_ANY);
+    sock_in.sin_port = htons(0);
+    sock_in.sin_family = PF_INET;
+
+    if (::bind(sock_fd, (struct sockaddr *) &sock_in, sizeof(struct sockaddr_in)) < 0) {
+        perror("bind");
+        exit(1);
+    }
+
+    setsockopt(sock_fd, SOL_SOCKET, SO_BROADCAST, &yes, sizeof(int));
+
+    sock_in.sin_addr.s_addr = htonl(-1); /* send message to 255.255.255.255 */
+    sock_in.sin_port = htons(SENDER_PORT);
+    sock_in.sin_family = PF_INET;
+
     string message = string("NEW ") + bk->getBlockInfo();
-    cout << "Broadcast " << message << endl;
+
+    sendto(sock_fd, message.c_str(), message.size() + 1, 0, (struct sockaddr *)&sock_in, sizeof(struct sockaddr_in));
+
+    shutdown(sock_fd, 2);
+    close(sock_fd);
 }
 
