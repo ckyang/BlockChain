@@ -26,12 +26,16 @@ string blockChain::calculateHash(const int index, const string& preHash, const t
 
 blockChain::blockChain(bool bGenerateGenesis)
 {
+    cout << "Initialize blockchain..." << endl;
+
     head = NULL;
     tail = NULL;
     len = 0;
 
     if(bGenerateGenesis)
         addBlock(getGenesisBlock());
+
+    cout << "Blockchain initialized." << endl;
 }
 
 block* blockChain::getGenesisBlock()

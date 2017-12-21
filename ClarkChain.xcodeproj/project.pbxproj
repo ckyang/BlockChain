@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		A816C34C1FE555BE00A2B0B1 /* talk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A816C34A1FE555BE00A2B0B1 /* talk.cpp */; };
 		A81F2FF81FE669B900E77552 /* factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A81F2FF71FE669B900E77552 /* factory.cpp */; };
-		A86B8D0A1FEA8FE3001FD188 /* sha.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A86B8D081FEA8FE3001FD188 /* sha.cpp */; };
 		A8EA7FAA1FE4C083003F4E89 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8EA7FA91FE4C083003F4E89 /* main.cpp */; };
 		A8EA7FB41FE4C3EF003F4E89 /* block.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8EA7FB21FE4C3EF003F4E89 /* block.cpp */; };
 		A8EA7FB71FE4C9F3003F4E89 /* crypto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8EA7FB51FE4C9F3003F4E89 /* crypto.cpp */; };
@@ -33,8 +32,6 @@
 		A816C34D1FE555D400A2B0B1 /* talk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = talk.h; sourceTree = "<group>"; };
 		A81F2FF71FE669B900E77552 /* factory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = factory.cpp; sourceTree = "<group>"; };
 		A81F2FF91FE669C400E77552 /* factory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = factory.h; sourceTree = "<group>"; };
-		A86B8D081FEA8FE3001FD188 /* sha.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sha.cpp; sourceTree = "<group>"; };
-		A86B8D0B1FEA90AB001FD188 /* sha.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sha.h; sourceTree = "<group>"; };
 		A8EA7FA61FE4C083003F4E89 /* ClarkChain */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ClarkChain; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8EA7FA91FE4C083003F4E89 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		A8EA7FB11FE4C2F4003F4E89 /* block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = block.h; sourceTree = "<group>"; };
@@ -61,8 +58,6 @@
 			children = (
 				A8EA7FB81FE4CA06003F4E89 /* crypto.h */,
 				A8EA7FB51FE4C9F3003F4E89 /* crypto.cpp */,
-				A86B8D081FEA8FE3001FD188 /* sha.cpp */,
-				A86B8D0B1FEA90AB001FD188 /* sha.h */,
 			);
 			path = crypto;
 			sourceTree = "<group>";
@@ -174,7 +169,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8EA7FAA1FE4C083003F4E89 /* main.cpp in Sources */,
-				A86B8D0A1FEA8FE3001FD188 /* sha.cpp in Sources */,
 				A8EA7FBA1FE4D220003F4E89 /* blockChain.cpp in Sources */,
 				A8EA7FB71FE4C9F3003F4E89 /* crypto.cpp in Sources */,
 				A816C34C1FE555BE00A2B0B1 /* talk.cpp in Sources */,
@@ -234,7 +228,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = /usr/local/include;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/usr/local/Cellar/openssl/1.0.2n/include,
+				);
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -286,7 +283,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = /usr/local/include;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/usr/local/Cellar/openssl/1.0.2n/include,
+				);
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -299,9 +299,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				HEADER_SEARCH_PATHS = /usr/local/include;
-				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				OTHER_LDFLAGS = "-levent";
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/usr/local/Cellar/openssl/1.0.2n/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/usr/local/Cellar/openssl/1.0.2n/lib,
+				);
+				OTHER_LDFLAGS = (
+					"-levent",
+					"-lcrypto",
+				);
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -312,9 +321,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				HEADER_SEARCH_PATHS = /usr/local/include;
-				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				OTHER_LDFLAGS = "-levent";
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/usr/local/Cellar/openssl/1.0.2n/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/usr/local/Cellar/openssl/1.0.2n/lib,
+				);
+				OTHER_LDFLAGS = (
+					"-levent",
+					"-lcrypto",
+				);
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "";
