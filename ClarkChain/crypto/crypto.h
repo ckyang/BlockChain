@@ -28,9 +28,7 @@ public:
 private:
     void generateKeyPair();
 
-    EVP_PKEY* m_pkey;
-    EC_KEY* m_myecc;
-    BIO* m_pbio_key_file;
+    EC_KEY* m_pECCKeyPair;
 };
 
 #endif /* crypto_h */

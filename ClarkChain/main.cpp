@@ -40,7 +40,7 @@ int main(int argc, const char * argv[]) {
     pthread_create(&thread, NULL , create_talk, (void*) talkObject);
 
     crypto* cryptoObject = factory::GetCrypto();
-    ECDSA_SIG* sig = cryptoObject->sign("abc");
+//    ECDSA_SIG* sig = cryptoObject->sign("abc");
 //    cout << cryptoObject->verify("abc", sig, NULL) << endl;
 
     //Handle user input
