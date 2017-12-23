@@ -1,6 +1,6 @@
 //
 //  crypto.cpp
-//  ClarkChain
+//  BlockChain
 //
 //  Created by Chung-kaiYang on 12/16/17.
 //  Copyright © 2017 Chung-kaiYang. All rights reserved.
@@ -79,7 +79,7 @@ bool crypto::verify(const string& message, ECDSA_SIG const * signature, EC_KEY* 
 {
     if(!public_key)
     {
-        cout << "Public key invalid, please enter valid public key to verify message!" << endl;
+        cout << "Public key is invalid, please enter valid public key to verify message!" << endl;
         return false;
     }
 

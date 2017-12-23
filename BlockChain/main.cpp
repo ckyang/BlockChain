@@ -1,6 +1,6 @@
 //
 //  main.cpp
-//  ClarkChain
+//  BlockChain
 //
 //  Created by Chung-kaiYang on 12/16/17.
 //  Copyright © 2017 Chung-kaiYang. All rights reserved.
@@ -40,8 +40,8 @@ int main(int argc, const char * argv[]) {
     pthread_create(&thread, NULL , create_talk, (void*) talkObject);
 
     crypto* cryptoObject = factory::GetCrypto();
-//    ECDSA_SIG* sig = cryptoObject->sign("abc");
-//    cout << cryptoObject->verify("abc", sig, NULL) << endl;
+    ECDSA_SIG* sig = cryptoObject->sign("abc");
+    cout << cryptoObject->verify("abc", sig, NULL) << endl;
 
     //Handle user input
     while(true)

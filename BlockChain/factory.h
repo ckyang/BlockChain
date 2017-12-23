@@ -1,6 +1,6 @@
 //
 //  factory.h
-//  ClarkChain
+//  BlockChain
 //
 //  Created by Chung-kaiYang on 12/17/17.
 //  Copyright © 2017 Chung-kaiYang. All rights reserved.

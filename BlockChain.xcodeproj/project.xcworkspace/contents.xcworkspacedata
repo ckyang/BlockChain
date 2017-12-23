@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:ClarkChain.xcodeproj">
+      location = "self:/Users/CK-Yang/GitHub/ClarkChain/BlockChain.xcodeproj">
    </FileRef>
 </Workspace>

@@ -1,6 +1,6 @@
 //
 //  talk.h
-//  ClarkChain
+//  BlockChain
 //
 //  Created by Chung-kaiYang on 12/16/17.
 //  Copyright © 2017 Chung-kaiYang. All rights reserved.

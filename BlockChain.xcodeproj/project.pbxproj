@@ -32,7 +32,7 @@
 		A816C34D1FE555D400A2B0B1 /* talk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = talk.h; sourceTree = "<group>"; };
 		A81F2FF71FE669B900E77552 /* factory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = factory.cpp; sourceTree = "<group>"; };
 		A81F2FF91FE669C400E77552 /* factory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = factory.h; sourceTree = "<group>"; };
-		A8EA7FA61FE4C083003F4E89 /* ClarkChain */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ClarkChain; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8EA7FA61FE4C083003F4E89 /* BlockChain */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BlockChain; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8EA7FA91FE4C083003F4E89 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		A8EA7FB11FE4C2F4003F4E89 /* block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = block.h; sourceTree = "<group>"; };
 		A8EA7FB21FE4C3EF003F4E89 /* block.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = block.cpp; sourceTree = "<group>"; };
@@ -85,7 +85,7 @@
 		A8EA7F9D1FE4C083003F4E89 = {
 			isa = PBXGroup;
 			children = (
-				A8EA7FA81FE4C083003F4E89 /* ClarkChain */,
+				A8EA7FA81FE4C083003F4E89 /* BlockChain */,
 				A8EA7FA71FE4C083003F4E89 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -93,12 +93,12 @@
 		A8EA7FA71FE4C083003F4E89 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A8EA7FA61FE4C083003F4E89 /* ClarkChain */,
+				A8EA7FA61FE4C083003F4E89 /* BlockChain */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A8EA7FA81FE4C083003F4E89 /* ClarkChain */ = {
+		A8EA7FA81FE4C083003F4E89 /* BlockChain */ = {
 			isa = PBXGroup;
 			children = (
 				A86B8D071FEA8EC2001FD188 /* blockchain */,
@@ -108,15 +108,15 @@
 				A81F2FF71FE669B900E77552 /* factory.cpp */,
 				A81F2FF91FE669C400E77552 /* factory.h */,
 			);
-			path = ClarkChain;
+			path = BlockChain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A8EA7FA51FE4C083003F4E89 /* ClarkChain */ = {
+		A8EA7FA51FE4C083003F4E89 /* BlockChain */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A8EA7FAD1FE4C083003F4E89 /* Build configuration list for PBXNativeTarget "ClarkChain" */;
+			buildConfigurationList = A8EA7FAD1FE4C083003F4E89 /* Build configuration list for PBXNativeTarget "BlockChain" */;
 			buildPhases = (
 				A8EA7FA21FE4C083003F4E89 /* Sources */,
 				A8EA7FA31FE4C083003F4E89 /* Frameworks */,
@@ -126,9 +126,9 @@
 			);
 			dependencies = (
 			);
-			name = ClarkChain;
+			name = BlockChain;
 			productName = ClarkChain;
-			productReference = A8EA7FA61FE4C083003F4E89 /* ClarkChain */;
+			productReference = A8EA7FA61FE4C083003F4E89 /* BlockChain */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -146,7 +146,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A8EA7FA11FE4C083003F4E89 /* Build configuration list for PBXProject "ClarkChain" */;
+			buildConfigurationList = A8EA7FA11FE4C083003F4E89 /* Build configuration list for PBXProject "BlockChain" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -158,7 +158,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A8EA7FA51FE4C083003F4E89 /* ClarkChain */,
+				A8EA7FA51FE4C083003F4E89 /* BlockChain */,
 			);
 		};
 /* End PBXProject section */
@@ -342,7 +342,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A8EA7FA11FE4C083003F4E89 /* Build configuration list for PBXProject "ClarkChain" */ = {
+		A8EA7FA11FE4C083003F4E89 /* Build configuration list for PBXProject "BlockChain" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A8EA7FAB1FE4C083003F4E89 /* Debug */,
@@ -351,7 +351,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A8EA7FAD1FE4C083003F4E89 /* Build configuration list for PBXNativeTarget "ClarkChain" */ = {
+		A8EA7FAD1FE4C083003F4E89 /* Build configuration list for PBXNativeTarget "BlockChain" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A8EA7FAE1FE4C083003F4E89 /* Debug */,
