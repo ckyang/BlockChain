@@ -94,6 +94,9 @@ dependencies: /Users/CK-Yang/GitHub/BlockChain/main.cpp \
   ../../Qt/5.10.0/ios/include/QtGui/qfontinfo.h \
   ../../Qt/5.10.0/ios/include/QtWidgets/qsizepolicy.h \
   ../../Qt/5.10.0/ios/include/QtGui/qkeysequence.h \
+  ../../Qt/5.10.0/ios/include/QtWidgets/QScrollArea \
+  ../../Qt/5.10.0/ios/include/QtWidgets/qscrollarea.h \
+  ../../Qt/5.10.0/ios/include/QtWidgets/qabstractscrollarea.h \
   /Users/CK-Yang/GitHub/BlockChain/blockchain/block.h factory.h \
   /Users/CK-Yang/GitHub/BlockChain/blockchain/blockChain.h \
   /Users/CK-Yang/GitHub/BlockChain/network/talk.h \

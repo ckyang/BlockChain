@@ -4,6 +4,7 @@
 #include <iostream>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QScrollArea>
 #include "block.h"
 #include "factory.h"
 #include "blockChain.h"
@@ -29,12 +30,15 @@ void* create_talk(void *talkClass)
 
 int main(int argc, char *argv[]){
     QApplication app(argc, argv);
-    QLabel *label = new QLabel("Blockchain implementation @ Clark Yang");
-    label->show();
+    QScrollArea *scrollArea = new QScrollArea;
+    QLabel *label = new QLabel("BlockChain implementation by Clark Yang");
+    scrollArea->resize (5, 5);
+    scrollArea->setWidget(label);
+    scrollArea->show ();
 
     cout << "Blockchain demo program." << endl;
-//    blockChain* blockChainObject = factory::GetBlockChain();
-    
+    blockChain* blockChainObject = factory::GetBlockChain();
+
     pthread_t thread;
 //    talk* talkObject = factory::GetTalk();
 //    pthread_create(&thread, NULL , create_talk, (void*) talkObject);

@@ -446,6 +446,8 @@
 					../../Qt/5.10.0/ios/include/QtCore,
 					.,
 					"../../Qt/5.10.0/ios/mkspecs/macx-ios-clang",
+					/usr/local/include,
+					/usr/local/Cellar/openssl/1.0.2n/include,
 				);
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -455,7 +457,9 @@
 					/System/Library/Frameworks/,
 					"/Users/CK-Yang/Qt/5.10.0/ios/lib",
 					"/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats",
+					/usr/local/Cellar/openssl/1.0.2n/lib,
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-pipe",
 					"-g",
@@ -503,6 +507,7 @@
 					"-L/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats",
 					"-lm",
 					"-lz",
+					"-lcrypto",
 				);
 				PRODUCT_NAME = BlockChain;
 				"QMAKE_MAC_SDK_PATH[sdk=iphoneos*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.2.sdk;
@@ -549,6 +554,8 @@
 					../../Qt/5.10.0/ios/include/QtCore,
 					.,
 					"../../Qt/5.10.0/ios/mkspecs/macx-ios-clang",
+					/usr/local/include,
+					/usr/local/Cellar/openssl/1.0.2n/include,
 				);
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -558,8 +565,9 @@
 					/System/Library/Frameworks/,
 					"/Users/CK-Yang/Qt/5.10.0/ios/lib",
 					"/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats",
+					/usr/local/Cellar/openssl/1.0.2n/lib,
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-pipe",
 					"-g",
@@ -607,6 +615,7 @@
 					"-L/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats",
 					"-lm",
 					"-lz",
+					"-lcrypto",
 				);
 				PRODUCT_NAME = BlockChain;
 				"QMAKE_MAC_SDK_PATH[sdk=iphoneos*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.2.sdk;
@@ -641,8 +650,35 @@
 					../../Qt/5.10.0/ios/include/QtCore,
 					.,
 					"../../Qt/5.10.0/ios/mkspecs/macx-ios-clang",
-					/usr/local/Cellar/openssl/1.0.2n/include,
 					/usr/local/include,
+					/usr/local/Cellar/openssl/1.0.2n/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/CK-Yang/Qt/5.10.0/ios/plugins/platforms",
+					/System/Library/Frameworks/,
+					"/Users/CK-Yang/Qt/5.10.0/ios/lib",
+					"/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats",
+					/usr/local/Cellar/openssl/1.0.2n/lib,
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-stdlib=libc++",
+					"-Wl,-e,_qt_main_wrapper",
+					"-Wl,-rpath,@executable_path/Frameworks",
+					"-L/Users/CK-Yang/Qt/5.10.0/ios/plugins/platforms",
+					"-framework",
+					UIKit,
+					"-framework",
+					AssetsLibrary,
+					"-L/Users/CK-Yang/Qt/5.10.0/ios/lib",
+					"-framework",
+					MobileCoreServices,
+					"-framework",
+					OpenGLES,
+					"-L/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats",
+					"-lm",
+					"-lz",
+					"-lcrypto",
 				);
 				PRODUCT_NAME = BlockChain;
 				"QMAKE_MAC_SDK_PATH[sdk=iphoneos*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.2.sdk;
@@ -678,10 +714,36 @@
 					../../Qt/5.10.0/ios/include/QtCore,
 					.,
 					"../../Qt/5.10.0/ios/mkspecs/macx-ios-clang",
-					/usr/local/Cellar/openssl/1.0.2n/include,
 					/usr/local/include,
+					/usr/local/Cellar/openssl/1.0.2n/include,
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/CK-Yang/Qt/5.10.0/ios/plugins/platforms",
+					/System/Library/Frameworks/,
+					"/Users/CK-Yang/Qt/5.10.0/ios/lib",
+					"/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats",
+					/usr/local/Cellar/openssl/1.0.2n/lib,
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-stdlib=libc++",
+					"-Wl,-e,_qt_main_wrapper",
+					"-Wl,-rpath,@executable_path/Frameworks",
+					"-L/Users/CK-Yang/Qt/5.10.0/ios/plugins/platforms",
+					"-framework",
+					UIKit,
+					"-framework",
+					AssetsLibrary,
+					"-L/Users/CK-Yang/Qt/5.10.0/ios/lib",
+					"-framework",
+					MobileCoreServices,
+					"-framework",
+					OpenGLES,
+					"-L/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats",
+					"-lm",
+					"-lz",
+					"-lcrypto",
+				);
 				PRODUCT_NAME = BlockChain;
 				"QMAKE_MAC_SDK_PATH[sdk=iphoneos*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.2.sdk;
 				"QMAKE_MAC_SDK_PATH[sdk=iphonesimulator*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.2.sdk;
