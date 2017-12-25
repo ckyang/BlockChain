@@ -3,364 +3,718 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		F1B3528CFBDA3342FC622EE0 /* Qt Preprocess */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 6CC3B5D2136C7CD6A5CF5A59 /* Build configuration list for PBXNativeTarget "BlockChain" */;
+			buildPhases = (
+				5E618435888B9D49F8540165 /* Qt Qmake */,
+				7EF0942E79C014DCEC8976BC /* Qt Preprocessors */,
+			);
+			dependencies = (
+			);
+			name = "Qt Preprocess";
+			productName = "Qt Preprocess";
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
-		A816C34C1FE555BE00A2B0B1 /* talk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A816C34A1FE555BE00A2B0B1 /* talk.cpp */; };
-		A81F2FF81FE669B900E77552 /* factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A81F2FF71FE669B900E77552 /* factory.cpp */; };
-		A8EA7FAA1FE4C083003F4E89 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8EA7FA91FE4C083003F4E89 /* main.cpp */; };
-		A8EA7FB41FE4C3EF003F4E89 /* block.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8EA7FB21FE4C3EF003F4E89 /* block.cpp */; };
-		A8EA7FB71FE4C9F3003F4E89 /* crypto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8EA7FB51FE4C9F3003F4E89 /* crypto.cpp */; };
-		A8EA7FBA1FE4D220003F4E89 /* blockChain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8EA7FB91FE4D220003F4E89 /* blockChain.cpp */; };
+		061CDD1D90EAEA18239D3E50 /* Qt5GraphicsSupport in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 558ED2A717A168C006BEB592 /* Qt5GraphicsSupport */; };
+		0CE02722F00CAD43741297B5 /* CoreGraphics.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 6AE3EC31EE5BB1FCEE84137C /* CoreGraphics.framework */; };
+		1D1AB8646A7C6BE982CB42BB /* qtpcre2 in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 5F20D06B5EA8E77C9697D29A /* qtpcre2 */; };
+		2538D869EBDF8C13C0739AF8 /* qios in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 5B24AB79BDC3033BCA037A0E /* qios */; };
+		2A734B0E339D8EE44AE09BA0 /* qjpeg in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 1EE20B613CC278AA3B356334 /* qjpeg */; };
+		2B02D9DC58A01E45248DDBCE /* CoreText.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 7D7B02101166B76FD2D4F8B4 /* CoreText.framework */; };
+		405B8D54885CD5F375D1793C /* Qt5Core in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 21C6015A28D5DBD2ED7995A3 /* Qt5Core */; };
+		49B06E127F623A0846576728 /* qtga in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 73A18402E7068355BBF13259 /* qtga */; };
+		4C357A3E624E0A432702FB57 /* Default-568h@2x.png in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 8FE7346E45B67F6F35D5A235 /* Default-568h@2x.png */; };
+		4EB68D0C8182BCE33529C421 /* AudioToolbox.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 3C44131FDCFEF4396B9EA2BA /* AudioToolbox.framework */; };
+		5169E16F4F311664CDD2D77A /* qtlibpng in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 3CF0C4F2840409A569E0D0E0 /* qtlibpng */; };
+		5C6F5723764FDE6BD92FB095 /* Qt5FontDatabaseSupport in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 87B165D28799CFFD916E06F3 /* Qt5FontDatabaseSupport */; };
+		61EEC397DC8556BF8C4E36A7 /* ImageIO.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 3A8EF9C62A8D4790CBB89CEA /* ImageIO.framework */; };
+		67F5825697A5FCC8CEA59E1B /* qicns in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = BF55133AC0A7CBB32FEA074C /* qicns */; };
+		77BAB74F75EC98EA171B6E7B /* blockchain_plugin_import.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = E33596A9C9F32281F6576E2F /* blockchain_plugin_import.cpp */; settings = {ATTRIBUTES = (); }; };
+		803B91B6CBCEA20ACE41C0CD /* qtfreetype in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = BC75BBE4991D95B1538F3E35 /* qtfreetype */; };
+		8096B883DA876B1798A3A3DD /* Qt5ClipboardSupport in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 130A5B0FF192FE51E67445BF /* Qt5ClipboardSupport */; };
+		83A1FEFF2BA011C20AB1A4DB /* qwebp in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 252914FB7C3EC649EDEED0BF /* qwebp */; };
+		8640083F107D0F4BEAE5AF73 /* qtiff in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 131FABFD6A5FFEDF9E510721 /* qtiff */; };
+		A80A3B791FF0E677003709B4 /* factory.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A80A3B771FF0E677003709B4 /* factory.cpp */; };
+		A80A3B7D1FF0E686003709B4 /* talk.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A80A3B7B1FF0E686003709B4 /* talk.cpp */; };
+		A80A3B831FF0E699003709B4 /* blockChain.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A80A3B7F1FF0E699003709B4 /* blockChain.cpp */; };
+		A80A3B841FF0E699003709B4 /* block.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A80A3B801FF0E699003709B4 /* block.cpp */; };
+		A80A3B881FF0E6AC003709B4 /* crypto.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A80A3B871FF0E6AC003709B4 /* crypto.cpp */; };
+		B460F624007324313696BE86 /* QuartzCore.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 7EC00404ACD5AB0E97726B0E /* QuartzCore.framework */; };
+		B5575CEA35FC88C1FB263068 /* qwbmp in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 18C0590D1D4F5D77ECF7E1C6 /* qwbmp */; };
+		D56AC791C8198AC2A4666DA3 /* qmacjp2 in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = EC70A2C9D9D595CC6DF07F96 /* qmacjp2 */; };
+		DF29C2865DAA02E11CF1A73C /* qico in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 27E0DB60FF77A3B12A9072FF /* qico */; };
+		ECA5219093563459E6FABE32 /* main.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A293A25407DFEE945CFC83ED /* main.cpp */; settings = {ATTRIBUTES = (); }; };
+		F26454630C80841CBDCFE1CA /* Foundation.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = FCC237CA5AD60B9BA4447615 /* Foundation.framework */; };
+		F459BB08B502B952E3545079 /* qtharfbuzz in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 05D0D629DB81A1CDC770C852 /* qtharfbuzz */; };
+		F463247A80FE3417BD003DD0 /* Qt5Gui in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = C7D44539630462423CF9BE0D /* Qt5Gui */; };
+		F8583A9952302A9BD24E40E2 /* LaunchScreen.xib in Copy Bundle Resources */ = {isa = PBXBuildFile; fileRef = 8DF72856967E44CFB42D856B /* LaunchScreen.xib */; };
+		F8B465CE34D8DF87AAE95913 /* CoreFoundation.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 4D765E1B1EA6C757220C63E7 /* CoreFoundation.framework */; };
+		FA11BFDBB53ADAC754D0E782 /* qgif in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 1851225BA428289B4E407DA2 /* qgif */; };
+		FC88534697E0854235ABFEC8 /* Qt5Widgets in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = C9C5C273CFAF30613CEFF4BE /* Qt5Widgets */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		A80A3B761FF0E5E0003709B4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DB9C3763D02B1415CD9D565 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F1B3528CFBDA3342FC622EE0;
+			remoteInfo = "Qt Preprocess";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
-		A8EA7FA41FE4C083003F4E89 /* CopyFiles */ = {
+		99542592E9780B9225F24AA8 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			dstPath = "";
+			dstSubfolderSpec = 10;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A816C34A1FE555BE00A2B0B1 /* talk.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = talk.cpp; sourceTree = "<group>"; };
-		A816C34D1FE555D400A2B0B1 /* talk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = talk.h; sourceTree = "<group>"; };
-		A81F2FF71FE669B900E77552 /* factory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = factory.cpp; sourceTree = "<group>"; };
-		A81F2FF91FE669C400E77552 /* factory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = factory.h; sourceTree = "<group>"; };
-		A8EA7FA61FE4C083003F4E89 /* BlockChain */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BlockChain; sourceTree = BUILT_PRODUCTS_DIR; };
-		A8EA7FA91FE4C083003F4E89 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		A8EA7FB11FE4C2F4003F4E89 /* block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = block.h; sourceTree = "<group>"; };
-		A8EA7FB21FE4C3EF003F4E89 /* block.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = block.cpp; sourceTree = "<group>"; };
-		A8EA7FB51FE4C9F3003F4E89 /* crypto.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = crypto.cpp; sourceTree = "<group>"; };
-		A8EA7FB81FE4CA06003F4E89 /* crypto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = crypto.h; sourceTree = "<group>"; };
-		A8EA7FB91FE4D220003F4E89 /* blockChain.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = blockChain.cpp; sourceTree = "<group>"; };
-		A8EA7FBB1FE4D230003F4E89 /* blockChain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = blockChain.h; sourceTree = "<group>"; };
+		05D0D629DB81A1CDC770C852 /* qtharfbuzz */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qtharfbuzz; path = "/Users/CK-Yang/Qt/5.10.0/ios/lib/libqtharfbuzz$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		130A5B0FF192FE51E67445BF /* Qt5ClipboardSupport */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = Qt5ClipboardSupport; path = "/Users/CK-Yang/Qt/5.10.0/ios/lib/libQt5ClipboardSupport$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		131FABFD6A5FFEDF9E510721 /* qtiff */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qtiff; path = "/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats/libqtiff$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		1851225BA428289B4E407DA2 /* qgif */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qgif; path = "/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats/libqgif$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		18C0590D1D4F5D77ECF7E1C6 /* qwbmp */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qwbmp; path = "/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats/libqwbmp$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		1EE20B613CC278AA3B356334 /* qjpeg */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qjpeg; path = "/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats/libqjpeg$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		21C6015A28D5DBD2ED7995A3 /* Qt5Core */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = Qt5Core; path = "/Users/CK-Yang/Qt/5.10.0/ios/lib/libQt5Core$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		252914FB7C3EC649EDEED0BF /* qwebp */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qwebp; path = "/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats/libqwebp$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		27E0DB60FF77A3B12A9072FF /* qico */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qico; path = "/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats/libqico$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		3A8EF9C62A8D4790CBB89CEA /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = /System/Library/Frameworks/ImageIO.framework; sourceTree = "<absolute>"; };
+		3C44131FDCFEF4396B9EA2BA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /System/Library/Frameworks/AudioToolbox.framework; sourceTree = "<absolute>"; };
+		3CF0C4F2840409A569E0D0E0 /* qtlibpng */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qtlibpng; path = "/Users/CK-Yang/Qt/5.10.0/ios/lib/libqtlibpng$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		4D765E1B1EA6C757220C63E7 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
+		558ED2A717A168C006BEB592 /* Qt5GraphicsSupport */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = Qt5GraphicsSupport; path = "/Users/CK-Yang/Qt/5.10.0/ios/lib/libQt5GraphicsSupport$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		5B24AB79BDC3033BCA037A0E /* qios */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qios; path = "/Users/CK-Yang/Qt/5.10.0/ios/plugins/platforms/libqios$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		5F20D06B5EA8E77C9697D29A /* qtpcre2 */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qtpcre2; path = "/Users/CK-Yang/Qt/5.10.0/ios/lib/libqtpcre2$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		60E5C0393D4EE2E23A4CCED4 /* BlockChain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlockChain.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AE3EC31EE5BB1FCEE84137C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = /System/Library/Frameworks/CoreGraphics.framework; sourceTree = "<absolute>"; };
+		73A18402E7068355BBF13259 /* qtga */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qtga; path = "/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats/libqtga$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		7D7B02101166B76FD2D4F8B4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = /System/Library/Frameworks/CoreText.framework; sourceTree = "<absolute>"; };
+		7EC00404ACD5AB0E97726B0E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
+		83534508FC70CBA8AE0FF6AA /* BlockChain.pro */ = {isa = PBXFileReference; lastKnownFileType = text; name = BlockChain.pro; path = "/Users/CK-Yang/GitHub/BlockChain/BlockChain.pro"; sourceTree = "<absolute>"; };
+		87B165D28799CFFD916E06F3 /* Qt5FontDatabaseSupport */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = Qt5FontDatabaseSupport; path = "/Users/CK-Yang/Qt/5.10.0/ios/lib/libQt5FontDatabaseSupport$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		8DF72856967E44CFB42D856B /* LaunchScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = "/Users/CK-Yang/GitHub/BlockChain/BlockChain.xcodeproj/LaunchScreen.xib"; sourceTree = "<absolute>"; };
+		8FE7346E45B67F6F35D5A235 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "/Users/CK-Yang/GitHub/BlockChain/BlockChain.xcodeproj/Default-568h@2x.png"; sourceTree = "<absolute>"; };
+		A293A25407DFEE945CFC83ED /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = "/Users/CK-Yang/GitHub/BlockChain/main.cpp"; sourceTree = "<absolute>"; };
+		A80A3B771FF0E677003709B4 /* factory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = factory.cpp; sourceTree = "<group>"; };
+		A80A3B781FF0E677003709B4 /* factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = factory.h; sourceTree = "<group>"; };
+		A80A3B7B1FF0E686003709B4 /* talk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = talk.cpp; path = network/talk.cpp; sourceTree = SOURCE_ROOT; };
+		A80A3B7C1FF0E686003709B4 /* talk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = talk.h; path = network/talk.h; sourceTree = SOURCE_ROOT; };
+		A80A3B7F1FF0E699003709B4 /* blockChain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = blockChain.cpp; path = blockchain/blockChain.cpp; sourceTree = SOURCE_ROOT; };
+		A80A3B801FF0E699003709B4 /* block.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = block.cpp; path = blockchain/block.cpp; sourceTree = SOURCE_ROOT; };
+		A80A3B811FF0E699003709B4 /* block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = block.h; path = blockchain/block.h; sourceTree = SOURCE_ROOT; };
+		A80A3B821FF0E699003709B4 /* blockChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = blockChain.h; path = blockchain/blockChain.h; sourceTree = SOURCE_ROOT; };
+		A80A3B861FF0E6AC003709B4 /* crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = crypto.h; path = crypto/crypto.h; sourceTree = SOURCE_ROOT; };
+		A80A3B871FF0E6AC003709B4 /* crypto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = crypto.cpp; path = crypto/crypto.cpp; sourceTree = SOURCE_ROOT; };
+		BC75BBE4991D95B1538F3E35 /* qtfreetype */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qtfreetype; path = "/Users/CK-Yang/Qt/5.10.0/ios/lib/libqtfreetype$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		BF55133AC0A7CBB32FEA074C /* qicns */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qicns; path = "/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats/libqicns$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		C7D44539630462423CF9BE0D /* Qt5Gui */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = Qt5Gui; path = "/Users/CK-Yang/Qt/5.10.0/ios/lib/libQt5Gui$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		C9C5C273CFAF30613CEFF4BE /* Qt5Widgets */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = Qt5Widgets; path = "/Users/CK-Yang/Qt/5.10.0/ios/lib/libQt5Widgets$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		E33596A9C9F32281F6576E2F /* blockchain_plugin_import.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = blockchain_plugin_import.cpp; path = "/Users/CK-Yang/GitHub/BlockChain/blockchain_plugin_import.cpp"; sourceTree = "<absolute>"; };
+		EC70A2C9D9D595CC6DF07F96 /* qmacjp2 */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qmacjp2; path = "/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats/libqmacjp2$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
+		F939F68D98330C6073F36D89 /* .qmake.stash */ = {isa = PBXFileReference; lastKnownFileType = text; name = .qmake.stash; path = "/Users/CK-Yang/GitHub/BlockChain/.qmake.stash"; sourceTree = "<absolute>"; };
+		FCC237CA5AD60B9BA4447615 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A8EA7FA31FE4C083003F4E89 /* Frameworks */ = {
+		D1C883685E82D5676953459A /* Link Binary With Libraries */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F26454630C80841CBDCFE1CA /* Foundation.framework in Link Binary With Libraries */,
+				B460F624007324313696BE86 /* QuartzCore.framework in Link Binary With Libraries */,
+				4EB68D0C8182BCE33529C421 /* AudioToolbox.framework in Link Binary With Libraries */,
+				F8B465CE34D8DF87AAE95913 /* CoreFoundation.framework in Link Binary With Libraries */,
+				0CE02722F00CAD43741297B5 /* CoreGraphics.framework in Link Binary With Libraries */,
+				2B02D9DC58A01E45248DDBCE /* CoreText.framework in Link Binary With Libraries */,
+				61EEC397DC8556BF8C4E36A7 /* ImageIO.framework in Link Binary With Libraries */,
+				2538D869EBDF8C13C0739AF8 /* qios in Link Binary With Libraries */,
+				5C6F5723764FDE6BD92FB095 /* Qt5FontDatabaseSupport in Link Binary With Libraries */,
+				803B91B6CBCEA20ACE41C0CD /* qtfreetype in Link Binary With Libraries */,
+				061CDD1D90EAEA18239D3E50 /* Qt5GraphicsSupport in Link Binary With Libraries */,
+				8096B883DA876B1798A3A3DD /* Qt5ClipboardSupport in Link Binary With Libraries */,
+				FA11BFDBB53ADAC754D0E782 /* qgif in Link Binary With Libraries */,
+				67F5825697A5FCC8CEA59E1B /* qicns in Link Binary With Libraries */,
+				DF29C2865DAA02E11CF1A73C /* qico in Link Binary With Libraries */,
+				2A734B0E339D8EE44AE09BA0 /* qjpeg in Link Binary With Libraries */,
+				D56AC791C8198AC2A4666DA3 /* qmacjp2 in Link Binary With Libraries */,
+				49B06E127F623A0846576728 /* qtga in Link Binary With Libraries */,
+				8640083F107D0F4BEAE5AF73 /* qtiff in Link Binary With Libraries */,
+				B5575CEA35FC88C1FB263068 /* qwbmp in Link Binary With Libraries */,
+				83A1FEFF2BA011C20AB1A4DB /* qwebp in Link Binary With Libraries */,
+				FC88534697E0854235ABFEC8 /* Qt5Widgets in Link Binary With Libraries */,
+				F463247A80FE3417BD003DD0 /* Qt5Gui in Link Binary With Libraries */,
+				5169E16F4F311664CDD2D77A /* qtlibpng in Link Binary With Libraries */,
+				F459BB08B502B952E3545079 /* qtharfbuzz in Link Binary With Libraries */,
+				405B8D54885CD5F375D1793C /* Qt5Core in Link Binary With Libraries */,
+				1D1AB8646A7C6BE982CB42BB /* qtpcre2 in Link Binary With Libraries */,
 			);
+			name = "Link Binary With Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A86B8D051FEA8E69001FD188 /* crypto */ = {
+		25B08E2869634E9BCBA333A2 /* Generated Sources */ = {
 			isa = PBXGroup;
 			children = (
-				A8EA7FB81FE4CA06003F4E89 /* crypto.h */,
-				A8EA7FB51FE4C9F3003F4E89 /* crypto.cpp */,
+				E33596A9C9F32281F6576E2F /* blockchain_plugin_import.cpp */,
 			);
-			path = crypto;
+			name = "Generated Sources";
 			sourceTree = "<group>";
 		};
-		A86B8D061FEA8E84001FD188 /* network */ = {
+		2EB56BE3C2D93CDAB0C52E67 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				A816C34D1FE555D400A2B0B1 /* talk.h */,
-				A816C34A1FE555BE00A2B0B1 /* talk.cpp */,
+				A80A3B851FF0E69C003709B4 /* crypto */,
+				A80A3B7E1FF0E68C003709B4 /* blockchain */,
+				A80A3B7A1FF0E67B003709B4 /* network */,
+				A80A3B771FF0E677003709B4 /* factory.cpp */,
+				A80A3B781FF0E677003709B4 /* factory.h */,
+				A293A25407DFEE945CFC83ED /* main.cpp */,
 			);
-			path = network;
+			name = Sources;
 			sourceTree = "<group>";
 		};
-		A86B8D071FEA8EC2001FD188 /* blockchain */ = {
+		74B182DB50CB5611B5C1C297 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A8EA7FB11FE4C2F4003F4E89 /* block.h */,
-				A8EA7FB21FE4C3EF003F4E89 /* block.cpp */,
-				A8EA7FB91FE4D220003F4E89 /* blockChain.cpp */,
-				A8EA7FBB1FE4D230003F4E89 /* blockChain.h */,
+				83534508FC70CBA8AE0FF6AA /* BlockChain.pro */,
+				F939F68D98330C6073F36D89 /* .qmake.stash */,
 			);
-			path = blockchain;
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		A8EA7F9D1FE4C083003F4E89 = {
+		858FCAB0EB1F29CF8B07677C /* Bundle Data */ = {
 			isa = PBXGroup;
 			children = (
-				A8EA7FA81FE4C083003F4E89 /* BlockChain */,
-				A8EA7FA71FE4C083003F4E89 /* Products */,
+				8FE7346E45B67F6F35D5A235 /* Default-568h@2x.png */,
+				8DF72856967E44CFB42D856B /* LaunchScreen.xib */,
 			);
+			name = "Bundle Data";
 			sourceTree = "<group>";
 		};
-		A8EA7FA71FE4C083003F4E89 /* Products */ = {
+		A80A3B7A1FF0E67B003709B4 /* network */ = {
 			isa = PBXGroup;
 			children = (
-				A8EA7FA61FE4C083003F4E89 /* BlockChain */,
+				A80A3B7B1FF0E686003709B4 /* talk.cpp */,
+				A80A3B7C1FF0E686003709B4 /* talk.h */,
+			);
+			name = network;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		A80A3B7E1FF0E68C003709B4 /* blockchain */ = {
+			isa = PBXGroup;
+			children = (
+				A80A3B801FF0E699003709B4 /* block.cpp */,
+				A80A3B811FF0E699003709B4 /* block.h */,
+				A80A3B7F1FF0E699003709B4 /* blockChain.cpp */,
+				A80A3B821FF0E699003709B4 /* blockChain.h */,
+			);
+			name = blockchain;
+			path = "New Group1";
+			sourceTree = "<group>";
+		};
+		A80A3B851FF0E69C003709B4 /* crypto */ = {
+			isa = PBXGroup;
+			children = (
+				A80A3B871FF0E6AC003709B4 /* crypto.cpp */,
+				A80A3B861FF0E6AC003709B4 /* crypto.h */,
+			);
+			name = crypto;
+			path = "New Group2";
+			sourceTree = "<group>";
+		};
+		AF39DD055C3EF8226FBE929D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FCC237CA5AD60B9BA4447615 /* Foundation.framework */,
+				7EC00404ACD5AB0E97726B0E /* QuartzCore.framework */,
+				3C44131FDCFEF4396B9EA2BA /* AudioToolbox.framework */,
+				4D765E1B1EA6C757220C63E7 /* CoreFoundation.framework */,
+				6AE3EC31EE5BB1FCEE84137C /* CoreGraphics.framework */,
+				7D7B02101166B76FD2D4F8B4 /* CoreText.framework */,
+				3A8EF9C62A8D4790CBB89CEA /* ImageIO.framework */,
+				5B24AB79BDC3033BCA037A0E /* qios */,
+				87B165D28799CFFD916E06F3 /* Qt5FontDatabaseSupport */,
+				BC75BBE4991D95B1538F3E35 /* qtfreetype */,
+				558ED2A717A168C006BEB592 /* Qt5GraphicsSupport */,
+				130A5B0FF192FE51E67445BF /* Qt5ClipboardSupport */,
+				1851225BA428289B4E407DA2 /* qgif */,
+				BF55133AC0A7CBB32FEA074C /* qicns */,
+				27E0DB60FF77A3B12A9072FF /* qico */,
+				1EE20B613CC278AA3B356334 /* qjpeg */,
+				EC70A2C9D9D595CC6DF07F96 /* qmacjp2 */,
+				73A18402E7068355BBF13259 /* qtga */,
+				131FABFD6A5FFEDF9E510721 /* qtiff */,
+				18C0590D1D4F5D77ECF7E1C6 /* qwbmp */,
+				252914FB7C3EC649EDEED0BF /* qwebp */,
+				C9C5C273CFAF30613CEFF4BE /* Qt5Widgets */,
+				C7D44539630462423CF9BE0D /* Qt5Gui */,
+				3CF0C4F2840409A569E0D0E0 /* qtlibpng */,
+				05D0D629DB81A1CDC770C852 /* qtharfbuzz */,
+				21C6015A28D5DBD2ED7995A3 /* Qt5Core */,
+				5F20D06B5EA8E77C9697D29A /* qtpcre2 */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E8C543AB96796ECAA2E65C57 /* BlockChain */ = {
+			isa = PBXGroup;
+			children = (
+				2EB56BE3C2D93CDAB0C52E67 /* Sources */,
+				25B08E2869634E9BCBA333A2 /* Generated Sources */,
+				74B182DB50CB5611B5C1C297 /* Supporting Files */,
+				AF39DD055C3EF8226FBE929D /* Frameworks */,
+				858FCAB0EB1F29CF8B07677C /* Bundle Data */,
+				FE0A091FDBFB3E9C31B7A1BD /* Products */,
+			);
+			name = BlockChain;
+			sourceTree = "<group>";
+		};
+		FE0A091FDBFB3E9C31B7A1BD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				60E5C0393D4EE2E23A4CCED4 /* BlockChain.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		A8EA7FA81FE4C083003F4E89 /* BlockChain */ = {
-			isa = PBXGroup;
-			children = (
-				A86B8D071FEA8EC2001FD188 /* blockchain */,
-				A86B8D061FEA8E84001FD188 /* network */,
-				A86B8D051FEA8E69001FD188 /* crypto */,
-				A8EA7FA91FE4C083003F4E89 /* main.cpp */,
-				A81F2FF71FE669B900E77552 /* factory.cpp */,
-				A81F2FF91FE669C400E77552 /* factory.h */,
-			);
-			path = BlockChain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A8EA7FA51FE4C083003F4E89 /* BlockChain */ = {
+		04C78FF136D7191DD74D86A9 /* BlockChain */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A8EA7FAD1FE4C083003F4E89 /* Build configuration list for PBXNativeTarget "BlockChain" */;
+			buildConfigurationList = 6CC3B5D2136C7CD6A5CF5A59 /* Build configuration list for PBXNativeTarget "BlockChain" */;
 			buildPhases = (
-				A8EA7FA21FE4C083003F4E89 /* Sources */,
-				A8EA7FA31FE4C083003F4E89 /* Frameworks */,
-				A8EA7FA41FE4C083003F4E89 /* CopyFiles */,
+				F7E50F631C51CD5B5DC0BC43 /* Compile Sources */,
+				D1C883685E82D5676953459A /* Link Binary With Libraries */,
+				30414803F31797EB689AE508 /* Copy Bundle Resources */,
+				99542592E9780B9225F24AA8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				DB5FF4AE9C18E22263756A45 /* PBXTargetDependency */,
 			);
 			name = BlockChain;
-			productName = ClarkChain;
-			productReference = A8EA7FA61FE4C083003F4E89 /* BlockChain */;
-			productType = "com.apple.product-type.tool";
+			productName = BlockChain;
+			productReference = 60E5C0393D4EE2E23A4CCED4 /* BlockChain.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		A8EA7F9E1FE4C083003F4E89 /* Project object */ = {
+		6DB9C3763D02B1415CD9D565 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0920;
-				ORGANIZATIONNAME = "Chung-kaiYang";
 				TargetAttributes = {
-					A8EA7FA51FE4C083003F4E89 = {
-						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+					04C78FF136D7191DD74D86A9 = {
+						DevelopmentTeam = 485WHBE245;
+					};
+					F1B3528CFBDA3342FC622EE0 = {
+						DevelopmentTeam = 485WHBE245;
 					};
 				};
 			};
-			buildConfigurationList = A8EA7FA11FE4C083003F4E89 /* Build configuration list for PBXProject "BlockChain" */;
-			compatibilityVersion = "Xcode 8.0";
+			buildConfigurationList = DAC4C1AA5EDEA1C85E9CA5E6 /* Build configuration list for PBXProject "BlockChain" */;
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
-			hasScannedForEncodings = 0;
+			hasScannedForEncodings = 1;
 			knownRegions = (
 				en,
 			);
-			mainGroup = A8EA7F9D1FE4C083003F4E89;
-			productRefGroup = A8EA7FA71FE4C083003F4E89 /* Products */;
+			mainGroup = E8C543AB96796ECAA2E65C57 /* BlockChain */;
+			productRefGroup = FE0A091FDBFB3E9C31B7A1BD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A8EA7FA51FE4C083003F4E89 /* BlockChain */,
+				04C78FF136D7191DD74D86A9 /* BlockChain */,
+				F1B3528CFBDA3342FC622EE0 /* Qt Preprocess */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		30414803F31797EB689AE508 /* Copy Bundle Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C357A3E624E0A432702FB57 /* Default-568h@2x.png in Copy Bundle Resources */,
+				F8583A9952302A9BD24E40E2 /* LaunchScreen.xib in Copy Bundle Resources */,
+			);
+			name = "Copy Bundle Resources";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5E618435888B9D49F8540165 /* Qt Qmake */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "Qt Qmake";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/CK-Yang/GitHub/BlockChain/ -f BlockChain.xcodeproj/qt_makeqmake.mak";
+			showEnvVarsInLog = 0;
+		};
+		7EF0942E79C014DCEC8976BC /* Qt Preprocessors */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "Qt Preprocessors";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/CK-Yang/GitHub/BlockChain/ -f BlockChain.xcodeproj/qt_preprocess.mak";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		A8EA7FA21FE4C083003F4E89 /* Sources */ = {
+		F7E50F631C51CD5B5DC0BC43 /* Compile Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8EA7FAA1FE4C083003F4E89 /* main.cpp in Sources */,
-				A8EA7FBA1FE4D220003F4E89 /* blockChain.cpp in Sources */,
-				A8EA7FB71FE4C9F3003F4E89 /* crypto.cpp in Sources */,
-				A816C34C1FE555BE00A2B0B1 /* talk.cpp in Sources */,
-				A81F2FF81FE669B900E77552 /* factory.cpp in Sources */,
-				A8EA7FB41FE4C3EF003F4E89 /* block.cpp in Sources */,
+				ECA5219093563459E6FABE32 /* main.cpp in Compile Sources */,
+				A80A3B7D1FF0E686003709B4 /* talk.cpp in Compile Sources */,
+				A80A3B881FF0E6AC003709B4 /* crypto.cpp in Compile Sources */,
+				A80A3B791FF0E677003709B4 /* factory.cpp in Compile Sources */,
+				77BAB74F75EC98EA171B6E7B /* blockchain_plugin_import.cpp in Compile Sources */,
+				A80A3B831FF0E699003709B4 /* blockChain.cpp in Compile Sources */,
+				A80A3B841FF0E699003709B4 /* block.cpp in Compile Sources */,
 			);
+			name = "Compile Sources";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		DB5FF4AE9C18E22263756A45 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F1B3528CFBDA3342FC622EE0 /* Qt Preprocess */;
+			targetProxy = A80A3B761FF0E5E0003709B4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
-		A8EA7FAB1FE4C083003F4E89 /* Debug */ = {
+		339EE1B2CC4FC24589A0EA95 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				ARCHS = (
+					arm64,
+					x86_64,
+				);
+				"ARCHS[sdk=iphoneos*]" = arm64;
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
+				CC = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = 485WHBE245;
+				DYLIB_COMPATIBILITY_VERSION = 1.0;
+				DYLIB_CURRENT_VERSION = 1.0.0;
+				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					.,
+					../../Qt/5.10.0/ios/mkspecs/common/uikit,
+					../../Qt/5.10.0/ios/mkspecs/common/uikit,
+					.,
+					../../Qt/5.10.0/ios/include,
+					../../Qt/5.10.0/ios/include/QtWidgets,
+					../../Qt/5.10.0/ios/include/QtGui,
+					../../Qt/5.10.0/ios/include/QtCore,
+					.,
+					"../../Qt/5.10.0/ios/mkspecs/macx-ios-clang",
+				);
+				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LDPLUSPLUS = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++";
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/CK-Yang/Qt/5.10.0/ios/plugins/platforms",
+					/System/Library/Frameworks/,
+					"/Users/CK-Yang/Qt/5.10.0/ios/lib",
+					"/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats",
+				);
+				OTHER_CFLAGS = (
+					"-pipe",
+					"-g",
+					"-fobjc-nonfragile-abi",
+					"-fobjc-legacy-dispatch",
+					"-Wall",
+					"-W",
+					"-fPIC",
+					"-DQT_COMPILER_SUPPORTS_SSE2",
+					"-DQT_DEPRECATED_WARNINGS",
+					"-DQT_WIDGETS_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-pipe",
+					"-stdlib=libc++",
+					"-g",
+					"-std=gnu++11",
+					"-fobjc-nonfragile-abi",
+					"-fobjc-legacy-dispatch",
+					"-Wall",
+					"-W",
+					"-fPIC",
+					"-DQT_COMPILER_SUPPORTS_SSE2",
+					"-DQT_DEPRECATED_WARNINGS",
+					"-DQT_WIDGETS_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB",
+				);
+				OTHER_LDFLAGS = (
+					"-stdlib=libc++",
+					"-Wl,-e,_qt_main_wrapper",
+					"-Wl,-rpath,@executable_path/Frameworks",
+					"-L/Users/CK-Yang/Qt/5.10.0/ios/plugins/platforms",
+					"-framework",
+					UIKit,
+					"-framework",
+					AssetsLibrary,
+					"-L/Users/CK-Yang/Qt/5.10.0/ios/lib",
+					"-framework",
+					MobileCoreServices,
+					"-framework",
+					OpenGLES,
+					"-L/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats",
+					"-lm",
+					"-lz",
+				);
+				PRODUCT_NAME = BlockChain;
+				"QMAKE_MAC_SDK_PATH[sdk=iphoneos*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.2.sdk;
+				"QMAKE_MAC_SDK_PATH[sdk=iphonesimulator*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.2.sdk;
+				"QMAKE_MAC_SDK_PLATFORM_PATH[sdk=iphoneos*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform;
+				"QMAKE_MAC_SDK_PLATFORM_PATH[sdk=iphonesimulator*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform;
+				QT_LIBRARY_SUFFIX = "";
+				SDKROOT = iphoneos;
+				SYMROOT = "/Users/CK-Yang/GitHub/BlockChain/";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3AA6C32AC930069E80220CF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				ARCHS = (
+					arm64,
+					x86_64,
+				);
+				"ARCHS[sdk=iphoneos*]" = arm64;
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
+				CC = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
+				DEVELOPMENT_TEAM = 485WHBE245;
+				DYLIB_COMPATIBILITY_VERSION = 1.0;
+				DYLIB_CURRENT_VERSION = 1.0.0;
+				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
-					/usr/local/include,
-					/usr/local/Cellar/openssl/1.0.2n/include,
+					.,
+					../../Qt/5.10.0/ios/mkspecs/common/uikit,
+					../../Qt/5.10.0/ios/mkspecs/common/uikit,
+					.,
+					../../Qt/5.10.0/ios/include,
+					../../Qt/5.10.0/ios/include/QtWidgets,
+					../../Qt/5.10.0/ios/include/QtGui,
+					../../Qt/5.10.0/ios/include/QtCore,
+					.,
+					"../../Qt/5.10.0/ios/mkspecs/macx-ios-clang",
 				);
-				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MTL_ENABLE_DEBUG_INFO = YES;
+				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LDPLUSPLUS = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++";
+				LIBRARY_SEARCH_PATHS = (
+					"/Users/CK-Yang/Qt/5.10.0/ios/plugins/platforms",
+					/System/Library/Frameworks/,
+					"/Users/CK-Yang/Qt/5.10.0/ios/lib",
+					"/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats",
+				);
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "-levent";
-				SDKROOT = macosx;
+				OTHER_CFLAGS = (
+					"-pipe",
+					"-g",
+					"-fobjc-nonfragile-abi",
+					"-fobjc-legacy-dispatch",
+					"-Wall",
+					"-W",
+					"-fPIC",
+					"-DQT_COMPILER_SUPPORTS_SSE2",
+					"-DQT_DEPRECATED_WARNINGS",
+					"-DQT_WIDGETS_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-pipe",
+					"-stdlib=libc++",
+					"-g",
+					"-std=gnu++11",
+					"-fobjc-nonfragile-abi",
+					"-fobjc-legacy-dispatch",
+					"-Wall",
+					"-W",
+					"-fPIC",
+					"-DQT_COMPILER_SUPPORTS_SSE2",
+					"-DQT_DEPRECATED_WARNINGS",
+					"-DQT_WIDGETS_LIB",
+					"-DQT_GUI_LIB",
+					"-DQT_CORE_LIB",
+				);
+				OTHER_LDFLAGS = (
+					"-stdlib=libc++",
+					"-Wl,-e,_qt_main_wrapper",
+					"-Wl,-rpath,@executable_path/Frameworks",
+					"-L/Users/CK-Yang/Qt/5.10.0/ios/plugins/platforms",
+					"-framework",
+					UIKit,
+					"-framework",
+					AssetsLibrary,
+					"-L/Users/CK-Yang/Qt/5.10.0/ios/lib",
+					"-framework",
+					MobileCoreServices,
+					"-framework",
+					OpenGLES,
+					"-L/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats",
+					"-lm",
+					"-lz",
+				);
+				PRODUCT_NAME = BlockChain;
+				"QMAKE_MAC_SDK_PATH[sdk=iphoneos*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.2.sdk;
+				"QMAKE_MAC_SDK_PATH[sdk=iphonesimulator*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.2.sdk;
+				"QMAKE_MAC_SDK_PLATFORM_PATH[sdk=iphoneos*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform;
+				"QMAKE_MAC_SDK_PLATFORM_PATH[sdk=iphonesimulator*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform;
+				QT_LIBRARY_SUFFIX = _debug;
+				SDKROOT = iphoneos;
+				SYMROOT = "/Users/CK-Yang/GitHub/BlockChain/";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		A8EA7FAC1FE4C083003F4E89 /* Release */ = {
+		6666AA5E688052234F6758D8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				"ARCHS[sdk=iphoneos*]" = arm64;
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
+				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = 485WHBE245;
+				ENABLE_BITCODE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				HEADER_SEARCH_PATHS = (
+					.,
+					../../Qt/5.10.0/ios/mkspecs/common/uikit,
+					../../Qt/5.10.0/ios/mkspecs/common/uikit,
+					.,
+					../../Qt/5.10.0/ios/include,
+					../../Qt/5.10.0/ios/include/QtWidgets,
+					../../Qt/5.10.0/ios/include/QtGui,
+					../../Qt/5.10.0/ios/include/QtCore,
+					.,
+					"../../Qt/5.10.0/ios/mkspecs/macx-ios-clang",
+					/usr/local/Cellar/openssl/1.0.2n/include,
+					/usr/local/include,
+				);
+				PRODUCT_NAME = BlockChain;
+				"QMAKE_MAC_SDK_PATH[sdk=iphoneos*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.2.sdk;
+				"QMAKE_MAC_SDK_PATH[sdk=iphonesimulator*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.2.sdk;
+				"QMAKE_MAC_SDK_PLATFORM_PATH[sdk=iphoneos*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform;
+				"QMAKE_MAC_SDK_PLATFORM_PATH[sdk=iphonesimulator*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform;
+				QT_LIBRARY_SUFFIX = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		77418F46922677BB04ED38DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				"ARCHS[sdk=iphoneos*]" = arm64;
+				"ARCHS[sdk=iphonesimulator*]" = x86_64;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 485WHBE245;
+				ENABLE_BITCODE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				HEADER_SEARCH_PATHS = (
-					/usr/local/include,
+					.,
+					../../Qt/5.10.0/ios/mkspecs/common/uikit,
+					../../Qt/5.10.0/ios/mkspecs/common/uikit,
+					.,
+					../../Qt/5.10.0/ios/include,
+					../../Qt/5.10.0/ios/include/QtWidgets,
+					../../Qt/5.10.0/ios/include/QtGui,
+					../../Qt/5.10.0/ios/include/QtCore,
+					.,
+					"../../Qt/5.10.0/ios/mkspecs/macx-ios-clang",
 					/usr/local/Cellar/openssl/1.0.2n/include,
-				);
-				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "-levent";
-				SDKROOT = macosx;
-			};
-			name = Release;
-		};
-		A8EA7FAE1FE4C083003F4E89 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
-					/usr/local/Cellar/openssl/1.0.2n/include,
 				);
-				LIBRARY_SEARCH_PATHS = (
-					/usr/local/lib,
-					/usr/local/Cellar/openssl/1.0.2n/lib,
-				);
-				OTHER_LDFLAGS = (
-					"-levent",
-					"-lcrypto",
-				);
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = BlockChain;
+				"QMAKE_MAC_SDK_PATH[sdk=iphoneos*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.2.sdk;
+				"QMAKE_MAC_SDK_PATH[sdk=iphonesimulator*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.2.sdk;
+				"QMAKE_MAC_SDK_PLATFORM_PATH[sdk=iphoneos*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform;
+				"QMAKE_MAC_SDK_PLATFORM_PATH[sdk=iphonesimulator*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform;
+				QT_LIBRARY_SUFFIX = _debug;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
-		};
-		A8EA7FAF1FE4C083003F4E89 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				HEADER_SEARCH_PATHS = (
-					/usr/local/include,
-					/usr/local/Cellar/openssl/1.0.2n/include,
-				);
-				LIBRARY_SEARCH_PATHS = (
-					/usr/local/lib,
-					/usr/local/Cellar/openssl/1.0.2n/lib,
-				);
-				OTHER_LDFLAGS = (
-					"-levent",
-					"-lcrypto",
-				);
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "";
-			};
-			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A8EA7FA11FE4C083003F4E89 /* Build configuration list for PBXProject "BlockChain" */ = {
+		6CC3B5D2136C7CD6A5CF5A59 /* Build configuration list for PBXNativeTarget "BlockChain" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A8EA7FAB1FE4C083003F4E89 /* Debug */,
-				A8EA7FAC1FE4C083003F4E89 /* Release */,
+				77418F46922677BB04ED38DD /* Debug */,
+				6666AA5E688052234F6758D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
-		A8EA7FAD1FE4C083003F4E89 /* Build configuration list for PBXNativeTarget "BlockChain" */ = {
+		DAC4C1AA5EDEA1C85E9CA5E6 /* Build configuration list for PBXProject "BlockChain" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A8EA7FAE1FE4C083003F4E89 /* Debug */,
-				A8EA7FAF1FE4C083003F4E89 /* Release */,
+				3AA6C32AC930069E80220CF1 /* Debug */,
+				339EE1B2CC4FC24589A0EA95 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = A8EA7F9E1FE4C083003F4E89 /* Project object */;
+	rootObject = 6DB9C3763D02B1415CD9D565 /* Project object */;
 }
