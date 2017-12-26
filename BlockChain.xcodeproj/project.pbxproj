@@ -46,6 +46,8 @@
 		A80A3B831FF0E699003709B4 /* blockChain.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A80A3B7F1FF0E699003709B4 /* blockChain.cpp */; };
 		A80A3B841FF0E699003709B4 /* block.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A80A3B801FF0E699003709B4 /* block.cpp */; };
 		A80A3B881FF0E6AC003709B4 /* crypto.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A80A3B871FF0E6AC003709B4 /* crypto.cpp */; };
+		A88AA1451FF2847700DB933D /* libcrypto.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = A88AA1431FF2847700DB933D /* libcrypto.a */; };
+		A88AA1461FF2847700DB933D /* libssl.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = A88AA1441FF2847700DB933D /* libssl.a */; };
 		B460F624007324313696BE86 /* QuartzCore.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 7EC00404ACD5AB0E97726B0E /* QuartzCore.framework */; };
 		B5575CEA35FC88C1FB263068 /* qwbmp in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 18C0590D1D4F5D77ECF7E1C6 /* qwbmp */; };
 		D56AC791C8198AC2A4666DA3 /* qmacjp2 in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = EC70A2C9D9D595CC6DF07F96 /* qmacjp2 */; };
@@ -120,6 +122,8 @@
 		A80A3B821FF0E699003709B4 /* blockChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = blockChain.h; path = blockchain/blockChain.h; sourceTree = SOURCE_ROOT; };
 		A80A3B861FF0E6AC003709B4 /* crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = crypto.h; path = crypto/crypto.h; sourceTree = SOURCE_ROOT; };
 		A80A3B871FF0E6AC003709B4 /* crypto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = crypto.cpp; path = crypto/crypto.cpp; sourceTree = SOURCE_ROOT; };
+		A88AA1431FF2847700DB933D /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "../OpenSSL-for-iPhone-master/lib/libcrypto.a"; sourceTree = "<group>"; };
+		A88AA1441FF2847700DB933D /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "../OpenSSL-for-iPhone-master/lib/libssl.a"; sourceTree = "<group>"; };
 		BC75BBE4991D95B1538F3E35 /* qtfreetype */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qtfreetype; path = "/Users/CK-Yang/Qt/5.10.0/ios/lib/libqtfreetype$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
 		BF55133AC0A7CBB32FEA074C /* qicns */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qicns; path = "/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats/libqicns$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
 		C7D44539630462423CF9BE0D /* Qt5Gui */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = Qt5Gui; path = "/Users/CK-Yang/Qt/5.10.0/ios/lib/libQt5Gui$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
@@ -141,12 +145,14 @@
 				F8B465CE34D8DF87AAE95913 /* CoreFoundation.framework in Link Binary With Libraries */,
 				0CE02722F00CAD43741297B5 /* CoreGraphics.framework in Link Binary With Libraries */,
 				2B02D9DC58A01E45248DDBCE /* CoreText.framework in Link Binary With Libraries */,
+				A88AA1451FF2847700DB933D /* libcrypto.a in Link Binary With Libraries */,
 				61EEC397DC8556BF8C4E36A7 /* ImageIO.framework in Link Binary With Libraries */,
 				2538D869EBDF8C13C0739AF8 /* qios in Link Binary With Libraries */,
 				5C6F5723764FDE6BD92FB095 /* Qt5FontDatabaseSupport in Link Binary With Libraries */,
 				803B91B6CBCEA20ACE41C0CD /* qtfreetype in Link Binary With Libraries */,
 				061CDD1D90EAEA18239D3E50 /* Qt5GraphicsSupport in Link Binary With Libraries */,
 				8096B883DA876B1798A3A3DD /* Qt5ClipboardSupport in Link Binary With Libraries */,
+				A88AA1461FF2847700DB933D /* libssl.a in Link Binary With Libraries */,
 				FA11BFDBB53ADAC754D0E782 /* qgif in Link Binary With Libraries */,
 				67F5825697A5FCC8CEA59E1B /* qicns in Link Binary With Libraries */,
 				DF29C2865DAA02E11CF1A73C /* qico in Link Binary With Libraries */,
@@ -243,6 +249,8 @@
 		AF39DD055C3EF8226FBE929D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A88AA1431FF2847700DB933D /* libcrypto.a */,
+				A88AA1441FF2847700DB933D /* libssl.a */,
 				FCC237CA5AD60B9BA4447615 /* Foundation.framework */,
 				7EC00404ACD5AB0E97726B0E /* QuartzCore.framework */,
 				3C44131FDCFEF4396B9EA2BA /* AudioToolbox.framework */,
@@ -424,7 +432,10 @@
 					x86_64,
 				);
 				"ARCHS[sdk=iphoneos*]" = arm64;
-				"ARCHS[sdk=iphonesimulator*]" = x86_64;
+				"ARCHS[sdk=iphonesimulator*]" = (
+					x86_64,
+					arm64,
+				);
 				CC = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
@@ -447,7 +458,6 @@
 					.,
 					"../../Qt/5.10.0/ios/mkspecs/macx-ios-clang",
 					/usr/local/include,
-					/usr/local/Cellar/openssl/1.0.2n/include,
 				);
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -457,7 +467,7 @@
 					/System/Library/Frameworks/,
 					"/Users/CK-Yang/Qt/5.10.0/ios/lib",
 					"/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats",
-					/usr/local/Cellar/openssl/1.0.2n/lib,
+					"/Users/CK-Yang/GitHub/OpenSSL-for-iPhone-master/lib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
@@ -507,7 +517,6 @@
 					"-L/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats",
 					"-lm",
 					"-lz",
-					"-lcrypto",
 				);
 				PRODUCT_NAME = BlockChain;
 				"QMAKE_MAC_SDK_PATH[sdk=iphoneos*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.2.sdk;
@@ -518,6 +527,7 @@
 				SDKROOT = iphoneos;
 				SYMROOT = "/Users/CK-Yang/GitHub/BlockChain/";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "/Users/CK-Yang/GitHub/OpenSSL-for-iPhone-master/include";
 			};
 			name = Release;
 		};
@@ -530,7 +540,10 @@
 					x86_64,
 				);
 				"ARCHS[sdk=iphoneos*]" = arm64;
-				"ARCHS[sdk=iphonesimulator*]" = x86_64;
+				"ARCHS[sdk=iphonesimulator*]" = (
+					x86_64,
+					arm64,
+				);
 				CC = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -555,7 +568,6 @@
 					.,
 					"../../Qt/5.10.0/ios/mkspecs/macx-ios-clang",
 					/usr/local/include,
-					/usr/local/Cellar/openssl/1.0.2n/include,
 				);
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -565,7 +577,7 @@
 					/System/Library/Frameworks/,
 					"/Users/CK-Yang/Qt/5.10.0/ios/lib",
 					"/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats",
-					/usr/local/Cellar/openssl/1.0.2n/lib,
+					"/Users/CK-Yang/GitHub/OpenSSL-for-iPhone-master/lib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
@@ -615,7 +627,6 @@
 					"-L/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats",
 					"-lm",
 					"-lz",
-					"-lcrypto",
 				);
 				PRODUCT_NAME = BlockChain;
 				"QMAKE_MAC_SDK_PATH[sdk=iphoneos*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.2.sdk;
@@ -626,6 +637,7 @@
 				SDKROOT = iphoneos;
 				SYMROOT = "/Users/CK-Yang/GitHub/BlockChain/";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "/Users/CK-Yang/GitHub/OpenSSL-for-iPhone-master/include";
 			};
 			name = Debug;
 		};
@@ -634,7 +646,10 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				"ARCHS[sdk=iphoneos*]" = arm64;
-				"ARCHS[sdk=iphonesimulator*]" = x86_64;
+				"ARCHS[sdk=iphonesimulator*]" = (
+					x86_64,
+					arm64,
+				);
 				COPY_PHASE_STRIP = YES;
 				DEVELOPMENT_TEAM = 485WHBE245;
 				ENABLE_BITCODE = YES;
@@ -651,14 +666,13 @@
 					.,
 					"../../Qt/5.10.0/ios/mkspecs/macx-ios-clang",
 					/usr/local/include,
-					/usr/local/Cellar/openssl/1.0.2n/include,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"/Users/CK-Yang/Qt/5.10.0/ios/plugins/platforms",
 					/System/Library/Frameworks/,
 					"/Users/CK-Yang/Qt/5.10.0/ios/lib",
 					"/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats",
-					/usr/local/Cellar/openssl/1.0.2n/lib,
+					"/Users/CK-Yang/GitHub/OpenSSL-for-iPhone-master/lib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -678,7 +692,6 @@
 					"-L/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats",
 					"-lm",
 					"-lz",
-					"-lcrypto",
 				);
 				PRODUCT_NAME = BlockChain;
 				"QMAKE_MAC_SDK_PATH[sdk=iphoneos*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.2.sdk;
@@ -688,6 +701,7 @@
 				QT_LIBRARY_SUFFIX = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "/Users/CK-Yang/GitHub/OpenSSL-for-iPhone-master/include";
 			};
 			name = Release;
 		};
@@ -696,7 +710,10 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				"ARCHS[sdk=iphoneos*]" = arm64;
-				"ARCHS[sdk=iphonesimulator*]" = x86_64;
+				"ARCHS[sdk=iphonesimulator*]" = (
+					x86_64,
+					arm64,
+				);
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 485WHBE245;
@@ -715,14 +732,13 @@
 					.,
 					"../../Qt/5.10.0/ios/mkspecs/macx-ios-clang",
 					/usr/local/include,
-					/usr/local/Cellar/openssl/1.0.2n/include,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"/Users/CK-Yang/Qt/5.10.0/ios/plugins/platforms",
 					/System/Library/Frameworks/,
 					"/Users/CK-Yang/Qt/5.10.0/ios/lib",
 					"/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats",
-					/usr/local/Cellar/openssl/1.0.2n/lib,
+					"/Users/CK-Yang/GitHub/OpenSSL-for-iPhone-master/lib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -742,7 +758,6 @@
 					"-L/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats",
 					"-lm",
 					"-lz",
-					"-lcrypto",
 				);
 				PRODUCT_NAME = BlockChain;
 				"QMAKE_MAC_SDK_PATH[sdk=iphoneos*]" = /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.2.sdk;
@@ -752,6 +767,7 @@
 				QT_LIBRARY_SUFFIX = _debug;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "/Users/CK-Yang/GitHub/OpenSSL-for-iPhone-master/include";
 			};
 			name = Debug;
 		};

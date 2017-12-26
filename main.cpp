@@ -43,9 +43,9 @@ int main(int argc, char *argv[]){
 //    talk* talkObject = factory::GetTalk();
 //    pthread_create(&thread, NULL , create_talk, (void*) talkObject);
     
-//    crypto* cryptoObject = factory::GetCrypto();
-//    ECDSA_SIG* sig = cryptoObject->sign("abc");
-//    cout << cryptoObject->verify("abc", sig, NULL) << endl;
+    crypto* cryptoObject = factory::GetCrypto();
+    ECDSA_SIG* sig = cryptoObject->sign("abc");
+    cout << cryptoObject->verify("abc", sig, NULL) << endl;
 
 /*
     //Handle user input
