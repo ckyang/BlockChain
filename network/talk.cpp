@@ -47,6 +47,9 @@ static bool startWith(const string& str, const string& start)
 
 static void response(int sock_fd, short event, void *arg)
 {
+    (void)event;
+    (void)arg;
+
     char rbuf[MAX_BUF_SIZE];
     int size = sizeof(struct sockaddr);
     struct sockaddr_in client_addr;
