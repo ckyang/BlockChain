@@ -40,7 +40,7 @@ int main(int argc, char *argv[]){
     blockChain* blockChainObject = factory::GetBlockChain();
 
     pthread_t thread;
-//    talk* talkObject = factory::GetTalk();
+    talk* talkObject = factory::GetTalk();
 //    pthread_create(&thread, NULL , create_talk, (void*) talkObject);
     
     crypto* cryptoObject = factory::GetCrypto();

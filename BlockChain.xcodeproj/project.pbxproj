@@ -46,6 +46,10 @@
 		A80A3B831FF0E699003709B4 /* blockChain.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A80A3B7F1FF0E699003709B4 /* blockChain.cpp */; };
 		A80A3B841FF0E699003709B4 /* block.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A80A3B801FF0E699003709B4 /* block.cpp */; };
 		A80A3B881FF0E6AC003709B4 /* crypto.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A80A3B871FF0E6AC003709B4 /* crypto.cpp */; };
+		A8276EA51FF4B1100027DA40 /* libevent_extra.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = A8276EA11FF4B1100027DA40 /* libevent_extra.a */; };
+		A8276EA61FF4B1100027DA40 /* libevent_core.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = A8276EA21FF4B1100027DA40 /* libevent_core.a */; };
+		A8276EA71FF4B1100027DA40 /* libevent.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = A8276EA31FF4B1100027DA40 /* libevent.a */; };
+		A8276EA81FF4B1100027DA40 /* libevent_pthreads.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = A8276EA41FF4B1100027DA40 /* libevent_pthreads.a */; };
 		A88AA1451FF2847700DB933D /* libcrypto.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = A88AA1431FF2847700DB933D /* libcrypto.a */; };
 		A88AA1461FF2847700DB933D /* libssl.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = A88AA1441FF2847700DB933D /* libssl.a */; };
 		B460F624007324313696BE86 /* QuartzCore.framework in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = 7EC00404ACD5AB0E97726B0E /* QuartzCore.framework */; };
@@ -122,6 +126,10 @@
 		A80A3B821FF0E699003709B4 /* blockChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = blockChain.h; path = blockchain/blockChain.h; sourceTree = SOURCE_ROOT; };
 		A80A3B861FF0E6AC003709B4 /* crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = crypto.h; path = crypto/crypto.h; sourceTree = SOURCE_ROOT; };
 		A80A3B871FF0E6AC003709B4 /* crypto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = crypto.cpp; path = crypto/crypto.cpp; sourceTree = SOURCE_ROOT; };
+		A8276EA11FF4B1100027DA40 /* libevent_extra.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libevent_extra.a; path = ../libevent_extra.a; sourceTree = "<group>"; };
+		A8276EA21FF4B1100027DA40 /* libevent_core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libevent_core.a; path = ../libevent_core.a; sourceTree = "<group>"; };
+		A8276EA31FF4B1100027DA40 /* libevent.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libevent.a; path = ../libevent.a; sourceTree = "<group>"; };
+		A8276EA41FF4B1100027DA40 /* libevent_pthreads.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libevent_pthreads.a; path = ../libevent_pthreads.a; sourceTree = "<group>"; };
 		A88AA1431FF2847700DB933D /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "../OpenSSL-for-iPhone-master/lib/libcrypto.a"; sourceTree = "<group>"; };
 		A88AA1441FF2847700DB933D /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "../OpenSSL-for-iPhone-master/lib/libssl.a"; sourceTree = "<group>"; };
 		BC75BBE4991D95B1538F3E35 /* qtfreetype */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = qtfreetype; path = "/Users/CK-Yang/Qt/5.10.0/ios/lib/libqtfreetype$(QT_LIBRARY_SUFFIX).a"; sourceTree = "<absolute>"; };
@@ -148,6 +156,8 @@
 				A88AA1451FF2847700DB933D /* libcrypto.a in Link Binary With Libraries */,
 				61EEC397DC8556BF8C4E36A7 /* ImageIO.framework in Link Binary With Libraries */,
 				2538D869EBDF8C13C0739AF8 /* qios in Link Binary With Libraries */,
+				A8276EA51FF4B1100027DA40 /* libevent_extra.a in Link Binary With Libraries */,
+				A8276EA81FF4B1100027DA40 /* libevent_pthreads.a in Link Binary With Libraries */,
 				5C6F5723764FDE6BD92FB095 /* Qt5FontDatabaseSupport in Link Binary With Libraries */,
 				803B91B6CBCEA20ACE41C0CD /* qtfreetype in Link Binary With Libraries */,
 				061CDD1D90EAEA18239D3E50 /* Qt5GraphicsSupport in Link Binary With Libraries */,
@@ -156,6 +166,7 @@
 				FA11BFDBB53ADAC754D0E782 /* qgif in Link Binary With Libraries */,
 				67F5825697A5FCC8CEA59E1B /* qicns in Link Binary With Libraries */,
 				DF29C2865DAA02E11CF1A73C /* qico in Link Binary With Libraries */,
+				A8276EA71FF4B1100027DA40 /* libevent.a in Link Binary With Libraries */,
 				2A734B0E339D8EE44AE09BA0 /* qjpeg in Link Binary With Libraries */,
 				D56AC791C8198AC2A4666DA3 /* qmacjp2 in Link Binary With Libraries */,
 				49B06E127F623A0846576728 /* qtga in Link Binary With Libraries */,
@@ -168,6 +179,7 @@
 				F459BB08B502B952E3545079 /* qtharfbuzz in Link Binary With Libraries */,
 				405B8D54885CD5F375D1793C /* Qt5Core in Link Binary With Libraries */,
 				1D1AB8646A7C6BE982CB42BB /* qtpcre2 in Link Binary With Libraries */,
+				A8276EA61FF4B1100027DA40 /* libevent_core.a in Link Binary With Libraries */,
 			);
 			name = "Link Binary With Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,6 +261,10 @@
 		AF39DD055C3EF8226FBE929D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A8276EA21FF4B1100027DA40 /* libevent_core.a */,
+				A8276EA11FF4B1100027DA40 /* libevent_extra.a */,
+				A8276EA41FF4B1100027DA40 /* libevent_pthreads.a */,
+				A8276EA31FF4B1100027DA40 /* libevent.a */,
 				A88AA1431FF2847700DB933D /* libcrypto.a */,
 				A88AA1441FF2847700DB933D /* libssl.a */,
 				FCC237CA5AD60B9BA4447615 /* Foundation.framework */,
@@ -457,7 +473,6 @@
 					../../Qt/5.10.0/ios/include/QtCore,
 					.,
 					"../../Qt/5.10.0/ios/mkspecs/macx-ios-clang",
-					/usr/local/include,
 				);
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -467,7 +482,8 @@
 					/System/Library/Frameworks/,
 					"/Users/CK-Yang/Qt/5.10.0/ios/lib",
 					"/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats",
-					"/Users/CK-Yang/GitHub/OpenSSL-for-iPhone-master/lib",
+					"/Users/CK-Yang/iOS_Library/openssl/lib",
+					"/Users/CK-Yang/iOS_Library/libevent/lib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
@@ -527,7 +543,7 @@
 				SDKROOT = iphoneos;
 				SYMROOT = "/Users/CK-Yang/GitHub/BlockChain/";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "/Users/CK-Yang/GitHub/OpenSSL-for-iPhone-master/include";
+				USER_HEADER_SEARCH_PATHS = "/Users/CK-Yang/iOS_Library/openssl/include /Users/CK-Yang/iOS_Library/libevent/include";
 			};
 			name = Release;
 		};
@@ -567,7 +583,6 @@
 					../../Qt/5.10.0/ios/include/QtCore,
 					.,
 					"../../Qt/5.10.0/ios/mkspecs/macx-ios-clang",
-					/usr/local/include,
 				);
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -577,7 +592,8 @@
 					/System/Library/Frameworks/,
 					"/Users/CK-Yang/Qt/5.10.0/ios/lib",
 					"/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats",
-					"/Users/CK-Yang/GitHub/OpenSSL-for-iPhone-master/lib",
+					"/Users/CK-Yang/iOS_Library/openssl/lib",
+					"/Users/CK-Yang/iOS_Library/libevent/lib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
@@ -637,7 +653,7 @@
 				SDKROOT = iphoneos;
 				SYMROOT = "/Users/CK-Yang/GitHub/BlockChain/";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "/Users/CK-Yang/GitHub/OpenSSL-for-iPhone-master/include";
+				USER_HEADER_SEARCH_PATHS = "/Users/CK-Yang/iOS_Library/openssl/include /Users/CK-Yang/iOS_Library/libevent/include";
 			};
 			name = Debug;
 		};
@@ -665,14 +681,14 @@
 					../../Qt/5.10.0/ios/include/QtCore,
 					.,
 					"../../Qt/5.10.0/ios/mkspecs/macx-ios-clang",
-					/usr/local/include,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"/Users/CK-Yang/Qt/5.10.0/ios/plugins/platforms",
 					/System/Library/Frameworks/,
 					"/Users/CK-Yang/Qt/5.10.0/ios/lib",
 					"/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats",
-					"/Users/CK-Yang/GitHub/OpenSSL-for-iPhone-master/lib",
+					"/Users/CK-Yang/iOS_Library/openssl/lib",
+					"/Users/CK-Yang/iOS_Library/libevent/lib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -701,7 +717,7 @@
 				QT_LIBRARY_SUFFIX = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "/Users/CK-Yang/GitHub/OpenSSL-for-iPhone-master/include";
+				USER_HEADER_SEARCH_PATHS = "/Users/CK-Yang/iOS_Library/openssl/include /Users/CK-Yang/iOS_Library/libevent/include";
 			};
 			name = Release;
 		};
@@ -731,14 +747,14 @@
 					../../Qt/5.10.0/ios/include/QtCore,
 					.,
 					"../../Qt/5.10.0/ios/mkspecs/macx-ios-clang",
-					/usr/local/include,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"/Users/CK-Yang/Qt/5.10.0/ios/plugins/platforms",
 					/System/Library/Frameworks/,
 					"/Users/CK-Yang/Qt/5.10.0/ios/lib",
 					"/Users/CK-Yang/Qt/5.10.0/ios/plugins/imageformats",
-					"/Users/CK-Yang/GitHub/OpenSSL-for-iPhone-master/lib",
+					"/Users/CK-Yang/iOS_Library/openssl/lib",
+					"/Users/CK-Yang/iOS_Library/libevent/lib",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -767,7 +783,7 @@
 				QT_LIBRARY_SUFFIX = _debug;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "/Users/CK-Yang/GitHub/OpenSSL-for-iPhone-master/include";
+				USER_HEADER_SEARCH_PATHS = "/Users/CK-Yang/iOS_Library/openssl/include /Users/CK-Yang/iOS_Library/libevent/include";
 			};
 			name = Debug;
 		};
