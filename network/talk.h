@@ -9,8 +9,6 @@
 #ifndef talk_h
 #define talk_h
 
-using namespace std;
-
 class blockChain;
 class block;
 

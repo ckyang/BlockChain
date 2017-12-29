@@ -6,7 +6,6 @@
 //  Copyright © 2017 Chung-kaiYang. All rights reserved.
 //
 
-#include <stdio.h>
 #include "factory.h"
 #include "blockChain.h"
 #include "talk.h"
@@ -42,10 +41,10 @@ crypto* factory::GetCrypto()
     return m_crypto;
 }
 
-dialog* factory::GetDialog()
+dialog* factory::GetDialog(QApplication *app)
 {
     if(!m_dialog)
-        m_dialog = new dialog();
+        m_dialog = new dialog(0, app);
     
     return m_dialog;
 }

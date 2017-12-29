@@ -1,6 +1,6 @@
 dependencies: /Users/CK-Yang/GitHub/BlockChain/gui/dialog.cpp \
-  ../../Qt/5.10.0/ios/include/QtWidgets/QScrollArea \
-  ../../Qt/5.10.0/ios/include/QtWidgets/qscrollarea.h \
+  ../../Qt/5.10.0/ios/include/QtWidgets/QApplication \
+  ../../Qt/5.10.0/ios/include/QtWidgets/qapplication.h \
   ../../Qt/5.10.0/ios/include/QtWidgets/qtwidgetsglobal.h \
   ../../Qt/5.10.0/ios/include/QtGui/qtguiglobal.h \
   ../../Qt/5.10.0/ios/include/QtCore/qglobal.h \
@@ -23,22 +23,19 @@ dependencies: /Users/CK-Yang/GitHub/BlockChain/gui/dialog.cpp \
   ../../Qt/5.10.0/ios/include/QtCore/qversiontagging.h \
   ../../Qt/5.10.0/ios/include/QtGui/qtgui-config.h \
   ../../Qt/5.10.0/ios/include/QtWidgets/qtwidgets-config.h \
-  ../../Qt/5.10.0/ios/include/QtWidgets/qabstractscrollarea.h \
-  ../../Qt/5.10.0/ios/include/QtWidgets/qframe.h \
-  ../../Qt/5.10.0/ios/include/QtWidgets/qwidget.h \
-  ../../Qt/5.10.0/ios/include/QtGui/qwindowdefs.h \
-  ../../Qt/5.10.0/ios/include/QtCore/qobjectdefs.h \
-  ../../Qt/5.10.0/ios/include/QtCore/qnamespace.h \
-  ../../Qt/5.10.0/ios/include/QtCore/qobjectdefs_impl.h \
-  ../../Qt/5.10.0/ios/include/QtCore/qobject.h \
+  ../../Qt/5.10.0/ios/include/QtCore/qcoreapplication.h \
   ../../Qt/5.10.0/ios/include/QtCore/qstring.h \
   ../../Qt/5.10.0/ios/include/QtCore/qchar.h \
   ../../Qt/5.10.0/ios/include/QtCore/qbytearray.h \
   ../../Qt/5.10.0/ios/include/QtCore/qrefcount.h \
+  ../../Qt/5.10.0/ios/include/QtCore/qnamespace.h \
   ../../Qt/5.10.0/ios/include/QtCore/qarraydata.h \
   ../../Qt/5.10.0/ios/include/QtCore/qstringliteral.h \
   ../../Qt/5.10.0/ios/include/QtCore/qstringalgorithms.h \
   ../../Qt/5.10.0/ios/include/QtCore/qstringview.h \
+  ../../Qt/5.10.0/ios/include/QtCore/qobject.h \
+  ../../Qt/5.10.0/ios/include/QtCore/qobjectdefs.h \
+  ../../Qt/5.10.0/ios/include/QtCore/qobjectdefs_impl.h \
   ../../Qt/5.10.0/ios/include/QtCore/qlist.h \
   ../../Qt/5.10.0/ios/include/QtCore/qalgorithms.h \
   ../../Qt/5.10.0/ios/include/QtCore/qiterator.h \
@@ -53,11 +50,27 @@ dependencies: /Users/CK-Yang/GitHub/BlockChain/gui/dialog.cpp \
   ../../Qt/5.10.0/ios/include/QtCore/qvarlengtharray.h \
   ../../Qt/5.10.0/ios/include/QtCore/qcontainerfwd.h \
   ../../Qt/5.10.0/ios/include/QtCore/qobject_impl.h \
+  ../../Qt/5.10.0/ios/include/QtCore/qcoreevent.h \
+  ../../Qt/5.10.0/ios/include/QtCore/qeventloop.h \
+  ../../Qt/5.10.0/ios/include/QtGui/qwindowdefs.h \
+  ../../Qt/5.10.0/ios/include/QtCore/qpoint.h \
+  ../../Qt/5.10.0/ios/include/QtCore/qsize.h \
+  ../../Qt/5.10.0/ios/include/QtGui/qcursor.h \
+  ../../Qt/5.10.0/ios/include/QtGui/qguiapplication.h \
+  ../../Qt/5.10.0/ios/include/QtGui/qinputmethod.h \
+  ../../Qt/5.10.0/ios/include/QtCore/qlocale.h \
+  ../../Qt/5.10.0/ios/include/QtCore/qvariant.h \
+  ../../Qt/5.10.0/ios/include/QtCore/qmap.h \
+  ../../Qt/5.10.0/ios/include/QtCore/qhash.h \
+  ../../Qt/5.10.0/ios/include/QtCore/qshareddata.h \
+  ../../Qt/5.10.0/ios/include/QtWidgets/QScrollArea \
+  ../../Qt/5.10.0/ios/include/QtWidgets/qscrollarea.h \
+  ../../Qt/5.10.0/ios/include/QtWidgets/qabstractscrollarea.h \
+  ../../Qt/5.10.0/ios/include/QtWidgets/qframe.h \
+  ../../Qt/5.10.0/ios/include/QtWidgets/qwidget.h \
   ../../Qt/5.10.0/ios/include/QtCore/qmargins.h \
   ../../Qt/5.10.0/ios/include/QtGui/qpaintdevice.h \
   ../../Qt/5.10.0/ios/include/QtCore/qrect.h \
-  ../../Qt/5.10.0/ios/include/QtCore/qsize.h \
-  ../../Qt/5.10.0/ios/include/QtCore/qpoint.h \
   ../../Qt/5.10.0/ios/include/QtGui/qpalette.h \
   ../../Qt/5.10.0/ios/include/QtGui/qcolor.h \
   ../../Qt/5.10.0/ios/include/QtGui/qrgb.h \
@@ -76,15 +89,15 @@ dependencies: /Users/CK-Yang/GitHub/BlockChain/gui/dialog.cpp \
   ../../Qt/5.10.0/ios/include/QtGui/qpixelformat.h \
   ../../Qt/5.10.0/ios/include/QtGui/qpixmap.h \
   ../../Qt/5.10.0/ios/include/QtCore/qsharedpointer.h \
-  ../../Qt/5.10.0/ios/include/QtCore/qshareddata.h \
-  ../../Qt/5.10.0/ios/include/QtCore/qhash.h \
   ../../Qt/5.10.0/ios/include/QtCore/qsharedpointer_impl.h \
   ../../Qt/5.10.0/ios/include/QtGui/qfont.h \
   ../../Qt/5.10.0/ios/include/QtGui/qfontmetrics.h \
   ../../Qt/5.10.0/ios/include/QtGui/qfontinfo.h \
   ../../Qt/5.10.0/ios/include/QtWidgets/qsizepolicy.h \
-  ../../Qt/5.10.0/ios/include/QtGui/qcursor.h \
   ../../Qt/5.10.0/ios/include/QtGui/qkeysequence.h \
+  ../../Qt/5.10.0/ios/include/QtWidgets/QScrollBar \
+  ../../Qt/5.10.0/ios/include/QtWidgets/qscrollbar.h \
+  ../../Qt/5.10.0/ios/include/QtWidgets/qabstractslider.h \
   ../../Qt/5.10.0/ios/include/QtWidgets/QGridLayout \
   ../../Qt/5.10.0/ios/include/QtWidgets/qgridlayout.h \
   ../../Qt/5.10.0/ios/include/QtWidgets/qlayout.h \

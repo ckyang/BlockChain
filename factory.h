@@ -13,6 +13,7 @@ class blockChain;
 class talk;
 class crypto;
 class dialog;
+class QApplication;
 
 class factory
 {
@@ -20,7 +21,7 @@ public:
     static blockChain* GetBlockChain();
     static talk* GetTalk();
     static crypto* GetCrypto();
-    static dialog* GetDialog();
+    static dialog* GetDialog(QApplication *app = 0);
     ~factory();
 
 private:

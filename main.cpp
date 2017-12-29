@@ -29,10 +29,10 @@ void* create_talk(void *talkClass)
 
 int main(int argc, char *argv[]){
     QApplication app(argc, argv);
-    dialog* dialog = factory::GetDialog();
+    dialog* dialog = factory::GetDialog(&app);
     dialog->show();
 
-    dialog->AppendLog("Blockchain demo program.");
+    dialog->AppendLog("Welcome to blockchain demo program @ Clark Yang!");
     blockChain* blockChainObject = factory::GetBlockChain();
 
     pthread_t thread;
@@ -41,7 +41,7 @@ int main(int argc, char *argv[]){
     
     crypto* cryptoObject = factory::GetCrypto();
     ECDSA_SIG* sig = cryptoObject->sign("abc");
-    cout << cryptoObject->verify("abc", sig, NULL) << endl;
+    dialog->AppendLog(to_string(cryptoObject->verify("abc", sig, NULL)));
 
 /*
     //Handle user input

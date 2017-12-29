@@ -6,7 +6,6 @@
 //  Copyright © 2017 Chung-kaiYang. All rights reserved.
 //
 
-#include <iostream>
 #include "talk.h"
 #include "unistd.h"
 #include "netinet/in.h"
@@ -16,6 +15,7 @@
 #include "factory.h"
 #include "blockChain.h"
 #include "block.h"
+#include "dialog.h"
 
 #define REMOTE_COMMAND_NEW "NEW"
 #define REMOTE_COMMAND_GET_LAST "GET LAST"
@@ -58,7 +58,7 @@ static void response(int sock_fd, short event, void *arg)
     
     if(recvfrom(sock_fd, rbuf, (size_t)sizeof(rbuf), 0, (struct sockaddr *)&client_addr, (socklen_t *)&size) < 0)
     {
-        cout << "Connection Closed" << endl;
+        factory::GetDialog()->AppendLog("Connection Closed");
         return;
     }
 

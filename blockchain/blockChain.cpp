@@ -6,13 +6,13 @@
 //  Copyright © 2017 Chung-kaiYang. All rights reserved.
 //
 
-#include <iostream>
 #include <stack>
 #include "blockChain.h"
 #include "crypto.h"
 #include "block.h"
 #include "factory.h"
 #include "talk.h"
+#include "dialog.h"
 
 string blockChain::calculateHash(const int index, const string& preHash, const time_t& timeStamp, const string& data)
 {
@@ -26,7 +26,8 @@ string blockChain::calculateHash(const int index, const string& preHash, const t
 
 blockChain::blockChain(bool bGenerateGenesis)
 {
-    cout << "Initialize blockchain..." << endl;
+    dialog* dialog = factory::GetDialog();
+    dialog->AppendLog("Initialize blockchain...");
 
     head = NULL;
     tail = NULL;
@@ -35,7 +36,7 @@ blockChain::blockChain(bool bGenerateGenesis)
     if(bGenerateGenesis)
         addBlock(getGenesisBlock());
 
-    cout << "Blockchain initialized." << endl;
+    dialog->AppendLog("Blockchain initialized.");
 }
 
 block* blockChain::getGenesisBlock()
@@ -60,15 +61,17 @@ void blockChain::addBlock(block *newBlock)
 
 bool blockChain::isValidBlock(const int index, const string& preHash, const time_t& timeStamp, const string& data, const string& hash, block* preBlock)
 {
+    dialog* dialog = factory::GetDialog();
+
     if(preBlock->getIndex() + 1 != index)
     {
-        cout << "Invalid index" << endl;
+        dialog->AppendLog("Invalid index");
         return false;
     }
 
     if(preBlock->getHash() != preHash)
     {
-        cout << "Invalid previoushash" << endl;
+        dialog->AppendLog("Invalid previoushash");
         return false;
     }
 
@@ -76,7 +79,7 @@ bool blockChain::isValidBlock(const int index, const string& preHash, const time
 
     if(newHash != hash)
     {
-        cout << "Invalid hash: " << newHash << " " << hash << endl;
+        dialog->AppendLog(string("Invalid hash: ") + newHash + " " + hash);
         return false;
     }
 
@@ -105,13 +108,15 @@ bool blockChain::isValidChain(blockChain * const chain)
 
 void blockChain::replaceChain(blockChain * const newChain)
 {
+    dialog* dialog = factory::GetDialog();
+
     if(!isValidChain(newChain) || newChain->length() <= len)
     {
-        cout << "Received blockchain invalid, not replaced." << endl;
+        dialog->AppendLog("Received blockchain invalid, not replaced.");
         return;
     }
 
-    cout << "Received blockchain is valid. Replacing current blockchain with received blockchain." << endl;
+    dialog->AppendLog("Received blockchain is valid. Replacing current blockchain with received blockchain.");
 
     removeAll();
 
@@ -155,7 +160,8 @@ blockChain* blockChain::generateChain(const string& chainInfo)
     time_t timeStamp;
     stack<block*> s;
 
-    cout << "generateChain " << chainInfo << endl;
+    factory::GetDialog()->AppendLog(string("generateChain ") + chainInfo);
+
     while(found != string::npos)
     {
         block::TransferInfo(info.substr(0, found), index, preHash, timeStamp, data, hash);

@@ -6,12 +6,13 @@
 //  Copyright © 2017 Chung-kaiYang. All rights reserved.
 //
 
-#include <iostream>
 #include <openssl/sha.h>
 #include <openssl/bio.h>
 #include <openssl/err.h>
 #include <openssl/pem.h>
 #include "crypto.h"
+#include "factory.h"
+#include "dialog.h"
 
 #define ECCTYPE "secp521r1"
 
@@ -44,7 +45,8 @@ string crypto::HASH(const char *data)
 
 void crypto::generateKeyPair()
 {
-    cout << "Generate public/private key pairs..." << endl;
+    dialog* dialog = factory::GetDialog();
+    dialog->AppendLog("Generate public/private key pairs...");
 
     OpenSSL_add_all_algorithms();
     ERR_load_BIO_strings();
@@ -66,7 +68,7 @@ void crypto::generateKeyPair()
 
     EVP_PKEY_free(pkey);
     BIO_free_all(pbio_key_file);
-    cout << "Public/private key pairs generated." << endl;
+    dialog->AppendLog("Public/private key pairs generated.");
 }
 
 ECDSA_SIG* crypto::sign(const string& message)
@@ -79,7 +81,7 @@ bool crypto::verify(const string& message, ECDSA_SIG const * signature, EC_KEY* 
 {
     if(!public_key)
     {
-        cout << "Public key is invalid, please enter valid public key to verify message!" << endl;
+        factory::GetDialog()->AppendLog("Public key is invalid, please enter valid public key to verify message!");
         return false;
     }
 
