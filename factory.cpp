@@ -11,10 +11,12 @@
 #include "blockChain.h"
 #include "talk.h"
 #include "crypto.h"
+#include "dialog.h"
 
 blockChain* factory::m_blockChain = NULL;
 talk* factory::m_talk = NULL;
 crypto* factory::m_crypto = NULL;
+dialog* factory::m_dialog = NULL;
 
 blockChain* factory::GetBlockChain()
 {
@@ -40,6 +42,14 @@ crypto* factory::GetCrypto()
     return m_crypto;
 }
 
+dialog* factory::GetDialog()
+{
+    if(!m_dialog)
+        m_dialog = new dialog();
+    
+    return m_dialog;
+}
+
 factory::~factory(void)
 {
     if(m_blockChain)
@@ -58,5 +68,11 @@ factory::~factory(void)
     {
         delete m_crypto;
         m_crypto = NULL;
+    }
+
+    if(m_dialog)
+    {
+        delete m_dialog;
+        m_dialog = NULL;
     }
 }

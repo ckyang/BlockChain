@@ -46,6 +46,7 @@
 		A80A3B831FF0E699003709B4 /* blockChain.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A80A3B7F1FF0E699003709B4 /* blockChain.cpp */; };
 		A80A3B841FF0E699003709B4 /* block.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A80A3B801FF0E699003709B4 /* block.cpp */; };
 		A80A3B881FF0E6AC003709B4 /* crypto.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A80A3B871FF0E6AC003709B4 /* crypto.cpp */; };
+		A8369B1E1FF5F68C005E3A84 /* dialog.cpp in Compile Sources */ = {isa = PBXBuildFile; fileRef = A8369B1D1FF5F68C005E3A84 /* dialog.cpp */; };
 		A84440BB1FF53DBD004D113C /* libevent_extra.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = A84440B71FF53DBD004D113C /* libevent_extra.a */; };
 		A84440BC1FF53DBD004D113C /* libevent_core.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = A84440B81FF53DBD004D113C /* libevent_core.a */; };
 		A84440BD1FF53DBD004D113C /* libevent.a in Link Binary With Libraries */ = {isa = PBXBuildFile; fileRef = A84440B91FF53DBD004D113C /* libevent.a */; };
@@ -126,6 +127,8 @@
 		A80A3B821FF0E699003709B4 /* blockChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = blockChain.h; path = blockchain/blockChain.h; sourceTree = SOURCE_ROOT; };
 		A80A3B861FF0E6AC003709B4 /* crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = crypto.h; path = crypto/crypto.h; sourceTree = SOURCE_ROOT; };
 		A80A3B871FF0E6AC003709B4 /* crypto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = crypto.cpp; path = crypto/crypto.cpp; sourceTree = SOURCE_ROOT; };
+		A8369B1D1FF5F68C005E3A84 /* dialog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = dialog.cpp; sourceTree = "<group>"; };
+		A8369B1F1FF5F69F005E3A84 /* dialog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dialog.h; sourceTree = "<group>"; };
 		A84440B71FF53DBD004D113C /* libevent_extra.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libevent_extra.a; path = ../libevent_extra.a; sourceTree = "<group>"; };
 		A84440B81FF53DBD004D113C /* libevent_core.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libevent_core.a; path = ../libevent_core.a; sourceTree = "<group>"; };
 		A84440B91FF53DBD004D113C /* libevent.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libevent.a; path = ../libevent.a; sourceTree = "<group>"; };
@@ -198,6 +201,7 @@
 		2EB56BE3C2D93CDAB0C52E67 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				A8369B1C1FF5F673005E3A84 /* gui */,
 				A80A3B851FF0E69C003709B4 /* crypto */,
 				A80A3B7E1FF0E68C003709B4 /* blockchain */,
 				A80A3B7A1FF0E67B003709B4 /* network */,
@@ -256,6 +260,15 @@
 			);
 			name = crypto;
 			path = "New Group2";
+			sourceTree = "<group>";
+		};
+		A8369B1C1FF5F673005E3A84 /* gui */ = {
+			isa = PBXGroup;
+			children = (
+				A8369B1D1FF5F68C005E3A84 /* dialog.cpp */,
+				A8369B1F1FF5F69F005E3A84 /* dialog.h */,
+			);
+			path = gui;
 			sourceTree = "<group>";
 		};
 		AF39DD055C3EF8226FBE929D /* Frameworks */ = {
@@ -420,6 +433,7 @@
 				ECA5219093563459E6FABE32 /* main.cpp in Compile Sources */,
 				A80A3B7D1FF0E686003709B4 /* talk.cpp in Compile Sources */,
 				A80A3B881FF0E6AC003709B4 /* crypto.cpp in Compile Sources */,
+				A8369B1E1FF5F68C005E3A84 /* dialog.cpp in Compile Sources */,
 				A80A3B791FF0E677003709B4 /* factory.cpp in Compile Sources */,
 				77BAB74F75EC98EA171B6E7B /* blockchain_plugin_import.cpp in Compile Sources */,
 				A80A3B831FF0E699003709B4 /* blockChain.cpp in Compile Sources */,

@@ -3,13 +3,12 @@
 
 #include <iostream>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QLabel>
-#include <QtWidgets/QScrollArea>
 #include "block.h"
 #include "factory.h"
 #include "blockChain.h"
 #include "talk.h"
 #include "crypto.h"
+#include "dialog.h"
 
 using namespace std;
 
@@ -30,13 +29,10 @@ void* create_talk(void *talkClass)
 
 int main(int argc, char *argv[]){
     QApplication app(argc, argv);
-    QScrollArea *scrollArea = new QScrollArea;
-    QLabel *label = new QLabel("BlockChain implementation by Clark Yang");
-    scrollArea->resize (5, 5);
-    scrollArea->setWidget(label);
-    scrollArea->show ();
+    dialog* dialog = factory::GetDialog();
+    dialog->show();
 
-    cout << "Blockchain demo program." << endl;
+    dialog->AppendLog("Blockchain demo program.");
     blockChain* blockChainObject = factory::GetBlockChain();
 
     pthread_t thread;

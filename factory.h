@@ -12,6 +12,7 @@
 class blockChain;
 class talk;
 class crypto;
+class dialog;
 
 class factory
 {
@@ -19,12 +20,14 @@ public:
     static blockChain* GetBlockChain();
     static talk* GetTalk();
     static crypto* GetCrypto();
+    static dialog* GetDialog();
     ~factory();
 
 private:
     static blockChain* m_blockChain;
     static talk* m_talk;
     static crypto* m_crypto;
+    static dialog* m_dialog;
 };
 
 #endif /* factory_h */

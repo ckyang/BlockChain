@@ -63,9 +63,27 @@ dependencies: /Users/CK-Yang/GitHub/BlockChain/main.cpp \
   ../../Qt/5.10.0/ios/include/QtCore/qmap.h \
   ../../Qt/5.10.0/ios/include/QtCore/qhash.h \
   ../../Qt/5.10.0/ios/include/QtCore/qshareddata.h \
-  ../../Qt/5.10.0/ios/include/QtWidgets/QLabel \
-  ../../Qt/5.10.0/ios/include/QtWidgets/qlabel.h \
-  ../../Qt/5.10.0/ios/include/QtWidgets/qframe.h \
+  /Users/CK-Yang/GitHub/BlockChain/blockchain/block.h factory.h \
+  /Users/CK-Yang/GitHub/BlockChain/blockchain/blockChain.h \
+  /Users/CK-Yang/GitHub/BlockChain/network/talk.h \
+  /Users/CK-Yang/GitHub/BlockChain/crypto/crypto.h \
+  /Users/CK-Yang/iOS_Library/openssl/include/openssl/ec.h \
+  /Users/CK-Yang/iOS_Library/openssl/include/openssl/opensslconf.h \
+  /Users/CK-Yang/iOS_Library/openssl/include/openssl/opensslconf_ios_arm64.h \
+  /Users/CK-Yang/iOS_Library/openssl/include/openssl/asn1.h \
+  /Users/CK-Yang/iOS_Library/openssl/include/openssl/e_os2.h \
+  /Users/CK-Yang/iOS_Library/openssl/include/openssl/bio.h \
+  /Users/CK-Yang/iOS_Library/openssl/include/openssl/crypto.h \
+  /Users/CK-Yang/iOS_Library/openssl/include/openssl/stack.h \
+  /Users/CK-Yang/iOS_Library/openssl/include/openssl/safestack.h \
+  /Users/CK-Yang/iOS_Library/openssl/include/openssl/opensslv.h \
+  /Users/CK-Yang/iOS_Library/openssl/include/openssl/ossl_typ.h \
+  /Users/CK-Yang/iOS_Library/openssl/include/openssl/symhacks.h \
+  /Users/CK-Yang/iOS_Library/openssl/include/openssl/bn.h \
+  /Users/CK-Yang/iOS_Library/openssl/include/openssl/ecdsa.h \
+  /Users/CK-Yang/GitHub/BlockChain/gui/dialog.h \
+  ../../Qt/5.10.0/ios/include/QtWidgets/QDialog \
+  ../../Qt/5.10.0/ios/include/QtWidgets/qdialog.h \
   ../../Qt/5.10.0/ios/include/QtWidgets/qwidget.h \
   ../../Qt/5.10.0/ios/include/QtCore/qmargins.h \
   ../../Qt/5.10.0/ios/include/QtGui/qpaintdevice.h \
@@ -93,25 +111,4 @@ dependencies: /Users/CK-Yang/GitHub/BlockChain/main.cpp \
   ../../Qt/5.10.0/ios/include/QtGui/qfontmetrics.h \
   ../../Qt/5.10.0/ios/include/QtGui/qfontinfo.h \
   ../../Qt/5.10.0/ios/include/QtWidgets/qsizepolicy.h \
-  ../../Qt/5.10.0/ios/include/QtGui/qkeysequence.h \
-  ../../Qt/5.10.0/ios/include/QtWidgets/QScrollArea \
-  ../../Qt/5.10.0/ios/include/QtWidgets/qscrollarea.h \
-  ../../Qt/5.10.0/ios/include/QtWidgets/qabstractscrollarea.h \
-  /Users/CK-Yang/GitHub/BlockChain/blockchain/block.h factory.h \
-  /Users/CK-Yang/GitHub/BlockChain/blockchain/blockChain.h \
-  /Users/CK-Yang/GitHub/BlockChain/network/talk.h \
-  /Users/CK-Yang/GitHub/BlockChain/crypto/crypto.h \
-  /Users/CK-Yang/iOS_Library/openssl/include/openssl/ec.h \
-  /Users/CK-Yang/iOS_Library/openssl/include/openssl/opensslconf.h \
-  /Users/CK-Yang/iOS_Library/openssl/include/openssl/opensslconf_ios_arm64.h \
-  /Users/CK-Yang/iOS_Library/openssl/include/openssl/asn1.h \
-  /Users/CK-Yang/iOS_Library/openssl/include/openssl/e_os2.h \
-  /Users/CK-Yang/iOS_Library/openssl/include/openssl/bio.h \
-  /Users/CK-Yang/iOS_Library/openssl/include/openssl/crypto.h \
-  /Users/CK-Yang/iOS_Library/openssl/include/openssl/stack.h \
-  /Users/CK-Yang/iOS_Library/openssl/include/openssl/safestack.h \
-  /Users/CK-Yang/iOS_Library/openssl/include/openssl/opensslv.h \
-  /Users/CK-Yang/iOS_Library/openssl/include/openssl/ossl_typ.h \
-  /Users/CK-Yang/iOS_Library/openssl/include/openssl/symhacks.h \
-  /Users/CK-Yang/iOS_Library/openssl/include/openssl/bn.h \
-  /Users/CK-Yang/iOS_Library/openssl/include/openssl/ecdsa.h
+  ../../Qt/5.10.0/ios/include/QtGui/qkeysequence.h
