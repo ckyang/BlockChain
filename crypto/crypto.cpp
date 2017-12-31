@@ -46,7 +46,7 @@ string crypto::HASH(const char *data)
 void crypto::generateKeyPair()
 {
     dialog* dialog = factory::GetDialog();
-    dialog->AppendLog("Generate public/private key pairs...");
+    dialog->AppendLog("Generating public/private key pairs...");
 
     OpenSSL_add_all_algorithms();
     ERR_load_BIO_strings();

@@ -27,7 +27,7 @@ string blockChain::calculateHash(const int index, const string& preHash, const t
 blockChain::blockChain(bool bGenerateGenesis)
 {
     dialog* dialog = factory::GetDialog();
-    dialog->AppendLog("Initialize blockchain...");
+    dialog->AppendLog("Initializing blockchain...");
 
     head = NULL;
     tail = NULL;
@@ -134,17 +134,25 @@ void blockChain::replaceChain(blockChain * const newChain)
     len = newChain->length();
 }
 
-string blockChain::getChainInfo()
+string blockChain::getChainInfo(const bool bWithTitle)
 {
     string res;
+    char wrap = ',';
+
+    if(bWithTitle)
+    {
+        res = "Index TimeStamp Data Hash";
+        wrap = '\n';
+    }
+
     block* cur = getLatestBlock();
-    
+
     while(cur)
     {
         if(!res.empty())
-            res += ",";
+            res += wrap;
 
-        res += cur->getBlockInfo();
+        res += cur->getBlockInfo(bWithTitle);
         cur = getBlock(cur->getPreHash());
     }
 

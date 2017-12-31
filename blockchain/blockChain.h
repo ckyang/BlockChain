@@ -31,7 +31,7 @@ public:
     block *getLatestBlock(){return tail;}
     block *getBlock(const string& hash){return hashList[hash];}
     void replaceChain(blockChain * const chain);
-    string getChainInfo();
+    string getChainInfo(const bool bWithTitle = false);
     ~blockChain();
 
 private:

@@ -34,14 +34,15 @@ int main(int argc, char *argv[]){
 
     dialog->AppendLog("Welcome to blockchain demo program @ Clark Yang!");
     blockChain* blockChainObject = factory::GetBlockChain();
+    dialog->UpdateBlockChainList();
 
     pthread_t thread;
     talk* talkObject = factory::GetTalk();
     pthread_create(&thread, NULL , create_talk, (void*) talkObject);
     
     crypto* cryptoObject = factory::GetCrypto();
-    ECDSA_SIG* sig = cryptoObject->sign("abc");
-    dialog->AppendLog(to_string(cryptoObject->verify("abc", sig, NULL)));
+//    ECDSA_SIG* sig = cryptoObject->sign("abc");
+//    dialog->AppendLog(to_string(cryptoObject->verify("abc", sig, NULL)));
 
 /*
     //Handle user input

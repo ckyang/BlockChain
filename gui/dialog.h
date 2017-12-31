@@ -18,25 +18,25 @@ class QScrollArea;
 class QGridLayout;
 class QLabel;
 class QHBoxLayout;
+class QVBoxLayout;
 
 class dialog : public QDialog
 {
-//    Q_OBJECT
-
 public:
     dialog(QWidget *parent = 0, QApplication* app = 0);
     ~dialog();
 
     void AppendLog(const string& log);
+    void UpdateBlockChainList();
 
 private:
-    QLabel *m_logLabel;
-    QLabel *m_label1, *m_label2, *m_label3, *m_label4;
+    QLabel *m_logLabel, *m_label1, *m_label2, *m_blockChainLabel, *m_blockChainList;
 
     QApplication *m_app;
     QGridLayout *m_mainLayout;
-    QHBoxLayout *m_layout1, *m_layout2;
-    QScrollArea *m_scrollArea;
+    QHBoxLayout *m_layout1;
+    QVBoxLayout *m_blockChainListLayout;
+    QScrollArea *m_logScrollArea, *m_blockChainScrollArea;
 };
 
 #endif /* dialog_h */
