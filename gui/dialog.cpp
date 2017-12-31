@@ -5,7 +5,6 @@
 //  Created by Chung-kaiYang on 12/29/17.
 //
 
-#include <iostream>
 #include <assert.h>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QScrollArea>
@@ -13,9 +12,11 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QLineEdit>
 #include "dialog.h"
 #include "factory.h"
 #include "blockchain.h"
+#include "talk.h"
 
 dialog::dialog(QWidget *parent, QApplication* app)
 :QDialog(parent), m_app(app)
@@ -24,10 +25,15 @@ dialog::dialog(QWidget *parent, QApplication* app)
     m_mainLayout = new QGridLayout(this);
 
     m_addBlockLayout = new QHBoxLayout(this);
-    m_addBlockButton = new QPushButton("Add New Block:", this);
-    m_addBlockLabel = new QLabel("Label 1");
+    m_addBlockButton = new QPushButton("Add", this);
+    m_addBlockNameEdit = new QLineEdit(this);
+    m_addBlockLabel = new QLabel("");
     m_addBlockLayout->addWidget(m_addBlockButton);
+    m_addBlockLayout->addWidget(m_addBlockNameEdit);
     m_addBlockLayout->addWidget(m_addBlockLabel);
+    m_addBlockLayout->setStretchFactor(m_addBlockButton, 1);
+    m_addBlockLayout->setStretchFactor(m_addBlockNameEdit, 999);
+    m_addBlockLayout->setStretchFactor(m_addBlockLabel, 1);
     connect(m_addBlockButton, SIGNAL(clicked()), this, SLOT(addBlock()));
 
     m_blockChainListLayout = new QVBoxLayout(this);
@@ -61,6 +67,7 @@ dialog::~dialog()
     delete(m_addBlockLayout);
     delete(m_blockChainListLayout);
     delete(m_addBlockButton);
+    delete(m_addBlockNameEdit);
     delete(m_addBlockLabel);
     delete(m_blockChainTitleLabel);
     delete(m_blockChainListLabel);
@@ -71,7 +78,14 @@ dialog::~dialog()
 
 void dialog::addBlock()
 {
-
+    m_addBlockLabel->setText("Verifying..............");
+    blockChain* blockChainObject = factory::GetBlockChain();
+    blockChainObject->addBlock(blockChainObject->generateNextBlock(m_addBlockNameEdit->text().toUtf8().constData()));
+    m_addBlockNameEdit->clear();
+    //TBD
+    //    talk::Broadcast(blockChainObject->getLatestBlock());
+    updateBlockChainList();
+    m_addBlockLabel->setText("OK!");
 }
 
 void dialog::updateBlockChainList()

@@ -46,6 +46,12 @@ block* blockChain::getGenesisBlock()
 
 block* blockChain::generateNextBlock(const string& data)
 {
+    if(data.empty())
+    {
+        factory::GetDialog()->appendLog("Invalid block name : [" + data + "], cannot generate new block.");
+        return NULL;
+    }
+
     time_t timeStamp;
     time(&timeStamp);
     return new block(tail->getIndex() + 1, tail->getHash(), timeStamp, data, CalculateHash(tail->getIndex() + 1, tail->getHash(), timeStamp, data));
@@ -53,6 +59,12 @@ block* blockChain::generateNextBlock(const string& data)
 
 void blockChain::addBlock(block *newBlock)
 {
+    if(!newBlock)
+    {
+        factory::GetDialog()->appendLog("No new block is added.");
+        return;
+    }
+
     head = !head ? newBlock : head;
     tail = newBlock;
     hashList[newBlock->getHash()] = newBlock;

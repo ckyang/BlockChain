@@ -109,8 +109,15 @@ dependencies: /Users/CK-Yang/GitHub/BlockChain/gui/dialog.cpp \
   ../../Qt/5.10.0/ios/include/QtWidgets/qpushbutton.h \
   ../../Qt/5.10.0/ios/include/QtWidgets/qabstractbutton.h \
   ../../Qt/5.10.0/ios/include/QtGui/qicon.h \
+  ../../Qt/5.10.0/ios/include/QtWidgets/QLineEdit \
+  ../../Qt/5.10.0/ios/include/QtWidgets/qlineedit.h \
+  ../../Qt/5.10.0/ios/include/QtGui/qtextcursor.h \
+  ../../Qt/5.10.0/ios/include/QtGui/qtextformat.h \
+  ../../Qt/5.10.0/ios/include/QtGui/qpen.h \
+  ../../Qt/5.10.0/ios/include/QtGui/qtextoption.h \
   /Users/CK-Yang/GitHub/BlockChain/gui/dialog.h \
   ../../Qt/5.10.0/ios/include/QtWidgets/QDialog \
   ../../Qt/5.10.0/ios/include/QtWidgets/qdialog.h \
   /Users/CK-Yang/GitHub/BlockChain/factory.h \
-  /Users/CK-Yang/GitHub/BlockChain/blockchain/blockChain.h
+  /Users/CK-Yang/GitHub/BlockChain/blockchain/blockChain.h \
+  /Users/CK-Yang/GitHub/BlockChain/network/talk.h

@@ -20,6 +20,7 @@ class QLabel;
 class QHBoxLayout;
 class QVBoxLayout;
 class QPushButton;
+class QLineEdit;
 
 class dialog : public QDialog
 {
@@ -43,6 +44,7 @@ private:
     QVBoxLayout *m_blockChainListLayout;
     QScrollArea *m_logScrollArea, *m_blockChainScrollArea;
     QPushButton *m_addBlockButton;
+    QLineEdit *m_addBlockNameEdit;
 };
 
 #endif /* dialog_h */
