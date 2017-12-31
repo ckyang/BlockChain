@@ -21,3 +21,5 @@ QT += widgets
 
 # Input
 SOURCES += main.cpp
+SOURCES += gui/dialog.cpp
+HEADERS += gui/dialog.h

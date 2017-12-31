@@ -5,6 +5,7 @@
 //  Created by Chung-kaiYang on 12/29/17.
 //
 
+#include <iostream>
 #include <assert.h>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QScrollArea>
@@ -27,6 +28,7 @@ dialog::dialog(QWidget *parent, QApplication* app)
     m_addBlockLabel = new QLabel("Label 1");
     m_addBlockLayout->addWidget(m_addBlockButton);
     m_addBlockLayout->addWidget(m_addBlockLabel);
+    connect(m_addBlockButton, SIGNAL(clicked()), this, SLOT(addBlock()));
 
     m_blockChainListLayout = new QVBoxLayout(this);
     m_blockChainTitleLabel = new QLabel("Current Block Chain");
@@ -65,6 +67,11 @@ dialog::~dialog()
     delete(m_blockChainScrollArea);
     delete(m_logLabel);
     delete(m_logScrollArea);
+}
+
+void dialog::addBlock()
+{
+
 }
 
 void dialog::updateBlockChainList()

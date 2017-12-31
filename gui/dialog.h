@@ -23,12 +23,17 @@ class QPushButton;
 
 class dialog : public QDialog
 {
+    Q_OBJECT
+
 public:
     dialog(QWidget *parent = 0, QApplication* app = 0);
     ~dialog();
 
     void updateBlockChainList();
     void appendLog(const string& log);
+
+private slots:
+    void addBlock();
 
 private:
     QLabel *m_addBlockLabel, *m_blockChainTitleLabel, *m_blockChainListLabel, *m_logLabel;

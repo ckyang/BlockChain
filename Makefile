@@ -288,7 +288,7 @@ DIST          = ../../Qt/5.10.0/ios/mkspecs/features/spec_pre.prf \
 		../../Qt/5.10.0/ios/mkspecs/features/yacc.prf \
 		../../Qt/5.10.0/ios/mkspecs/features/lex.prf \
 		../../Qt/5.10.0/ios/mkspecs/features/uikit/xcodebuild.prf \
-		BlockChain.pro  
+		BlockChain.pro gui/dialog.h 
 QMAKE_TARGET  = BlockChain
 DESTDIR       = 
 TARGET        = BlockChain
