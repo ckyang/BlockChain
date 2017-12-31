@@ -58,7 +58,7 @@ static void response(int sock_fd, short event, void *arg)
     
     if(recvfrom(sock_fd, rbuf, (size_t)sizeof(rbuf), 0, (struct sockaddr *)&client_addr, (socklen_t *)&size) < 0)
     {
-        factory::GetDialog()->AppendLog("Connection Closed");
+        factory::GetDialog()->appendLog("Connection Closed");
         return;
     }
 
@@ -95,7 +95,7 @@ static void response(int sock_fd, short event, void *arg)
 
         //If this block (coming from remote) is valid, just add into currnet blockchain.
         //If it's invalid, ignore this block and request other node's blockchain
-        if(blockChain::isValidBlock(index, preHash, timeStamp, data, hash, blockChainObject->getLatestBlock()))
+        if(blockChain::IsValidBlock(index, preHash, timeStamp, data, hash, blockChainObject->getLatestBlock()))
         {
             blockChainObject->addBlock(new block(index, preHash, timeStamp, data, hash));
             return;
@@ -135,7 +135,7 @@ static void response(int sock_fd, short event, void *arg)
     //REPLY ALL ...
     if(startWith(readBuf, REMOTE_COMMAND_REPLY_ALL))
     {
-        blockChain* newChain = blockChain::generateChain(readBuf.substr(10));
+        blockChain* newChain = blockChain::GenerateChain(readBuf.substr(10));
 
         //If other node's blockchain is longer than current, use this one
         if(newChain->length() > blockChainObject->length())
@@ -183,7 +183,7 @@ void talk::connect()
     close(sock_fd);
 }
 
-void talk::broadcast(block* const bk)
+void talk::Broadcast(block* const bk)
 {
     int sock_fd;
     struct sockaddr_in sock_in;

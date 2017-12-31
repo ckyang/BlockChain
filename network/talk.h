@@ -17,7 +17,7 @@ class talk
 public:
     talk(){};
 
-    static void broadcast(block* const bk);
+    static void Broadcast(block* const bk);
 
     void connect();
 };

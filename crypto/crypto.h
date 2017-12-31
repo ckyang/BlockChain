@@ -20,6 +20,7 @@ class crypto
 public:
     crypto();
     ~crypto();
+
     static string HASH(const char *data);
 
     ECDSA_SIG* sign(const string& message);

@@ -18,11 +18,12 @@ class QApplication;
 class factory
 {
 public:
+    ~factory();
+
     static blockChain* GetBlockChain();
     static talk* GetTalk();
     static crypto* GetCrypto();
     static dialog* GetDialog(QApplication *app = 0);
-    ~factory();
 
 private:
     static blockChain* m_blockChain;

@@ -46,7 +46,7 @@ string crypto::HASH(const char *data)
 void crypto::generateKeyPair()
 {
     dialog* dialog = factory::GetDialog();
-    dialog->AppendLog("Generating public/private key pairs...");
+    dialog->appendLog("Generating public/private key pairs...");
 
     OpenSSL_add_all_algorithms();
     ERR_load_BIO_strings();
@@ -68,7 +68,7 @@ void crypto::generateKeyPair()
 
     EVP_PKEY_free(pkey);
     BIO_free_all(pbio_key_file);
-    dialog->AppendLog("Public/private key pairs generated.");
+    dialog->appendLog("Public/private key pairs generated.");
 }
 
 ECDSA_SIG* crypto::sign(const string& message)
@@ -81,7 +81,7 @@ bool crypto::verify(const string& message, ECDSA_SIG const * signature, EC_KEY* 
 {
     if(!public_key)
     {
-        factory::GetDialog()->AppendLog("Public key is invalid, please enter valid public key to verify message!");
+        factory::GetDialog()->appendLog("Public key is invalid, please enter valid public key to verify message!");
         return false;
     }
 

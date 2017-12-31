@@ -14,7 +14,7 @@
 #include "talk.h"
 #include "dialog.h"
 
-string blockChain::calculateHash(const int index, const string& preHash, const time_t& timeStamp, const string& data)
+string blockChain::CalculateHash(const int index, const string& preHash, const time_t& timeStamp, const string& data)
 {
     string s(to_string(index) + data + to_string(timeStamp) + preHash);
     char *tmp = new char[s.length() + 1];
@@ -27,7 +27,7 @@ string blockChain::calculateHash(const int index, const string& preHash, const t
 blockChain::blockChain(bool bGenerateGenesis)
 {
     dialog* dialog = factory::GetDialog();
-    dialog->AppendLog("Initializing blockchain...");
+    dialog->appendLog("Initializing blockchain...");
 
     head = NULL;
     tail = NULL;
@@ -36,7 +36,7 @@ blockChain::blockChain(bool bGenerateGenesis)
     if(bGenerateGenesis)
         addBlock(getGenesisBlock());
 
-    dialog->AppendLog("Blockchain initialized.");
+    dialog->appendLog("Blockchain initialized.");
 }
 
 block* blockChain::getGenesisBlock()
@@ -48,7 +48,7 @@ block* blockChain::generateNextBlock(const string& data)
 {
     time_t timeStamp;
     time(&timeStamp);
-    return new block(tail->getIndex() + 1, tail->getHash(), timeStamp, data, calculateHash(tail->getIndex() + 1, tail->getHash(), timeStamp, data));
+    return new block(tail->getIndex() + 1, tail->getHash(), timeStamp, data, CalculateHash(tail->getIndex() + 1, tail->getHash(), timeStamp, data));
 }
 
 void blockChain::addBlock(block *newBlock)
@@ -59,34 +59,34 @@ void blockChain::addBlock(block *newBlock)
     ++len;
 }
 
-bool blockChain::isValidBlock(const int index, const string& preHash, const time_t& timeStamp, const string& data, const string& hash, block* preBlock)
+bool blockChain::IsValidBlock(const int index, const string& preHash, const time_t& timeStamp, const string& data, const string& hash, block* preBlock)
 {
     dialog* dialog = factory::GetDialog();
 
     if(preBlock->getIndex() + 1 != index)
     {
-        dialog->AppendLog("Invalid index");
+        dialog->appendLog("Invalid index");
         return false;
     }
 
     if(preBlock->getHash() != preHash)
     {
-        dialog->AppendLog("Invalid previoushash");
+        dialog->appendLog("Invalid previoushash");
         return false;
     }
 
-    string newHash = calculateHash(index, preHash, timeStamp, data);
+    string newHash = CalculateHash(index, preHash, timeStamp, data);
 
     if(newHash != hash)
     {
-        dialog->AppendLog(string("Invalid hash: ") + newHash + " " + hash);
+        dialog->appendLog(string("Invalid hash: ") + newHash + " " + hash);
         return false;
     }
 
     return true;
 }
 
-bool blockChain::isValidChain(blockChain * const chain)
+bool blockChain::IsValidChain(blockChain * const chain)
 {
     block *cur = chain->getLatestBlock();
 
@@ -97,7 +97,7 @@ bool blockChain::isValidChain(blockChain * const chain)
         if(!pre)
             return true;
 
-        if(!isValidBlock(cur->getIndex(), cur->getPreHash(), cur->getTimeStamp(), cur->getData(), cur->getHash(), pre))
+        if(!IsValidBlock(cur->getIndex(), cur->getPreHash(), cur->getTimeStamp(), cur->getData(), cur->getHash(), pre))
             return false;
 
         cur = pre;
@@ -110,13 +110,13 @@ void blockChain::replaceChain(blockChain * const newChain)
 {
     dialog* dialog = factory::GetDialog();
 
-    if(!isValidChain(newChain) || newChain->length() <= len)
+    if(!IsValidChain(newChain) || newChain->length() <= len)
     {
-        dialog->AppendLog("Received blockchain invalid, not replaced.");
+        dialog->appendLog("Received blockchain invalid, not replaced.");
         return;
     }
 
-    dialog->AppendLog("Received blockchain is valid. Replacing current blockchain with received blockchain.");
+    dialog->appendLog("Received blockchain is valid. Replacing current blockchain with received blockchain.");
 
     removeAll();
 
@@ -159,7 +159,7 @@ string blockChain::getChainInfo(const bool bWithTitle)
     return res;
 }
 
-blockChain* blockChain::generateChain(const string& chainInfo)
+blockChain* blockChain::GenerateChain(const string& chainInfo)
 {
     string info = chainInfo;
     size_t found = info.find(",");
@@ -168,7 +168,7 @@ blockChain* blockChain::generateChain(const string& chainInfo)
     time_t timeStamp;
     stack<block*> s;
 
-    factory::GetDialog()->AppendLog(string("generateChain ") + chainInfo);
+    factory::GetDialog()->appendLog(string("generateChain ") + chainInfo);
 
     while(found != string::npos)
     {

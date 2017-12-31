@@ -105,6 +105,10 @@ dependencies: /Users/CK-Yang/GitHub/BlockChain/gui/dialog.cpp \
   ../../Qt/5.10.0/ios/include/QtWidgets/qboxlayout.h \
   ../../Qt/5.10.0/ios/include/QtWidgets/QLabel \
   ../../Qt/5.10.0/ios/include/QtWidgets/qlabel.h \
+  ../../Qt/5.10.0/ios/include/QtWidgets/QPushButton \
+  ../../Qt/5.10.0/ios/include/QtWidgets/qpushbutton.h \
+  ../../Qt/5.10.0/ios/include/QtWidgets/qabstractbutton.h \
+  ../../Qt/5.10.0/ios/include/QtGui/qicon.h \
   /Users/CK-Yang/GitHub/BlockChain/gui/dialog.h \
   ../../Qt/5.10.0/ios/include/QtWidgets/QDialog \
   ../../Qt/5.10.0/ios/include/QtWidgets/qdialog.h \

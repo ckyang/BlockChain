@@ -32,9 +32,9 @@ int main(int argc, char *argv[]){
     dialog* dialog = factory::GetDialog(&app);
     dialog->show();
 
-    dialog->AppendLog("Welcome to blockchain demo program @ Clark Yang!");
+    dialog->appendLog("Welcome to blockchain demo program @ Clark Yang!");
     blockChain* blockChainObject = factory::GetBlockChain();
-    dialog->UpdateBlockChainList();
+    dialog->updateBlockChainList();
 
     pthread_t thread;
     talk* talkObject = factory::GetTalk();

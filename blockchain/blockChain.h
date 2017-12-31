@@ -20,10 +20,11 @@ class blockChain
 {
 public:
     blockChain(bool bGenerateGenesis = false);
+    ~blockChain();
 
-    static bool isValidChain(blockChain * const chain);
-    static bool isValidBlock(const int index, const string& preHash, const time_t& timeStamp, const string& data, const string& hash, block *preBlock);
-    static blockChain* generateChain(const string& chainInfo);
+    static bool IsValidChain(blockChain * const chain);
+    static bool IsValidBlock(const int index, const string& preHash, const time_t& timeStamp, const string& data, const string& hash, block *preBlock);
+    static blockChain* GenerateChain(const string& chainInfo);
 
     block* generateNextBlock(const string& data);
     void addBlock(block *newBlock);
@@ -32,10 +33,9 @@ public:
     block *getBlock(const string& hash){return hashList[hash];}
     void replaceChain(blockChain * const chain);
     string getChainInfo(const bool bWithTitle = false);
-    ~blockChain();
 
 private:
-    static string calculateHash(const int index, const string& preHash, const time_t& timeStamp, const string& data);
+    static string CalculateHash(const int index, const string& preHash, const time_t& timeStamp, const string& data);
 
     block *getGenesisBlock();
     void removeAll();
