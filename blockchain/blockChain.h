@@ -27,7 +27,7 @@ public:
     static blockChain* GenerateChain(const string& chainInfo);
 
     block* generateNextBlock(const string& data);
-    void addBlock(block *newBlock);
+    void addBlock(block *newBlock, bool bBroadcast = false);
     unsigned long long length(){return len;}
     block *getLatestBlock(){return tail;}
     block *getBlock(const string& hash){return hashList[hash];}

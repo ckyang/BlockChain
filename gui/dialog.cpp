@@ -79,12 +79,12 @@ dialog::~dialog()
 void dialog::addBlock()
 {
     m_addBlockLabel->setText("Verifying..............");
+
     blockChain* blockChainObject = factory::GetBlockChain();
-    blockChainObject->addBlock(blockChainObject->generateNextBlock(m_addBlockNameEdit->text().toUtf8().constData()));
+    blockChainObject->addBlock(blockChainObject->generateNextBlock(m_addBlockNameEdit->text().toUtf8().constData()), true);
     m_addBlockNameEdit->clear();
-    //TBD
-    //    talk::Broadcast(blockChainObject->getLatestBlock());
     updateBlockChainList();
+
     m_addBlockLabel->setText("OK!");
 }
 

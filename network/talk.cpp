@@ -6,9 +6,11 @@
 //  Copyright © 2017 Chung-kaiYang. All rights reserved.
 //
 
+#include <iostream>
 #include "talk.h"
 #include "unistd.h"
 #include "netinet/in.h"
+#include "arpa/inet.h"
 #include "sys/socket.h"
 #include "sys/types.h"
 #include "event.h"
@@ -53,12 +55,13 @@ static void response(int sock_fd, short event, void *arg)
     char rbuf[MAX_BUF_SIZE];
     int size = sizeof(struct sockaddr);
     struct sockaddr_in client_addr;
+    dialog* dialog = factory::GetDialog();
 
     memset(rbuf, '\0', MAX_BUF_SIZE);
     
     if(recvfrom(sock_fd, rbuf, (size_t)sizeof(rbuf), 0, (struct sockaddr *)&client_addr, (socklen_t *)&size) < 0)
     {
-        factory::GetDialog()->appendLog("Connection Closed");
+        dialog->appendLog("Connection Closed");
         return;
     }
 
@@ -67,7 +70,9 @@ static void response(int sock_fd, short event, void *arg)
     if('\n' == readBuf[readBuf.size() - 1])
         readBuf = readBuf.substr(0, readBuf.size() - 1);
 
-//    cout << "receive " << readBuf.size() << "," << readBuf << endl;
+//    dialog->appendLog(string("Receive packet from ") + inet_ntoa(client_addr.sin_addr) + " : " + to_string(ntohs(client_addr.sin_port)));
+//    cout << "Receive packet from " << inet_ntoa(client_addr.sin_addr) << " : " << ntohs(client_addr.sin_port) << endl;
+//    cout << "Content: " << readBuf << endl;
 
     if(readBuf.size() < 7)
     {
@@ -170,7 +175,7 @@ void talk::connect()
         perror("bind");
         exit(1);
     }
-
+    
     event_init();
 
     struct event ev;
@@ -210,6 +215,9 @@ void talk::Broadcast(block* const bk)
     string message = string("NEW ") + bk->getBlockInfo();
 
     sendto(sock_fd, message.c_str(), message.size() + 1, 0, (struct sockaddr *)&sock_in, sizeof(struct sockaddr_in));
+
+    factory::GetDialog()->appendLog(string("Broadcast message from port " + to_string(ntohs(sock_in.sin_port))));
+    factory::GetDialog()->appendLog(message);
 
     shutdown(sock_fd, 2);
     close(sock_fd);

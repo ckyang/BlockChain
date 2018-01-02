@@ -57,7 +57,7 @@ block* blockChain::generateNextBlock(const string& data)
     return new block(tail->getIndex() + 1, tail->getHash(), timeStamp, data, CalculateHash(tail->getIndex() + 1, tail->getHash(), timeStamp, data));
 }
 
-void blockChain::addBlock(block *newBlock)
+void blockChain::addBlock(block *newBlock, bool bBroadcast)
 {
     if(!newBlock)
     {
@@ -69,6 +69,9 @@ void blockChain::addBlock(block *newBlock)
     tail = newBlock;
     hashList[newBlock->getHash()] = newBlock;
     ++len;
+
+    if(bBroadcast)
+        talk::Broadcast(newBlock);
 }
 
 bool blockChain::IsValidBlock(const int index, const string& preHash, const time_t& timeStamp, const string& data, const string& hash, block* preBlock)
