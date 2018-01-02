@@ -5,6 +5,7 @@
 //  Created by Chung-kaiYang on 12/29/17.
 //
 
+#include <iostream>
 #include <assert.h>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QScrollArea>
@@ -59,6 +60,13 @@ dialog::dialog(QWidget *parent, QApplication* app)
     m_mainLayout->setRowStretch(0, 1);
     m_mainLayout->setRowStretch(1, 7);
     m_mainLayout->setRowStretch(2, 2);
+
+    controller *worker = new controller();
+    worker->moveToThread(&workerThread);
+    connect(&workerThread, SIGNAL(finished()), worker, SLOT(deleteLater()));
+    connect(this, SIGNAL(appendLog(QString)), worker, SLOT(operate(QString)));
+    workerThread.start();
+
 }
 
 dialog::~dialog()
@@ -74,6 +82,8 @@ dialog::~dialog()
     delete(m_blockChainScrollArea);
     delete(m_logLabel);
     delete(m_logScrollArea);
+    workerThread.quit();
+    workerThread.wait();
 }
 
 void dialog::addBlock()
@@ -97,11 +107,15 @@ void dialog::updateBlockChainList()
     m_blockChainScrollArea->verticalScrollBar()->setValue(m_blockChainScrollArea->verticalScrollBar()->maximum());
 }
 
-void dialog::appendLog(const string& log)
+void controller::operate(const QString& log)
 {
-    m_logLabel->setText(m_logLabel->text() + "\n" + log.c_str());
-    m_logLabel->adjustSize();
-    m_logScrollArea->widget()->resize(m_logScrollArea->widget()->sizeHint());
-    m_app->processEvents();
-    m_logScrollArea->verticalScrollBar()->setValue(m_logScrollArea->verticalScrollBar()->maximum());
+    //TBD
+//    cout << log.toStdString() << endl;
+
+    factory::GetDialog()->m_logLabel->setText(factory::GetDialog()->m_logLabel->text().append("\n").append(log));
+//    factory::GetDialog()->m_logLabel->adjustSize();
+//    factory::GetDialog()->m_logScrollArea->widget()->resize(factory::GetDialog()->m_logScrollArea->widget()->sizeHint());
+//    factory::GetDialog()->m_app->processEvents();
+//    factory::GetDialog()->m_logScrollArea->verticalScrollBar()->setValue(factory::GetDialog()->m_logScrollArea->verticalScrollBar()->maximum());
+
 }

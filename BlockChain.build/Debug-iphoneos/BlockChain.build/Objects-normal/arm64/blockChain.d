@@ -102,4 +102,6 @@ dependencies: /Users/CK-Yang/GitHub/BlockChain/blockchain/blockChain.cpp \
   ../../Qt/5.10.0/ios/include/QtGui/qfontinfo.h \
   ../../Qt/5.10.0/ios/include/QtWidgets/qsizepolicy.h \
   ../../Qt/5.10.0/ios/include/QtGui/qcursor.h \
-  ../../Qt/5.10.0/ios/include/QtGui/qkeysequence.h
+  ../../Qt/5.10.0/ios/include/QtGui/qkeysequence.h \
+  ../../Qt/5.10.0/ios/include/QtCore/QThread \
+  ../../Qt/5.10.0/ios/include/QtCore/qthread.h

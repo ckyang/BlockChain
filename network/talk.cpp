@@ -70,7 +70,7 @@ static void response(int sock_fd, short event, void *arg)
     if('\n' == readBuf[readBuf.size() - 1])
         readBuf = readBuf.substr(0, readBuf.size() - 1);
 
-//    dialog->appendLog(string("Receive packet from ") + inet_ntoa(client_addr.sin_addr) + " : " + to_string(ntohs(client_addr.sin_port)));
+//    factory::GetDialog()->appendLog(string("Receive packet from ") + inet_ntoa(client_addr.sin_addr) + " : " + to_string(ntohs(client_addr.sin_port)));
 //    cout << "Receive packet from " << inet_ntoa(client_addr.sin_addr) << " : " << ntohs(client_addr.sin_port) << endl;
 //    cout << "Content: " << readBuf << endl;
 
@@ -176,6 +176,8 @@ void talk::connect()
         exit(1);
     }
     
+    factory::GetDialog()->appendLog(QString("a"));
+
     event_init();
 
     struct event ev;
@@ -216,8 +218,8 @@ void talk::Broadcast(block* const bk)
 
     sendto(sock_fd, message.c_str(), message.size() + 1, 0, (struct sockaddr *)&sock_in, sizeof(struct sockaddr_in));
 
-    factory::GetDialog()->appendLog(string("Broadcast message from port " + to_string(ntohs(sock_in.sin_port))));
-    factory::GetDialog()->appendLog(message);
+    factory::GetDialog()->appendLog(QString("Broadcast message from port ").append(to_string(ntohs(sock_in.sin_port)).c_str()));
+    factory::GetDialog()->appendLog(message.c_str());
 
     shutdown(sock_fd, 2);
     close(sock_fd);

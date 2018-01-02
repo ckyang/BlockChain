@@ -48,7 +48,7 @@ block* blockChain::generateNextBlock(const string& data)
 {
     if(data.empty())
     {
-        factory::GetDialog()->appendLog("Invalid block name : [" + data + "], cannot generate new block.");
+        factory::GetDialog()->appendLog(QString("Invalid block name : [").append(data.c_str()).append("], cannot generate new block."));
         return NULL;
     }
 
@@ -94,7 +94,7 @@ bool blockChain::IsValidBlock(const int index, const string& preHash, const time
 
     if(newHash != hash)
     {
-        dialog->appendLog(string("Invalid hash: ") + newHash + " " + hash);
+        dialog->appendLog(QString("Invalid hash: ").append(newHash.c_str()).append(" ").append(hash.c_str()));
         return false;
     }
 
@@ -183,7 +183,7 @@ blockChain* blockChain::GenerateChain(const string& chainInfo)
     time_t timeStamp;
     stack<block*> s;
 
-    factory::GetDialog()->appendLog(string("generateChain ") + chainInfo);
+    factory::GetDialog()->appendLog(QString("generateChain ").append(chainInfo.c_str()));
 
     while(found != string::npos)
     {
