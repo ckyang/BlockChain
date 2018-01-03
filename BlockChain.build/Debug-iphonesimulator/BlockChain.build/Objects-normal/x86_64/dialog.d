@@ -105,6 +105,31 @@ dependencies: /Users/CK-Yang/GitHub/BlockChain/gui/dialog.cpp \
   ../../Qt/5.10.0/ios/include/QtWidgets/qboxlayout.h \
   ../../Qt/5.10.0/ios/include/QtWidgets/QLabel \
   ../../Qt/5.10.0/ios/include/QtWidgets/qlabel.h \
+  ../../Qt/5.10.0/ios/include/QtWidgets/QPushButton \
+  ../../Qt/5.10.0/ios/include/QtWidgets/qpushbutton.h \
+  ../../Qt/5.10.0/ios/include/QtWidgets/qabstractbutton.h \
+  ../../Qt/5.10.0/ios/include/QtGui/qicon.h \
+  ../../Qt/5.10.0/ios/include/QtWidgets/QLineEdit \
+  ../../Qt/5.10.0/ios/include/QtWidgets/qlineedit.h \
+  ../../Qt/5.10.0/ios/include/QtGui/qtextcursor.h \
+  ../../Qt/5.10.0/ios/include/QtGui/qtextformat.h \
+  ../../Qt/5.10.0/ios/include/QtGui/qpen.h \
+  ../../Qt/5.10.0/ios/include/QtGui/qtextoption.h \
+  ../../Qt/5.10.0/ios/include/QtGui/QPixmap \
+  ../../Qt/5.10.0/ios/include/QtGui/QMovie \
+  ../../Qt/5.10.0/ios/include/QtGui/qmovie.h \
+  ../../Qt/5.10.0/ios/include/QtGui/qimagereader.h \
+  ../../Qt/5.10.0/ios/include/QtGui/qimageiohandler.h \
+  ../../Qt/5.10.0/ios/include/QtCore/qplugin.h \
+  ../../Qt/5.10.0/ios/include/QtCore/qpointer.h \
+  ../../Qt/5.10.0/ios/include/QtCore/qjsonobject.h \
+  ../../Qt/5.10.0/ios/include/QtCore/qjsonvalue.h \
+  ../../Qt/5.10.0/ios/include/QtCore/qfactoryinterface.h \
   /Users/CK-Yang/GitHub/BlockChain/gui/dialog.h \
   ../../Qt/5.10.0/ios/include/QtWidgets/QDialog \
-  ../../Qt/5.10.0/ios/include/QtWidgets/qdialog.h
+  ../../Qt/5.10.0/ios/include/QtWidgets/qdialog.h \
+  ../../Qt/5.10.0/ios/include/QtCore/QThread \
+  ../../Qt/5.10.0/ios/include/QtCore/qthread.h \
+  /Users/CK-Yang/GitHub/BlockChain/factory.h \
+  /Users/CK-Yang/GitHub/BlockChain/blockchain/blockChain.h \
+  /Users/CK-Yang/GitHub/BlockChain/network/talk.h

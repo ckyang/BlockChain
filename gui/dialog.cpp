@@ -5,7 +5,6 @@
 //  Created by Chung-kaiYang on 12/29/17.
 //
 
-#include <iostream>
 #include <assert.h>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QScrollArea>
@@ -14,6 +13,8 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QLineEdit>
+#include <QtGui/QPixmap>
+#include <QtGui/QMovie>
 #include "dialog.h"
 #include "factory.h"
 #include "blockchain.h"
@@ -24,11 +25,14 @@ dialog::dialog(QWidget *parent, QApplication* app)
 {
     assert(m_app);
     m_mainLayout = new QGridLayout(this);
+    m_loadingMovie = new QMovie("/Users/CK-Yang/Qt/image/loading.gif");
+    m_tickPix = new QPixmap("/Users/CK-Yang/Qt/image/tick.png");
 
     m_addBlockLayout = new QHBoxLayout(this);
-    m_addBlockButton = new QPushButton("Add", this);
+    m_addBlockButton = new QPushButton("+Block", this);
     m_addBlockNameEdit = new QLineEdit(this);
     m_addBlockLabel = new QLabel("");
+
     m_addBlockLayout->addWidget(m_addBlockButton);
     m_addBlockLayout->addWidget(m_addBlockNameEdit);
     m_addBlockLayout->addWidget(m_addBlockLabel);
@@ -41,12 +45,13 @@ dialog::dialog(QWidget *parent, QApplication* app)
     m_blockChainTitleLabel = new QLabel("Current Block Chain");
     m_blockChainListLabel = new QLabel("Empty");
     m_blockChainScrollArea = new QScrollArea;
+    m_blockChainScrollArea->setStyleSheet("background-color:lightcyan;");
     m_blockChainScrollArea->setWidget(m_blockChainListLabel);
     m_blockChainListLayout->addWidget(m_blockChainTitleLabel);
     m_blockChainListLayout->addWidget(m_blockChainScrollArea);
     m_blockChainListLayout->setStretch(0, 1);
     m_blockChainListLayout->setStretch(1, 10);
-
+    
     m_logLabel = new QLabel("QT initialized.");
     m_logLabel->setStyleSheet("QLabel { background-color:transparent; color : lime; }");
     m_logScrollArea = new QScrollArea;
@@ -61,12 +66,12 @@ dialog::dialog(QWidget *parent, QApplication* app)
     m_mainLayout->setRowStretch(1, 7);
     m_mainLayout->setRowStretch(2, 2);
 
-    controller *worker = new controller();
-    worker->moveToThread(&workerThread);
-    connect(&workerThread, SIGNAL(finished()), worker, SLOT(deleteLater()));
-    connect(this, SIGNAL(appendLog(QString)), worker, SLOT(operate(QString)));
+    m_controller = new dialog_controller();
+    m_controller->moveToThread(&workerThread);
+    connect(&workerThread, SIGNAL(finished()), m_controller, SLOT(deleteLater()));
+    connect(this, SIGNAL(appendLog(QString)), m_controller, SLOT(operate(QString)));
+    connect(m_controller, SIGNAL(resultReady(QString)), this, SLOT(handleResults(QString)));
     workerThread.start();
-
 }
 
 dialog::~dialog()
@@ -82,20 +87,24 @@ dialog::~dialog()
     delete(m_blockChainScrollArea);
     delete(m_logLabel);
     delete(m_logScrollArea);
+    delete(m_loadingMovie);
+    delete(m_tickPix);
     workerThread.quit();
     workerThread.wait();
+    delete(m_controller);
 }
 
 void dialog::addBlock()
 {
-    m_addBlockLabel->setText("Verifying..............");
+    m_addBlockLabel->setMovie(m_loadingMovie);
+    m_loadingMovie->start();
 
     blockChain* blockChainObject = factory::GetBlockChain();
     blockChainObject->addBlock(blockChainObject->generateNextBlock(m_addBlockNameEdit->text().toUtf8().constData()), true);
     m_addBlockNameEdit->clear();
     updateBlockChainList();
 
-    m_addBlockLabel->setText("OK!");
+    m_addBlockLabel->setPixmap(*m_tickPix);
 }
 
 void dialog::updateBlockChainList()
@@ -107,15 +116,16 @@ void dialog::updateBlockChainList()
     m_blockChainScrollArea->verticalScrollBar()->setValue(m_blockChainScrollArea->verticalScrollBar()->maximum());
 }
 
-void controller::operate(const QString& log)
+void dialog::handleResults(const QString& log)
 {
-    //TBD
-//    cout << log.toStdString() << endl;
+    m_logLabel->setText(m_logLabel->text().append("\n").append(log));
+    m_logLabel->adjustSize();
+    m_logScrollArea->widget()->resize(m_logScrollArea->widget()->sizeHint());
+    m_app->processEvents();
+    m_logScrollArea->verticalScrollBar()->setValue(m_logScrollArea->verticalScrollBar()->maximum());
+}
 
-    factory::GetDialog()->m_logLabel->setText(factory::GetDialog()->m_logLabel->text().append("\n").append(log));
-//    factory::GetDialog()->m_logLabel->adjustSize();
-//    factory::GetDialog()->m_logScrollArea->widget()->resize(factory::GetDialog()->m_logScrollArea->widget()->sizeHint());
-//    factory::GetDialog()->m_app->processEvents();
-//    factory::GetDialog()->m_logScrollArea->verticalScrollBar()->setValue(factory::GetDialog()->m_logScrollArea->verticalScrollBar()->maximum());
-
+void dialog_controller::operate(const QString& log)
+{
+    emit resultReady(log);
 }

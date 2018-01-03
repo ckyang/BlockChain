@@ -22,6 +22,9 @@ class QHBoxLayout;
 class QVBoxLayout;
 class QPushButton;
 class QLineEdit;
+class QPixmap;
+class QPMovie;
+class dialog_controller;
 
 class dialog : public QDialog
 {
@@ -37,6 +40,10 @@ public:
 signals:
     void appendLog(const QString& log);
 
+// Below functions are Qt internal only, don't call them directly.
+public slots:
+    void handleResults(const QString &);
+
 private slots:
     void addBlock();
 
@@ -49,16 +56,21 @@ private:
     QScrollArea *m_logScrollArea, *m_blockChainScrollArea;
     QPushButton *m_addBlockButton;
     QLineEdit *m_addBlockNameEdit;
-    friend class controller;
+    QMovie *m_loadingMovie;
+    QPixmap *m_tickPix;
+
+    dialog_controller *m_controller;
 };
 
-class controller : public QObject
+class dialog_controller : public QObject
 {
     Q_OBJECT
     QThread workerThread;
-
-public slots:
+    
+    public slots:
     void operate(const QString& log);
+signals:
+    void resultReady(const QString& log);
 };
 
 #endif /* dialog_h */

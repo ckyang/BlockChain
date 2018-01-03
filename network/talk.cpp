@@ -6,7 +6,6 @@
 //  Copyright © 2017 Chung-kaiYang. All rights reserved.
 //
 
-#include <iostream>
 #include "talk.h"
 #include "unistd.h"
 #include "netinet/in.h"
@@ -70,9 +69,8 @@ static void response(int sock_fd, short event, void *arg)
     if('\n' == readBuf[readBuf.size() - 1])
         readBuf = readBuf.substr(0, readBuf.size() - 1);
 
-//    factory::GetDialog()->appendLog(string("Receive packet from ") + inet_ntoa(client_addr.sin_addr) + " : " + to_string(ntohs(client_addr.sin_port)));
-//    cout << "Receive packet from " << inet_ntoa(client_addr.sin_addr) << " : " << ntohs(client_addr.sin_port) << endl;
-//    cout << "Content: " << readBuf << endl;
+    factory::GetDialog()->appendLog(QString("Receive packet from ").append(inet_ntoa(client_addr.sin_addr)).append(" : ").append(to_string(ntohs(client_addr.sin_port)).c_str()));
+    factory::GetDialog()->appendLog(QString("Content: ").append(readBuf.c_str()));
 
     if(readBuf.size() < 7)
     {
@@ -175,8 +173,6 @@ void talk::connect()
         perror("bind");
         exit(1);
     }
-    
-    factory::GetDialog()->appendLog(QString("a"));
 
     event_init();
 
@@ -219,7 +215,7 @@ void talk::Broadcast(block* const bk)
     sendto(sock_fd, message.c_str(), message.size() + 1, 0, (struct sockaddr *)&sock_in, sizeof(struct sockaddr_in));
 
     factory::GetDialog()->appendLog(QString("Broadcast message from port ").append(to_string(ntohs(sock_in.sin_port)).c_str()));
-    factory::GetDialog()->appendLog(message.c_str());
+//    factory::GetDialog()->appendLog(message.c_str());
 
     shutdown(sock_fd, 2);
     close(sock_fd);
