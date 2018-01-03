@@ -39,6 +39,7 @@ int main(int argc, char *argv[]){
     pthread_t thread;
     talk* talkObject = factory::GetTalk();
     pthread_create(&thread, NULL , create_talk, (void*) talkObject);
+    talk::Broadcast(REMOTE_COMMAND_GET_ALL);
     
     crypto* cryptoObject = factory::GetCrypto();
 //    ECDSA_SIG* sig = cryptoObject->sign("abc");

@@ -25,8 +25,10 @@ dialog::dialog(QWidget *parent, QApplication* app)
 {
     assert(m_app);
     m_mainLayout = new QGridLayout(this);
-    m_loadingMovie = new QMovie("/Users/CK-Yang/Qt/image/loading.gif");
-    m_tickPix = new QPixmap("/Users/CK-Yang/Qt/image/tick.png");
+//    m_loadingMovie = new QMovie("/Users/CK-Yang/Qt/image/loading.gif");
+//    m_tickPix = new QPixmap("/Users/CK-Yang/Qt/image/tick.png");
+    m_loadingMovie = new QMovie(":/image/loading.gif");
+    m_tickPix = new QPixmap(":/image/tick.png");
 
     m_addBlockLayout = new QHBoxLayout(this);
     m_addBlockButton = new QPushButton("+Block", this);
@@ -69,8 +71,10 @@ dialog::dialog(QWidget *parent, QApplication* app)
     m_controller = new dialog_controller();
     m_controller->moveToThread(&workerThread);
     connect(&workerThread, SIGNAL(finished()), m_controller, SLOT(deleteLater()));
-    connect(this, SIGNAL(appendLog(QString)), m_controller, SLOT(operate(QString)));
-    connect(m_controller, SIGNAL(resultReady(QString)), this, SLOT(handleResults(QString)));
+    connect(this, SIGNAL(appendLog(QString)), m_controller, SLOT(operateAppendLog(QString)));
+    connect(m_controller, SIGNAL(resultReadyAppendLog(QString)), this, SLOT(handleAppendLog(QString)));
+    connect(this, SIGNAL(updateBlockChainList()), m_controller, SLOT(operateUpdateBlockChainList()));
+    connect(m_controller, SIGNAL(resultReadyUpdateBlockChainList()), this, SLOT(handleUpdateBlockChainList()));
     workerThread.start();
 }
 
@@ -104,10 +108,10 @@ void dialog::addBlock()
     m_addBlockNameEdit->clear();
     updateBlockChainList();
 
-    m_addBlockLabel->setPixmap(*m_tickPix);
+//    m_addBlockLabel->setPixmap(*m_tickPix);
 }
 
-void dialog::updateBlockChainList()
+void dialog::handleUpdateBlockChainList()
 {
     m_blockChainListLabel->setText(factory::GetBlockChain()->getChainInfo(true).c_str());
     m_blockChainListLabel->adjustSize();
@@ -116,7 +120,7 @@ void dialog::updateBlockChainList()
     m_blockChainScrollArea->verticalScrollBar()->setValue(m_blockChainScrollArea->verticalScrollBar()->maximum());
 }
 
-void dialog::handleResults(const QString& log)
+void dialog::handleAppendLog(const QString& log)
 {
     m_logLabel->setText(m_logLabel->text().append("\n").append(log));
     m_logLabel->adjustSize();
@@ -125,7 +129,12 @@ void dialog::handleResults(const QString& log)
     m_logScrollArea->verticalScrollBar()->setValue(m_logScrollArea->verticalScrollBar()->maximum());
 }
 
-void dialog_controller::operate(const QString& log)
+void dialog_controller::operateAppendLog(const QString& log)
 {
-    emit resultReady(log);
+    emit resultReadyAppendLog(log);
+}
+
+void dialog_controller::operateUpdateBlockChainList()
+{
+    emit resultReadyUpdateBlockChainList();
 }

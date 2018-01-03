@@ -18,12 +18,6 @@
 #include "block.h"
 #include "dialog.h"
 
-#define REMOTE_COMMAND_NEW "NEW"
-#define REMOTE_COMMAND_GET_LAST "GET LAST"
-#define REMOTE_COMMAND_GET_ALL "GET ALL"
-#define REMOTE_COMMAND_REPLY_LAST "REPLY LAST"
-#define REMOTE_COMMAND_REPLY_ALL "REPLY ALL"
-
 #define DEBUG_MODE 0
 
 #if DEBUG_MODE
@@ -70,7 +64,7 @@ static void response(int sock_fd, short event, void *arg)
         readBuf = readBuf.substr(0, readBuf.size() - 1);
 
     factory::GetDialog()->appendLog(QString("Receive packet from ").append(inet_ntoa(client_addr.sin_addr)).append(" : ").append(to_string(ntohs(client_addr.sin_port)).c_str()));
-    factory::GetDialog()->appendLog(QString("Content: ").append(readBuf.c_str()));
+    factory::GetDialog()->appendLog(QString("Receive: ").append(readBuf.c_str()));
 
     if(readBuf.size() < 7)
     {
@@ -101,6 +95,7 @@ static void response(int sock_fd, short event, void *arg)
         if(blockChain::IsValidBlock(index, preHash, timeStamp, data, hash, blockChainObject->getLatestBlock()))
         {
             blockChainObject->addBlock(new block(index, preHash, timeStamp, data, hash));
+            factory::GetDialog()->updateBlockChainList();
             return;
         }
 
@@ -122,7 +117,6 @@ static void response(int sock_fd, short event, void *arg)
     if(startWith(readBuf, REMOTE_COMMAND_GET_ALL))
     {
         writeBuf = string(REMOTE_COMMAND_REPLY_ALL) + " " + blockChainObject->getChainInfo();
-
         sendto(sock_fd, writeBuf.c_str(), writeBuf.size(), 0, (struct sockaddr *)&client_addr, size);
         return;
     }
@@ -142,7 +136,10 @@ static void response(int sock_fd, short event, void *arg)
 
         //If other node's blockchain is longer than current, use this one
         if(newChain->length() > blockChainObject->length())
+        {
             blockChainObject->replaceChain(newChain);
+            factory::GetDialog()->updateBlockChainList();
+        }
 
         delete newChain;
         return;
@@ -188,6 +185,11 @@ void talk::connect()
 
 void talk::Broadcast(block* const bk)
 {
+    Broadcast(string("NEW ") + bk->getBlockInfo());
+}
+
+void talk::Broadcast(const string& message)
+{
     int sock_fd;
     struct sockaddr_in sock_in;
     int yes = 1;
@@ -209,8 +211,6 @@ void talk::Broadcast(block* const bk)
     sock_in.sin_addr.s_addr = htonl(-1); /* send message to 255.255.255.255 */
     sock_in.sin_port = htons(SENDER_PORT);
     sock_in.sin_family = PF_INET;
-
-    string message = string("NEW ") + bk->getBlockInfo();
 
     sendto(sock_fd, message.c_str(), message.size() + 1, 0, (struct sockaddr *)&sock_in, sizeof(struct sockaddr_in));
 

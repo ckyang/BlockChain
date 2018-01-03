@@ -35,14 +35,14 @@ public:
     dialog(QWidget *parent = 0, QApplication* app = 0);
     ~dialog();
 
-    void updateBlockChainList();
-
 signals:
     void appendLog(const QString& log);
+    void updateBlockChainList();
 
 // Below functions are Qt internal only, don't call them directly.
 public slots:
-    void handleResults(const QString &);
+    void handleAppendLog(const QString &);
+    void handleUpdateBlockChainList();
 
 private slots:
     void addBlock();
@@ -67,10 +67,13 @@ class dialog_controller : public QObject
     Q_OBJECT
     QThread workerThread;
     
-    public slots:
-    void operate(const QString& log);
+public slots:
+    void operateAppendLog(const QString& log);
+    void operateUpdateBlockChainList();
+
 signals:
-    void resultReady(const QString& log);
+    void resultReadyAppendLog(const QString& log);
+    void resultReadyUpdateBlockChainList();
 };
 
 #endif /* dialog_h */
