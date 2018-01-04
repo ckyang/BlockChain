@@ -25,10 +25,10 @@ dialog::dialog(QWidget *parent, QApplication* app)
 {
     assert(m_app);
     m_mainLayout = new QGridLayout(this);
-//    m_loadingMovie = new QMovie("/Users/CK-Yang/Qt/image/loading.gif");
-//    m_tickPix = new QPixmap("/Users/CK-Yang/Qt/image/tick.png");
-    m_loadingMovie = new QMovie(":/image/loading.gif");
-    m_tickPix = new QPixmap(":/image/tick.png");
+    m_loadingMovie = new QMovie("/Users/CK-Yang/Qt/image/loading.gif");
+    m_tickPix = new QPixmap("/Users/CK-Yang/Qt/image/tick.png");
+//    m_loadingMovie = new QMovie(":/image/loading.gif");
+//    m_tickPix = new QPixmap(QCoreApplication::applicationDirPath() + "/image/tick.png");
 
     m_addBlockLayout = new QHBoxLayout(this);
     m_addBlockButton = new QPushButton("+Block", this);
@@ -108,7 +108,7 @@ void dialog::addBlock()
     m_addBlockNameEdit->clear();
     updateBlockChainList();
 
-//    m_addBlockLabel->setPixmap(*m_tickPix);
+    m_addBlockLabel->setPixmap(*m_tickPix);
 }
 
 void dialog::handleUpdateBlockChainList()

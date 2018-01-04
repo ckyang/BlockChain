@@ -23,3 +23,9 @@ QT += widgets
 SOURCES += main.cpp
 SOURCES += gui/dialog.cpp
 HEADERS += gui/dialog.h
+
+ios {
+    QMAKE_INFO_PLIST = ios/Info.plist
+    QMAKE_ASSET_CATALOGS = $$PWD/ios/Images.xcassets
+    QMAKE_ASSET_CATALOGS_APP_ICON = "AppIcon"
+}
