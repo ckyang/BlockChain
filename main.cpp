@@ -32,61 +32,20 @@ int main(int argc, char *argv[]){
     dialog* dialog = factory::GetDialog(&app);
     dialog->show();
 
-    dialog->appendLog("Welcome to blockchain demo program @ Clark Yang!");
-    blockChain* blockChainObject = factory::GetBlockChain();
-    dialog->updateBlockChainList();
-
     pthread_t thread;
     talk* talkObject = factory::GetTalk();
     pthread_create(&thread, NULL , create_talk, (void*) talkObject);
-    talk::Broadcast(REMOTE_COMMAND_GET_ALL);
+
+    dialog->appendLog("Welcome to blockchain demo program @ Clark Yang!");
+    blockChain* blockChainObject = factory::GetBlockChain();
+    dialog->updateBlockChainList();
     
     crypto* cryptoObject = factory::GetCrypto();
 //    ECDSA_SIG* sig = cryptoObject->sign("abc");
 //    dialog->AppendLog(to_string(cryptoObject->verify("abc", sig, NULL)));
 
-/*
-    //Handle user input
-    while(true)
-    {
-        int input = 0;
-        cout << "Please input your choice:" << endl;
-        cout << USER_COMMAND_QUIT << ") : Quit" << endl;
-        cout << USER_COMMAND_ADD_BLOCK << ") : Add block" << endl;
-        cout << USER_COMMAND_LIST_BLOCKCHAIN << ") : List blockchain" << endl;
-        cin >> input;
-        
-        switch(input)
-        {
-            case USER_COMMAND_QUIT:
-                return 0;
-            case USER_COMMAND_ADD_BLOCK:
-            {
-                char str[20] = {'\0'};
-                cout << "Please input your block content:" << endl;
-                scanf("%s", str);
-                blockChainObject->addBlock(blockChainObject->generateNextBlock(string(str)));
-                talk::broadcast(blockChainObject->getLatestBlock());
-                break;
-            }
-            case USER_COMMAND_LIST_BLOCKCHAIN:
-            {
-                block* cur = blockChainObject->getLatestBlock();
-                
-                if(cur)
-                    cout << "Index PreHash TimeStamp Data Hash" << endl;
-                
-                while(cur)
-                {
-                    cout << cur->getIndex() << " " << cur->getPreHash() << " " << cur->getTimeStamp() << " " << cur->getData() << " " << cur->getHash() << endl;
-                    cur = blockChainObject->getBlock(cur->getPreHash());
-                }
-            }
-            default:
-                break;
-        }
-    }
-*/
+    talk::Broadcast(REMOTE_COMMAND_GET_ALL);
+
     return app.exec();
 }
 

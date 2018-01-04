@@ -45,6 +45,7 @@ static void response(int sock_fd, short event, void *arg)
     (void)event;
     (void)arg;
 
+    static string g_localIP;
     char rbuf[MAX_BUF_SIZE];
     int size = sizeof(struct sockaddr);
     struct sockaddr_in client_addr;
@@ -63,12 +64,23 @@ static void response(int sock_fd, short event, void *arg)
     if('\n' == readBuf[readBuf.size() - 1])
         readBuf = readBuf.substr(0, readBuf.size() - 1);
 
-    factory::GetDialog()->appendLog(QString("Receive packet from ").append(inet_ntoa(client_addr.sin_addr)).append(" : ").append(to_string(ntohs(client_addr.sin_port)).c_str()));
-    factory::GetDialog()->appendLog(QString("Receive: ").append(readBuf.c_str()));
+    dialog->appendLog(QString("Receive packet from ").append(inet_ntoa(client_addr.sin_addr)).append(" : ").append(to_string(ntohs(client_addr.sin_port)).c_str()));
+    dialog->appendLog(QString("Receive: ").append(readBuf.c_str()));
+
+    if(g_localIP.empty() || g_localIP == inet_ntoa(client_addr.sin_addr))
+    {
+        if(g_localIP.empty())
+            g_localIP = inet_ntoa(client_addr.sin_addr);
+
+        dialog->appendLog("Receive packet from myself, ignore it.");
+        return;
+    }
+
+    client_addr.sin_port = htons(SENDER_PORT);
 
     if(readBuf.size() < 7)
     {
-        writeBuf = "Invalid command!!!!!!!!!!!!!!!!!";
+        writeBuf = "Invalid command!";
         sendto(sock_fd, writeBuf.c_str(), writeBuf.size(), 0, (struct sockaddr *)&client_addr, size);
         return;
     }
@@ -86,7 +98,7 @@ static void response(int sock_fd, short event, void *arg)
         //If this block is already the top of blockchain, do nothing
         if(blockChainObject->getLatestBlock()->getIndex() == index && blockChainObject->getLatestBlock()->getPreHash() == preHash && blockChainObject->getLatestBlock()->getTimeStamp() == timeStamp && blockChainObject->getLatestBlock()->getData() == data && blockChainObject->getLatestBlock()->getHash() == hash)
         {
-//            cout << "This block already in the top of blockchain, do nothing." << endl;
+            dialog->appendLog("This block already in the top of blockchain, do nothing.");
             return;
         }
 
