@@ -117,7 +117,8 @@ void dialog::handleUpdateBlockChainList()
     m_blockChainListLabel->adjustSize();
     m_blockChainScrollArea->widget()->resize(m_blockChainScrollArea->widget()->sizeHint());
     m_app->processEvents();
-    m_blockChainScrollArea->verticalScrollBar()->setValue(m_blockChainScrollArea->verticalScrollBar()->maximum());
+    m_blockChainScrollArea->verticalScrollBar()->setValue(m_blockChainScrollArea->verticalScrollBar()->minimum());
+    m_blockChainScrollArea->horizontalScrollBar()->setValue(m_blockChainScrollArea->horizontalScrollBar()->minimum());
 }
 
 void dialog::handleAppendLog(const QString& log)
@@ -127,6 +128,7 @@ void dialog::handleAppendLog(const QString& log)
     m_logScrollArea->widget()->resize(m_logScrollArea->widget()->sizeHint());
     m_app->processEvents();
     m_logScrollArea->verticalScrollBar()->setValue(m_logScrollArea->verticalScrollBar()->maximum());
+    m_logScrollArea->horizontalScrollBar()->setValue(m_logScrollArea->horizontalScrollBar()->minimum());
 }
 
 void dialog_controller::operateAppendLog(const QString& log)

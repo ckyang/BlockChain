@@ -28,7 +28,7 @@
 #define RECEIVER_PORT 7000
 #endif
 
-#define MAX_BUF_SIZE 1500
+#define MAX_BUF_SIZE 65535
 
 using namespace std;
 
@@ -70,7 +70,10 @@ static void response(int sock_fd, short event, void *arg)
     if(g_localIP.empty() || g_localIP == inet_ntoa(client_addr.sin_addr))
     {
         if(g_localIP.empty())
+        {
             g_localIP = inet_ntoa(client_addr.sin_addr);
+            dialog->appendLog(QString("Local IP : ").append(g_localIP.c_str()));
+        }
 
         dialog->appendLog("Receive packet from myself, ignore it.");
         return;
