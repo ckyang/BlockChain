@@ -28,4 +28,6 @@ ios {
     QMAKE_INFO_PLIST = ios/Info.plist
     QMAKE_ASSET_CATALOGS = $$PWD/ios/Images.xcassets
     QMAKE_ASSET_CATALOGS_APP_ICON = "AppIcon"
+    assets_catalogs.files = $$PWD/ios/LaunchImage.xib $$files($$PWD/ios/Images.xcassets)
+    QMAKE_BUNDLE_DATA += assets_catalogs
 }

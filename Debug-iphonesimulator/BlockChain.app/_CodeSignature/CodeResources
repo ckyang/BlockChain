@@ -102,7 +102,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		57471W4hPvzzLl4woZOmGL9tbJc=
+		C8UV61ChjyZILOtE3O6LMP5wrks=
 		</data>
 		<key>Default-568h@2x.png</key>
 		<data>
@@ -110,7 +110,11 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		PloJt86i353T2lIEt4tldKI7YKo=
+		p0kKXEBMnvebKEHVtgQ9J7bD+8A=
+		</data>
+		<key>LaunchImage.nib</key>
+		<data>
+		CJcxP02TKImWC+xyuvsRag0MPCU=
 		</data>
 		<key>LaunchScreen.nib</key>
 		<data>
@@ -391,11 +395,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			57471W4hPvzzLl4woZOmGL9tbJc=
+			C8UV61ChjyZILOtE3O6LMP5wrks=
 			</data>
 			<key>hash2</key>
 			<data>
-			SFuh1qJ9a0jyYSCfkWYvnV3aakzkUoAMAJOEdJPJTqI=
+			MaO50nUne/97O669vOM1DTzSXmQcnVoyNSPbhZgPudQ=
 			</data>
 		</dict>
 		<key>Default-568h@2x.png</key>
@@ -407,6 +411,17 @@
 			<key>hash2</key>
 			<data>
 			UdHegDh1HZlDpSEYtzMl4sjA9q8uvK4K9OL0sRTFD6M=
+			</data>
+		</dict>
+		<key>LaunchImage.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			CJcxP02TKImWC+xyuvsRag0MPCU=
+			</data>
+			<key>hash2</key>
+			<data>
+			IerUyDgFs6QHuSbVInLis6dp/uyoGrIV4uiSQi5pofQ=
 			</data>
 		</dict>
 		<key>LaunchScreen.nib</key>

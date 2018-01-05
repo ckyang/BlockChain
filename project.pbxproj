@@ -31,15 +31,15 @@
 					);
 			};
 		};
-		C9FE4F9BBEF5CF6384EB6423 = {
+		4EBC7314C17CE92B86D63890 = {
 			isa = PBXFileReference;
-			path = "/Users/CK-Yang/GitHub/BlockChain/dialog.cpp";
+			path = "/Users/CK-Yang/GitHub/BlockChain/gui/dialog.cpp";
 			name = "dialog.cpp";
 			sourceTree = "<absolute>";
 			lastKnownFileType = "sourcecode.cpp.cpp";
 		};
-		C546D9C9ED775EDBBB0303D2 = {
-			fileRef = "C9FE4F9BBEF5CF6384EB6423";
+		312D5A001BEA75BE2CF91ED9 = {
+			fileRef = "4EBC7314C17CE92B86D63890";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -61,6 +61,28 @@
 					);
 			};
 		};
+		81C30407C65D085A83624E95 = {
+			isa = PBXFileReference;
+			path = "/Users/CK-Yang/GitHub/BlockChain/moc_dialog.cpp";
+			name = "moc_dialog.cpp";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		F6A57808CE42FFD56F080B41 = {
+			fileRef = "81C30407C65D085A83624E95";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		1828402C05B37CEC9C87BC4A = {
+			isa = PBXFileReference;
+			path = "/Users/CK-Yang/GitHub/BlockChain/gui/dialog.h";
+			name = "dialog.h";
+			sourceTree = "<absolute>";
+			lastKnownFileType = "sourcecode.c.h";
+		};
 		83534508FC70CBA8AE0FF6AA = {
 			isa = PBXFileReference;
 			path = "/Users/CK-Yang/GitHub/BlockChain/BlockChain.pro";
@@ -77,15 +99,24 @@
 		25B08E2869634E9BCBA333A2 = {
 			isa = PBXGroup;
 			children = (
-				"E33596A9C9F32281F6576E2F");
+				"E33596A9C9F32281F6576E2F",
+				"81C30407C65D085A83624E95");
 			name = "Generated Sources";
+			sourceTree = "<group>";
+		};
+		C76D9EF5064E96CDBBDAB65E = {
+			isa = PBXGroup;
+			children = (
+				"4EBC7314C17CE92B86D63890",
+				"1828402C05B37CEC9C87BC4A");
+			name = "gui";
 			sourceTree = "<group>";
 		};
 		2EB56BE3C2D93CDAB0C52E67 = {
 			isa = PBXGroup;
 			children = (
 				"A293A25407DFEE945CFC83ED",
-				"C9FE4F9BBEF5CF6384EB6423");
+				"C76D9EF5064E96CDBBDAB65E");
 			name = "Sources";
 			sourceTree = "<group>";
 		};
@@ -112,8 +143,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				"ECA5219093563459E6FABE32",
-				"C546D9C9ED775EDBBB0303D2",
-				"77BAB74F75EC98EA171B6E7B");
+				"312D5A001BEA75BE2CF91ED9",
+				"77BAB74F75EC98EA171B6E7B",
+				"F6A57808CE42FFD56F080B41");
 			isa = PBXSourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
 			name = "Compile Sources";
@@ -543,6 +575,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			name = "Link Binary With Libraries";
 		};
+		351B70EC5061935327907EB8 = {
+			isa = PBXFileReference;
+			path = "/Users/CK-Yang/GitHub/BlockChain/ios/LaunchImage.xib";
+			name = "LaunchImage.xib";
+			sourceTree = "<absolute>";
+		};
+		CBBE5D5EDBE3C2019F32C707 = {
+			fileRef = "351B70EC5061935327907EB8";
+			isa = PBXBuildFile;
+		};
+		191D8B30C2C9CD6ED14952D7 = {
+			isa = PBXFileReference;
+			path = "/Users/CK-Yang/GitHub/BlockChain/ios/Images.xcassets";
+			name = "Images.xcassets";
+			sourceTree = "<absolute>";
+		};
+		667A740F3FE258BDC873359B = {
+			fileRef = "191D8B30C2C9CD6ED14952D7";
+			isa = PBXBuildFile;
+		};
 		8FE7346E45B67F6F35D5A235 = {
 			isa = PBXFileReference;
 			path = "/Users/CK-Yang/GitHub/BlockChain/BlockChain.xcodeproj/Default-568h@2x.png";
@@ -563,10 +615,23 @@
 			fileRef = "8DF72856967E44CFB42D856B";
 			isa = PBXBuildFile;
 		};
+		97C506AECDB749C723F4D019 = {
+			isa = PBXFileReference;
+			path = "/Users/CK-Yang/GitHub/BlockChain/ios/Images.xcassets";
+			name = "Images.xcassets";
+			sourceTree = "<absolute>";
+		};
+		2BA8404FFF3904CE26ADB29E = {
+			fileRef = "97C506AECDB749C723F4D019";
+			isa = PBXBuildFile;
+		};
 		858FCAB0EB1F29CF8B07677C = {
 			children = (
+				"351B70EC5061935327907EB8",
+				"191D8B30C2C9CD6ED14952D7",
 				"8FE7346E45B67F6F35D5A235",
-				"8DF72856967E44CFB42D856B");
+				"8DF72856967E44CFB42D856B",
+				"97C506AECDB749C723F4D019");
 			isa = PBXGroup;
 			name = "Bundle Data";
 			sourceTree = "<group>";
@@ -574,8 +639,11 @@
 		30414803F31797EB689AE508 = {
 			buildActionMask = 2147483647;
 			files = (
+				"CBBE5D5EDBE3C2019F32C707",
+				"667A740F3FE258BDC873359B",
 				"4C357A3E624E0A432702FB57",
-				"F8583A9952302A9BD24E40E2");
+				"F8583A9952302A9BD24E40E2",
+				"2BA8404FFF3904CE26ADB29E");
 			isa = PBXResourcesBuildPhase;
 			runOnlyForDeploymentPostprocessing = 0;
 			name = "Copy Bundle Resources";
@@ -656,6 +724,7 @@
 				APPLICATION_EXTENSION_API_ONLY = "NO";
 				"ARCHS[sdk=iphoneos*]" = "arm64";
 				"ARCHS[sdk=iphonesimulator*]" = "x86_64";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon";
 				COPY_PHASE_STRIP = "NO";
 				DEBUG_INFORMATION_FORMAT = "dwarf";
 				DEVELOPMENT_TEAM = "485WHBE245";
@@ -674,7 +743,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				CC = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang";
 				LDPLUSPLUS = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++";
-				INFOPLIST_FILE = "Info.plist";
+				INFOPLIST_FILE = "ios/Info.plist";
 				SYMROOT = "/Users/CK-Yang/GitHub/BlockChain";
 				DYLIB_CURRENT_VERSION = "1.0.0";
 				DYLIB_COMPATIBILITY_VERSION = "1.0";
@@ -752,6 +821,7 @@
 				APPLICATION_EXTENSION_API_ONLY = "NO";
 				"ARCHS[sdk=iphoneos*]" = "arm64";
 				"ARCHS[sdk=iphonesimulator*]" = "x86_64";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon";
 				COPY_PHASE_STRIP = "NO";
 				DEBUG_INFORMATION_FORMAT = "dwarf";
 				DEVELOPMENT_TEAM = "485WHBE245";
@@ -777,6 +847,7 @@
 				APPLICATION_EXTENSION_API_ONLY = "NO";
 				"ARCHS[sdk=iphoneos*]" = "arm64";
 				"ARCHS[sdk=iphonesimulator*]" = "x86_64";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon";
 				COPY_PHASE_STRIP = "YES";
 				DEVELOPMENT_TEAM = "485WHBE245";
 				ENABLE_BITCODE = "YES";
@@ -792,7 +863,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				CC = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang";
 				LDPLUSPLUS = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++";
-				INFOPLIST_FILE = "Info.plist";
+				INFOPLIST_FILE = "ios/Info.plist";
 				SYMROOT = "/Users/CK-Yang/GitHub/BlockChain";
 				DYLIB_CURRENT_VERSION = "1.0.0";
 				DYLIB_COMPATIBILITY_VERSION = "1.0";
@@ -870,6 +941,7 @@
 				APPLICATION_EXTENSION_API_ONLY = "NO";
 				"ARCHS[sdk=iphoneos*]" = "arm64";
 				"ARCHS[sdk=iphonesimulator*]" = "x86_64";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon";
 				COPY_PHASE_STRIP = "YES";
 				DEVELOPMENT_TEAM = "485WHBE245";
 				ENABLE_BITCODE = "YES";

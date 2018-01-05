@@ -30,11 +30,18 @@ check: first
 
 benchmark: first
 
-compilers:
+compilers: moc_dialog.cpp
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all:
+compiler_moc_header_make_all: moc_dialog.cpp
 compiler_moc_header_clean:
+	-$(DEL_FILE) moc_dialog.cpp
+moc_dialog.cpp: ../../Qt/5.10.0/ios/include/QtWidgets/QDialog \
+		../../Qt/5.10.0/ios/include/QtCore/QThread \
+		gui/dialog.h \
+		../../Qt/5.10.0/ios/bin/moc
+	/Users/CK-Yang/Qt/5.10.0/ios/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=9 -D__clang_minor__=0 -D__clang_patchlevel__=0 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/CK-Yang/Qt/5.10.0/ios/mkspecs/macx-ios-clang -I/Users/CK-Yang/GitHub/BlockChain -I/Users/CK-Yang/Qt/5.10.0/ios/mkspecs/common/uikit -I/Users/CK-Yang/Qt/5.10.0/ios/mkspecs/common/uikit -I/Users/CK-Yang/GitHub/BlockChain -I/Users/CK-Yang/Qt/5.10.0/ios/include -I/Users/CK-Yang/Qt/5.10.0/ios/include/QtWidgets -I/Users/CK-Yang/Qt/5.10.0/ios/include/QtGui -I/Users/CK-Yang/Qt/5.10.0/ios/include/QtCore -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.2.sdk/usr/include gui/dialog.h -o moc_dialog.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
@@ -49,5 +56,5 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: 
+compiler_clean: compiler_moc_header_clean 
 

@@ -173,6 +173,12 @@
           "idiom" : "ios-marketing",
           "filename" : "ItunesArtwork@2x.png",
           "scale" : "1x"
+        },
+        {
+          "size" : "66x65",
+          "idiom" : "tick",
+          "filename" : "tick.png",
+          "scale" : "1x"
         }
     ],
     "info":{

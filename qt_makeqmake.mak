@@ -238,6 +238,7 @@ project.pbxproj: BlockChain.pro ../../Qt/5.10.0/ios/mkspecs/macx-ios-clang/qmake
 		../../Qt/5.10.0/ios/mkspecs/features/qmake_use.prf \
 		../../Qt/5.10.0/ios/mkspecs/features/file_copies.prf \
 		../../Qt/5.10.0/ios/mkspecs/features/mac/rez.prf \
+		../../Qt/5.10.0/ios/mkspecs/features/resolve_target.prf \
 		../../Qt/5.10.0/ios/mkspecs/features/mac/asset_catalogs.prf \
 		../../Qt/5.10.0/ios/mkspecs/features/testcase_targets.prf \
 		../../Qt/5.10.0/ios/mkspecs/features/uikit/testcase_targets.prf \
@@ -496,6 +497,7 @@ project.pbxproj: BlockChain.pro ../../Qt/5.10.0/ios/mkspecs/macx-ios-clang/qmake
 ../../Qt/5.10.0/ios/mkspecs/features/qmake_use.prf:
 ../../Qt/5.10.0/ios/mkspecs/features/file_copies.prf:
 ../../Qt/5.10.0/ios/mkspecs/features/mac/rez.prf:
+../../Qt/5.10.0/ios/mkspecs/features/resolve_target.prf:
 ../../Qt/5.10.0/ios/mkspecs/features/mac/asset_catalogs.prf:
 ../../Qt/5.10.0/ios/mkspecs/features/testcase_targets.prf:
 ../../Qt/5.10.0/ios/mkspecs/features/uikit/testcase_targets.prf:

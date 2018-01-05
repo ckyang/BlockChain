@@ -26,9 +26,9 @@ dialog::dialog(QWidget *parent, QApplication* app)
     assert(m_app);
     m_mainLayout = new QGridLayout(this);
     m_loadingMovie = new QMovie("/Users/CK-Yang/Qt/image/loading.gif");
-    m_tickPix = new QPixmap("/Users/CK-Yang/Qt/image/tick.png");
+//    m_tickPix = new QPixmap("/Users/CK-Yang/Qt/image/tick.png");
 //    m_loadingMovie = new QMovie(":/image/loading.gif");
-//    m_tickPix = new QPixmap(QCoreApplication::applicationDirPath() + "/image/tick.png");
+    m_tickPix = new QPixmap(QCoreApplication::applicationDirPath() + "/tick.png");
 
     m_addBlockLayout = new QHBoxLayout(this);
     m_addBlockButton = new QPushButton("+Block", this);
@@ -100,8 +100,8 @@ dialog::~dialog()
 
 void dialog::addBlock()
 {
-    m_addBlockLabel->setMovie(m_loadingMovie);
-    m_loadingMovie->start();
+//    m_addBlockLabel->setMovie(m_loadingMovie);
+//    m_loadingMovie->start();
 
     blockChain* blockChainObject = factory::GetBlockChain();
     blockChainObject->addBlock(blockChainObject->generateNextBlock(m_addBlockNameEdit->text().toUtf8().constData()), true);
