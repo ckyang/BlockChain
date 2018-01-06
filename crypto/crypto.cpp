@@ -96,8 +96,11 @@ bool crypto::verify(const string& message, const unsigned char *signature, const
     string digest = HASH(message.c_str());
 
     const unsigned char** pubKeyVCpp = &pubKey;
-    EC_KEY *curKey = EC_KEY_new_by_curve_name(OBJ_txt2nid(ECCTYPE));
-    curKey = o2i_ECPublicKey(&curKey, pubKeyVCpp, (long)pubKeyLen);
+    EC_KEY *curPubKey = EC_KEY_new_by_curve_name(OBJ_txt2nid(ECCTYPE));
+    curPubKey = o2i_ECPublicKey(&curPubKey, pubKeyVCpp, (long)pubKeyLen);
 
-    return 1 == ECDSA_verify(0, (unsigned char*)digest.c_str(), (int)digest.size(), signature, signatureLen, curKey);
+    bool res = (1 == ECDSA_verify(0, (unsigned char*)digest.c_str(), (int)digest.size(), signature, signatureLen, curPubKey));
+
+    EC_KEY_free(curPubKey);
+    return res;
 }

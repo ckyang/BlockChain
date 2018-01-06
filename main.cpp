@@ -46,7 +46,7 @@ int main(int argc, char *argv[]){
     unsigned int signatureLen = 0;
     cryptoObject->sign("abc", signature, signatureLen);
 
-    unsigned char pubKey[MAX_PUBLICKEY_SIZE] = {'\0'};
+    unsigned char pubKey[MAX_PUBLICKEY_LEN] = {'\0'};
     unsigned int pubKeyLen = 0;
     cryptoObject->getPublicKey(pubKey, pubKeyLen);
 

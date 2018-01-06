@@ -16,7 +16,7 @@
 using namespace std;
 
 #define MAX_SIGNATURE_LEN 256
-#define MAX_PUBLICKEY_SIZE 256
+#define MAX_PUBLICKEY_LEN 256
 
 class crypto
 {
