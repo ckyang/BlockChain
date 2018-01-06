@@ -71,21 +71,33 @@ void crypto::generateKeyPair()
     dialog->appendLog("Public/private key pairs generated.");
 }
 
-ECDSA_SIG* crypto::sign(const string& message)
+void crypto::getPublicKey(unsigned char *pubKey, unsigned int& pubKeyLen)
 {
-    string digest = HASH(message.c_str());
-    return ECDSA_do_sign((unsigned char*)digest.c_str(), (int)digest.size(), m_pECCKeyPair);
+    pubKeyLen = i2o_ECPublicKey(m_pECCKeyPair, NULL);
+    unsigned char *endBuf = pubKey;
+    i2o_ECPublicKey(m_pECCKeyPair, &endBuf);
 }
 
-bool crypto::verify(const string& message, ECDSA_SIG const * signature, EC_KEY* public_key)
+void crypto::sign(const string& message, unsigned char *signature, unsigned int& signatureLen)
 {
-    if(!public_key)
+    string digest = HASH(message.c_str());
+    signatureLen = ECDSA_size(m_pECCKeyPair);
+    ECDSA_sign(0, (unsigned char*)digest.c_str(), (int)digest.size(), signature, &signatureLen, m_pECCKeyPair);
+}
+
+bool crypto::verify(const string& message, const unsigned char *signature, const unsigned int signatureLen, const unsigned char *pubKey, const unsigned int pubKeyLen)
+{
+    if(!signature || 0 == signatureLen || !pubKey || 0 == pubKeyLen)
     {
-        factory::GetDialog()->appendLog("Public key is invalid, please enter valid public key to verify message!");
+        factory::GetDialog()->appendLog("Signature or public key are invalid, please enter valid signature/public key to verify message!");
         return false;
     }
 
     string digest = HASH(message.c_str());
 
-    return 1 == ECDSA_do_verify((unsigned char*)digest.c_str(), (int)digest.size(), signature, public_key);
+    const unsigned char** pubKeyVCpp = &pubKey;
+    EC_KEY *curKey = EC_KEY_new_by_curve_name(OBJ_txt2nid(ECCTYPE));
+    curKey = o2i_ECPublicKey(&curKey, pubKeyVCpp, (long)pubKeyLen);
+
+    return 1 == ECDSA_verify(0, (unsigned char*)digest.c_str(), (int)digest.size(), signature, signatureLen, curKey);
 }

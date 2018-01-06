@@ -12,10 +12,10 @@
 #include <string>
 
 #define REMOTE_COMMAND_NEW "NEW"
-#define REMOTE_COMMAND_GET_LAST "GET LAST"
-#define REMOTE_COMMAND_GET_ALL "GET ALL"
-#define REMOTE_COMMAND_REPLY_LAST "REPLY LAST"
-#define REMOTE_COMMAND_REPLY_ALL "REPLY ALL"
+#define REMOTE_COMMAND_GET_LAST "GET_LAST"
+#define REMOTE_COMMAND_GET_ALL "GET_ALL"
+#define REMOTE_COMMAND_REPLY_LAST "REPLY_LAST"
+#define REMOTE_COMMAND_REPLY_ALL "REPLY_ALL"
 
 using namespace std;
 
@@ -34,9 +34,10 @@ public:
 
 private:
     static void Response(int sock_fd, short event, void *arg);
-    static bool StartWith(const string& str, const string& start);
-    static void SendMsg(const int sock_fd, const struct sockaddr_in* sock_in, const string& rawMessage);
-    static string RcvMsg(const int sock_fd, struct sockaddr_in* client_addr);
+    static bool StartWith(const char* str, int len, const char* start_str);
+    static void SendMsg(const int sock_fd, const struct sockaddr_in* sock_in, const string& msg);
+    static void SendMsg(const int sock_fd, const struct sockaddr_in* sock_in, const char* msg, const int len);
+    static bool RcvMsg(const int sock_fd, struct sockaddr_in* client_addr, char* msg, int& len);
 };
 
 #endif /* talk_h */

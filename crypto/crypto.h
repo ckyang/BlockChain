@@ -15,6 +15,9 @@
 
 using namespace std;
 
+#define MAX_SIGNATURE_LEN 256
+#define MAX_PUBLICKEY_SIZE 256
+
 class crypto
 {
 public:
@@ -23,8 +26,9 @@ public:
 
     static string HASH(const char *data);
 
-    ECDSA_SIG* sign(const string& message);
-    bool verify(const string& message, ECDSA_SIG const * signature, EC_KEY* public_key);
+    void getPublicKey(unsigned char *pubKey, unsigned int& pubKeyLen);
+    void sign(const string& message, unsigned char *signature, unsigned int& signatureLen);
+    bool verify(const string& message, const unsigned char *signature, const unsigned int signatureLen, const unsigned char *pubKey, const unsigned int pubKeyLen);
 
 private:
     void generateKeyPair();

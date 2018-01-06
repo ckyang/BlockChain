@@ -18,16 +18,8 @@
 #include "block.h"
 #include "dialog.h"
 
-#define DEBUG_MODE 0
-
-#if DEBUG_MODE
-#define SENDER_PORT 7000
-#define RECEIVER_PORT 7001
-#else
 #define SENDER_PORT 7000
 #define RECEIVER_PORT 7000
-#endif
-
 #define MAX_BUF_SIZE 65535
 #define BLOCKCHAIN_HEADER "__ThisIsBlockChainPacketByClarkYang__"
 
@@ -41,16 +33,18 @@ void talk::Response(int sock_fd, short event, void *arg)
     static string g_localIP;
     struct sockaddr_in client_addr;
     dialog* dialog = factory::GetDialog();
-    string readBuf = RcvMsg(sock_fd, &client_addr);
+    static char readBuf[MAX_BUF_SIZE];
+    memset(readBuf, '\0', MAX_BUF_SIZE);
+    int len = 0;
 
-    if(readBuf.empty())
+    if(!RcvMsg(sock_fd, &client_addr, readBuf, len))
     {
         dialog->appendLog("Connection Closed");
         return;
     }
 
     dialog->appendLog(QString("Received packet from ").append(inet_ntoa(client_addr.sin_addr)).append(" : ").append(to_string(ntohs(client_addr.sin_port)).c_str()));
-    dialog->appendLog(QString("Received: ").append(readBuf.c_str()));
+    dialog->appendLog(QString("Received: ").append(readBuf));
 
     if(g_localIP.empty() || g_localIP == inet_ntoa(client_addr.sin_addr))
     {
@@ -67,7 +61,7 @@ void talk::Response(int sock_fd, short event, void *arg)
     string writeBuf;
     client_addr.sin_port = htons(SENDER_PORT);
 
-    if(readBuf.size() < 7)
+    if(len < 7)
     {
         writeBuf = "Invalid command!";
         SendMsg(sock_fd, &client_addr, writeBuf);
@@ -77,12 +71,14 @@ void talk::Response(int sock_fd, short event, void *arg)
     blockChain* blockChainObject = factory::GetBlockChain();
 
     //NEW blockInfo
-    if(StartWith(readBuf, REMOTE_COMMAND_NEW))
+    if(StartWith(readBuf, len, REMOTE_COMMAND_NEW))
     {
         int index;
         string preHash, data, hash;
         time_t timeStamp;
-        block::TransferInfo(readBuf.substr(4), index, preHash, timeStamp, data, hash);
+        string tmp(readBuf + strlen(REMOTE_COMMAND_NEW) + 1);
+        tmp[len - strlen(REMOTE_COMMAND_NEW)] = '\0';
+        block::TransferInfo(tmp, index, preHash, timeStamp, data, hash);
 
         //If this block is already the top of blockchain, do nothing
         if(blockChainObject->getLatestBlock()->getIndex() == index && blockChainObject->getLatestBlock()->getPreHash() == preHash && blockChainObject->getLatestBlock()->getTimeStamp() == timeStamp && blockChainObject->getLatestBlock()->getData() == data && blockChainObject->getLatestBlock()->getHash() == hash)
@@ -105,8 +101,8 @@ void talk::Response(int sock_fd, short event, void *arg)
         return;
     }
 
-    //GET LAST
-    if(StartWith(readBuf, REMOTE_COMMAND_GET_LAST))
+    //GET_LAST
+    if(StartWith(readBuf, len, REMOTE_COMMAND_GET_LAST))
     {
         writeBuf = string(REMOTE_COMMAND_REPLY_LAST) + " " + blockChainObject->getLatestBlock()->getBlockInfo();
 
@@ -114,26 +110,28 @@ void talk::Response(int sock_fd, short event, void *arg)
         return;
     }
 
-    //GET ALL
-    if(StartWith(readBuf, REMOTE_COMMAND_GET_ALL))
+    //GET_ALL
+    if(StartWith(readBuf, len, REMOTE_COMMAND_GET_ALL))
     {
         writeBuf = string(REMOTE_COMMAND_REPLY_ALL) + " " + blockChainObject->getChainInfo();
         SendMsg(sock_fd, &client_addr, writeBuf);
         return;
     }
 
-    //REPLY LAST ...
-    if(StartWith(readBuf, REMOTE_COMMAND_REPLY_LAST))
+    //REPLY_LAST ...
+    if(StartWith(readBuf, len, REMOTE_COMMAND_REPLY_LAST))
     {
         //TBD
 
         return;
     }
 
-    //REPLY ALL ...
-    if(StartWith(readBuf, REMOTE_COMMAND_REPLY_ALL))
+    //REPLY_ALL ...
+    if(StartWith(readBuf, len, REMOTE_COMMAND_REPLY_ALL))
     {
-        blockChain* newChain = blockChain::GenerateChain(readBuf.substr(10));
+        string tmp(readBuf + strlen(REMOTE_COMMAND_REPLY_ALL) + 1);
+        tmp[len - strlen(REMOTE_COMMAND_REPLY_ALL)] = '\0';
+        blockChain* newChain = blockChain::GenerateChain(tmp);
 
         //If other node's blockchain is longer than current, use this one
         if(newChain->length() > blockChainObject->length())
@@ -222,43 +220,52 @@ void talk::Broadcast(const string& message)
     close(sock_fd);
 }
 
-bool talk::StartWith(const string& str, const string& start)
+bool talk::StartWith(const char* str, int len, const char* start_str)
 {
-    if(str.size() < start.size())
+    if(len < (int)strlen(start_str))
         return false;
-    
-    return str.substr(0, start.size()) == start;
+
+    for(int i = 0; i < (int)strlen(start_str); ++i)
+        if(str[i] != start_str[i])
+            return false;
+
+    return true;
 }
 
-void talk::SendMsg(const int sock_fd, const struct sockaddr_in* sock_in, const string& rawMessage)
+void talk::SendMsg(const int sock_fd, const struct sockaddr_in* sock_in, const string& msg)
 {
-    if(rawMessage.empty())
+    SendMsg(sock_fd, sock_in, msg.c_str(), (int)msg.size());
+}
+
+void talk::SendMsg(const int sock_fd, const struct sockaddr_in* sock_in, const char* msg, const int len)
+{
+    if(0 == len)
         return;
 
-    string message = string(BLOCKCHAIN_HEADER) + rawMessage;
+    string message = string(BLOCKCHAIN_HEADER) + msg;
+    message[strlen(BLOCKCHAIN_HEADER) + len] = '\0';
 
     sendto(sock_fd, message.c_str(), message.size() + 1, 0, (struct sockaddr *)sock_in, sizeof(struct sockaddr_in));
 }
 
-string talk::RcvMsg(const int sock_fd, struct sockaddr_in* client_addr)
+bool talk::RcvMsg(const int sock_fd, struct sockaddr_in* client_addr, char* msg, int& len)
 {
     static char rbuf[MAX_BUF_SIZE];
     int size = sizeof(struct sockaddr);
     memset(rbuf, '\0', MAX_BUF_SIZE);
 
-    if(recvfrom(sock_fd, rbuf, (size_t)sizeof(rbuf), 0, (struct sockaddr *)client_addr, (socklen_t *)&size) < 0)
-        return "";
+    if((len = (int)recvfrom(sock_fd, rbuf, (size_t)sizeof(rbuf), 0, (struct sockaddr *)client_addr, (socklen_t *)&size) - 1) < 0)
+        return false;
 
-    string res(rbuf);
+    if(!StartWith(rbuf, len, BLOCKCHAIN_HEADER))
+        return false;
 
-    if(!StartWith(res, BLOCKCHAIN_HEADER))
-        return "";
+    len -= strlen(BLOCKCHAIN_HEADER);
+    memcpy(msg, rbuf + strlen(BLOCKCHAIN_HEADER), len);
 
-    res = res.substr(strlen(BLOCKCHAIN_HEADER));
+    if('\n' == msg[len - 1])
+        --len;
 
-    if('\n' == res[res.size() - 1])
-        res = res.substr(0, res.size() - 1);
-
-    return res;
+    return true;
 }
 
