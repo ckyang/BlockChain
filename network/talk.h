@@ -31,6 +31,12 @@ public:
     static void Broadcast(const string& message);
 
     void connect();
+
+private:
+    static void Response(int sock_fd, short event, void *arg);
+    static bool StartWith(const string& str, const string& start);
+    static void SendMsg(const int sock_fd, const struct sockaddr_in* sock_in, const string& rawMessage);
+    static string RcvMsg(const int sock_fd, struct sockaddr_in* client_addr);
 };
 
 #endif /* talk_h */

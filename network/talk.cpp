@@ -29,43 +29,28 @@
 #endif
 
 #define MAX_BUF_SIZE 65535
+#define BLOCKCHAIN_HEADER "__ThisIsBlockChainPacketByClarkYang__"
 
 using namespace std;
 
-static bool startWith(const string& str, const string& start)
-{
-    if(str.size() < start.size())
-        return false;
-
-    return str.substr(0, start.size()) == start;
-}
-
-static void response(int sock_fd, short event, void *arg)
+void talk::Response(int sock_fd, short event, void *arg)
 {
     (void)event;
     (void)arg;
 
     static string g_localIP;
-    char rbuf[MAX_BUF_SIZE];
-    int size = sizeof(struct sockaddr);
     struct sockaddr_in client_addr;
     dialog* dialog = factory::GetDialog();
+    string readBuf = RcvMsg(sock_fd, &client_addr);
 
-    memset(rbuf, '\0', MAX_BUF_SIZE);
-    
-    if(recvfrom(sock_fd, rbuf, (size_t)sizeof(rbuf), 0, (struct sockaddr *)&client_addr, (socklen_t *)&size) < 0)
+    if(readBuf.empty())
     {
         dialog->appendLog("Connection Closed");
         return;
     }
 
-    string readBuf(rbuf), writeBuf;
-
-    if('\n' == readBuf[readBuf.size() - 1])
-        readBuf = readBuf.substr(0, readBuf.size() - 1);
-
-    dialog->appendLog(QString("Receive packet from ").append(inet_ntoa(client_addr.sin_addr)).append(" : ").append(to_string(ntohs(client_addr.sin_port)).c_str()));
-    dialog->appendLog(QString("Receive: ").append(readBuf.c_str()));
+    dialog->appendLog(QString("Received packet from ").append(inet_ntoa(client_addr.sin_addr)).append(" : ").append(to_string(ntohs(client_addr.sin_port)).c_str()));
+    dialog->appendLog(QString("Received: ").append(readBuf.c_str()));
 
     if(g_localIP.empty() || g_localIP == inet_ntoa(client_addr.sin_addr))
     {
@@ -75,23 +60,24 @@ static void response(int sock_fd, short event, void *arg)
             dialog->appendLog(QString("Local IP : ").append(g_localIP.c_str()));
         }
 
-        dialog->appendLog("Receive packet from myself, ignore it.");
+        dialog->appendLog("Received packet is from myself, ignore it.");
         return;
     }
 
+    string writeBuf;
     client_addr.sin_port = htons(SENDER_PORT);
 
     if(readBuf.size() < 7)
     {
         writeBuf = "Invalid command!";
-        sendto(sock_fd, writeBuf.c_str(), writeBuf.size(), 0, (struct sockaddr *)&client_addr, size);
+        SendMsg(sock_fd, &client_addr, writeBuf);
         return;
     }
 
     blockChain* blockChainObject = factory::GetBlockChain();
 
     //NEW blockInfo
-    if(startWith(readBuf, REMOTE_COMMAND_NEW))
+    if(StartWith(readBuf, REMOTE_COMMAND_NEW))
     {
         int index;
         string preHash, data, hash;
@@ -115,29 +101,29 @@ static void response(int sock_fd, short event, void *arg)
         }
 
         writeBuf = REMOTE_COMMAND_GET_ALL;
-        sendto(sock_fd, writeBuf.c_str(), writeBuf.size(), 0, (struct sockaddr *)&client_addr, size);
+        SendMsg(sock_fd, &client_addr, writeBuf);
         return;
     }
 
     //GET LAST
-    if(startWith(readBuf, REMOTE_COMMAND_GET_LAST))
+    if(StartWith(readBuf, REMOTE_COMMAND_GET_LAST))
     {
         writeBuf = string(REMOTE_COMMAND_REPLY_LAST) + " " + blockChainObject->getLatestBlock()->getBlockInfo();
 
-        sendto(sock_fd, writeBuf.c_str(), writeBuf.size(), 0, (struct sockaddr *)&client_addr, size);
+        SendMsg(sock_fd, &client_addr, writeBuf);
         return;
     }
 
     //GET ALL
-    if(startWith(readBuf, REMOTE_COMMAND_GET_ALL))
+    if(StartWith(readBuf, REMOTE_COMMAND_GET_ALL))
     {
         writeBuf = string(REMOTE_COMMAND_REPLY_ALL) + " " + blockChainObject->getChainInfo();
-        sendto(sock_fd, writeBuf.c_str(), writeBuf.size(), 0, (struct sockaddr *)&client_addr, size);
+        SendMsg(sock_fd, &client_addr, writeBuf);
         return;
     }
 
     //REPLY LAST ...
-    if(startWith(readBuf, REMOTE_COMMAND_REPLY_LAST))
+    if(StartWith(readBuf, REMOTE_COMMAND_REPLY_LAST))
     {
         //TBD
 
@@ -145,7 +131,7 @@ static void response(int sock_fd, short event, void *arg)
     }
 
     //REPLY ALL ...
-    if(startWith(readBuf, REMOTE_COMMAND_REPLY_ALL))
+    if(StartWith(readBuf, REMOTE_COMMAND_REPLY_ALL))
     {
         blockChain* newChain = blockChain::GenerateChain(readBuf.substr(10));
 
@@ -189,7 +175,7 @@ void talk::connect()
     event_init();
 
     struct event ev;
-    event_set(&ev, sock_fd, EV_READ | EV_PERSIST, response, &ev);
+    event_set(&ev, sock_fd, EV_READ | EV_PERSIST, Response, &ev);
 
     event_add(&ev, NULL);
 
@@ -227,12 +213,52 @@ void talk::Broadcast(const string& message)
     sock_in.sin_port = htons(SENDER_PORT);
     sock_in.sin_family = PF_INET;
 
-    sendto(sock_fd, message.c_str(), message.size() + 1, 0, (struct sockaddr *)&sock_in, sizeof(struct sockaddr_in));
+    SendMsg(sock_fd, &sock_in, message);
 
-    factory::GetDialog()->appendLog(QString("Broadcast message from port ").append(to_string(ntohs(sock_in.sin_port)).c_str()));
+    factory::GetDialog()->appendLog(QString("Message is broadcasted."));
 //    factory::GetDialog()->appendLog(message.c_str());
 
     shutdown(sock_fd, 2);
     close(sock_fd);
+}
+
+bool talk::StartWith(const string& str, const string& start)
+{
+    if(str.size() < start.size())
+        return false;
+    
+    return str.substr(0, start.size()) == start;
+}
+
+void talk::SendMsg(const int sock_fd, const struct sockaddr_in* sock_in, const string& rawMessage)
+{
+    if(rawMessage.empty())
+        return;
+
+    string message = string(BLOCKCHAIN_HEADER) + rawMessage;
+
+    sendto(sock_fd, message.c_str(), message.size() + 1, 0, (struct sockaddr *)sock_in, sizeof(struct sockaddr_in));
+}
+
+string talk::RcvMsg(const int sock_fd, struct sockaddr_in* client_addr)
+{
+    static char rbuf[MAX_BUF_SIZE];
+    int size = sizeof(struct sockaddr);
+    memset(rbuf, '\0', MAX_BUF_SIZE);
+
+    if(recvfrom(sock_fd, rbuf, (size_t)sizeof(rbuf), 0, (struct sockaddr *)client_addr, (socklen_t *)&size) < 0)
+        return "";
+
+    string res(rbuf);
+
+    if(!StartWith(res, BLOCKCHAIN_HEADER))
+        return "";
+
+    res = res.substr(strlen(BLOCKCHAIN_HEADER));
+
+    if('\n' == res[res.size() - 1])
+        res = res.substr(0, res.size() - 1);
+
+    return res;
 }
 
