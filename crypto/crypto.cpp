@@ -26,14 +26,14 @@ crypto::~crypto()
     EC_KEY_free(m_pECCKeyPair);
 }
 
-string crypto::HASH(const char *data)
+string crypto::HASH(const char* data, const int len)
 {
     char outputBuffer[65];
     unsigned char hash[SHA256_DIGEST_LENGTH];
 
     SHA256_CTX sha256;
     SHA256_Init(&sha256);
-    SHA256_Update(&sha256, data, strlen(data));
+    SHA256_Update(&sha256, data, len);
     SHA256_Final(hash, &sha256);
 
     for(int i = 0; i < SHA256_DIGEST_LENGTH; i++)
@@ -78,14 +78,14 @@ void crypto::getPublicKey(unsigned char *pubKey, unsigned int& pubKeyLen)
     i2o_ECPublicKey(m_pECCKeyPair, &endBuf);
 }
 
-void crypto::sign(const string& message, unsigned char *signature, unsigned int& signatureLen)
+void crypto::sign(const char* msg, const int len, unsigned char *signature, unsigned int& signatureLen)
 {
-    string digest = HASH(message.c_str());
+    string digest = HASH(msg, len);
     signatureLen = ECDSA_size(m_pECCKeyPair);
     ECDSA_sign(0, (unsigned char*)digest.c_str(), (int)digest.size(), signature, &signatureLen, m_pECCKeyPair);
 }
 
-bool crypto::verify(const string& message, const unsigned char *signature, const unsigned int signatureLen, const unsigned char *pubKey, const unsigned int pubKeyLen)
+bool crypto::verify(const char* msg, const int len, const unsigned char *signature, const unsigned int signatureLen, const unsigned char *pubKey, const unsigned int pubKeyLen)
 {
     if(!signature || 0 == signatureLen || !pubKey || 0 == pubKeyLen)
     {
@@ -93,7 +93,7 @@ bool crypto::verify(const string& message, const unsigned char *signature, const
         return false;
     }
 
-    string digest = HASH(message.c_str());
+    string digest = HASH(msg, len);
 
     const unsigned char** pubKeyVCpp = &pubKey;
     EC_KEY *curPubKey = EC_KEY_new_by_curve_name(OBJ_txt2nid(ECCTYPE));

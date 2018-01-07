@@ -24,11 +24,11 @@ public:
     crypto();
     ~crypto();
 
-    static string HASH(const char *data);
+    static string HASH(const char* data, const int len);
 
     void getPublicKey(unsigned char *pubKey, unsigned int& pubKeyLen);
-    void sign(const string& message, unsigned char *signature, unsigned int& signatureLen);
-    bool verify(const string& message, const unsigned char *signature, const unsigned int signatureLen, const unsigned char *pubKey, const unsigned int pubKeyLen);
+    void sign(const char* msg, const int len, unsigned char *signature, unsigned int& signatureLen);
+    bool verify(const char* msg, const int len, const unsigned char *signature, const unsigned int signatureLen, const unsigned char *pubKey, const unsigned int pubKeyLen);
 
 private:
     void generateKeyPair();

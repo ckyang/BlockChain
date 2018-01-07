@@ -17,6 +17,7 @@
 #include "blockChain.h"
 #include "block.h"
 #include "dialog.h"
+#include "crypto.h"
 
 #define SENDER_PORT 7000
 #define RECEIVER_PORT 7000
@@ -126,7 +127,7 @@ void talk::Response(int sock_fd, short event, void *arg)
         return;
     }
 
-    //REPLY_ALL ...
+    //REPLY_ALL [publicKeyLen]publicKey...
     if(StartWith(readBuf, len, REMOTE_COMMAND_REPLY_ALL))
     {
         string tmp(readBuf + strlen(REMOTE_COMMAND_REPLY_ALL) + 1);
@@ -237,35 +238,77 @@ void talk::SendMsg(const int sock_fd, const struct sockaddr_in* sock_in, const s
     SendMsg(sock_fd, sock_in, msg.c_str(), (int)msg.size());
 }
 
+//Message Format:
+//BLOCKCHAIN_HEADER : strlen(BLOCKCHAIN_HEADER)
+//MessageLen : 4 (0000 ~ FFFF)
+//Message : MessageLen
+//Signature : Remained characters
 void talk::SendMsg(const int sock_fd, const struct sockaddr_in* sock_in, const char* msg, const int len)
 {
     if(0 == len)
         return;
 
-    string message = string(BLOCKCHAIN_HEADER) + msg;
-    message[strlen(BLOCKCHAIN_HEADER) + len] = '\0';
+    unsigned char signature[MAX_SIGNATURE_LEN] = {'\0'};
+    unsigned int signatureLen = 0;
+    factory::GetCrypto()->sign(msg, len, signature, signatureLen);
 
-    sendto(sock_fd, message.c_str(), message.size() + 1, 0, (struct sockaddr *)sock_in, sizeof(struct sockaddr_in));
+    static char message[MAX_BUF_SIZE], lenHex[4] = {'0'};
+
+    itoHex(len, lenHex);
+    memset(message, '\0', MAX_BUF_SIZE);
+    memcpy(message, BLOCKCHAIN_HEADER, strlen(BLOCKCHAIN_HEADER));
+    memcpy(message + strlen(BLOCKCHAIN_HEADER), lenHex, 4);
+    memcpy(message + strlen(BLOCKCHAIN_HEADER) + 4, msg, len);
+    memcpy(message + strlen(BLOCKCHAIN_HEADER) + 4 + len, signature, signatureLen);
+
+    sendto(sock_fd, message, strlen(BLOCKCHAIN_HEADER) + 4 + len + signatureLen + 1, 0, (struct sockaddr *)sock_in, sizeof(struct sockaddr_in));
 }
 
 bool talk::RcvMsg(const int sock_fd, struct sockaddr_in* client_addr, char* msg, int& len)
 {
     static char rbuf[MAX_BUF_SIZE];
-    int size = sizeof(struct sockaddr);
+    int size = sizeof(struct sockaddr), receiveLen;
     memset(rbuf, '\0', MAX_BUF_SIZE);
 
-    if((len = (int)recvfrom(sock_fd, rbuf, (size_t)sizeof(rbuf), 0, (struct sockaddr *)client_addr, (socklen_t *)&size) - 1) < 0)
+    if((receiveLen = (int)recvfrom(sock_fd, rbuf, (size_t)sizeof(rbuf), 0, (struct sockaddr *)client_addr, (socklen_t *)&size) - 1) < 0)
         return false;
 
-    if(!StartWith(rbuf, len, BLOCKCHAIN_HEADER))
+    if(!StartWith(rbuf, receiveLen, BLOCKCHAIN_HEADER))
         return false;
 
-    len -= strlen(BLOCKCHAIN_HEADER);
-    memcpy(msg, rbuf + strlen(BLOCKCHAIN_HEADER), len);
+    hextoI(len, rbuf + strlen(BLOCKCHAIN_HEADER));
+    memcpy(msg, rbuf + strlen(BLOCKCHAIN_HEADER) + 4, len);
 
-    if('\n' == msg[len - 1])
-        --len;
+    unsigned char signature[MAX_SIGNATURE_LEN] = {'\0'};
+    unsigned int signatureLen = receiveLen - strlen(BLOCKCHAIN_HEADER) - 4 - len - ('\n' == rbuf[receiveLen - 1] ? 1 : 0);
+    memcpy(signature, rbuf + strlen(BLOCKCHAIN_HEADER) + 4 + len, signatureLen);
 
+//    unsigned char pubKey[MAX_PUBLICKEY_LEN] = {'\0'};
+//    unsigned int pubKeyLen = 0;
+//    cryptoObject->getPublicKey(pubKey, pubKeyLen);
+//    return cryptoObject->verify(msg, len, signature, signatureLen, pubKey, pubKeyLen);
     return true;
+}
+
+void talk::itoHex(int number, char hex[])
+{
+    for(int i = 0; i < 4; ++i)
+        hex[i] = '0';
+
+    int idx = 3;
+
+    while(number > 0)
+    {
+        hex[idx--] = (number % 16 < 10) ? (number % 16 + '0') : (number % 16 - 10 + 'A');
+        number /= 16;
+    }
+}
+
+void talk::hextoI(int& number, const char hex[])
+{
+    number = 0;
+
+    for(int i = 0; i < 4; ++i)
+        number = number * 16 + ((hex[i] <= '9' && hex[i] >= '0') ? (hex[i] - '0') : (hex[i] - 'A' + 10));
 }
 
