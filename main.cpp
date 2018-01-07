@@ -39,7 +39,8 @@ int main(int argc, char *argv[]){
     factory::GetBlockChain();
     dialog->updateBlockChainList();
 
-    factory::GetCrypto();
+    talk::BroadcastPublicKey();
+    talk::Broadcast(REMOTE_COMMAND_GET_PUBKEY);
     talk::Broadcast(REMOTE_COMMAND_GET_ALL);
 
     return app.exec();
