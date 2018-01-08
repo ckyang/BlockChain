@@ -132,4 +132,5 @@ dependencies: /Users/CK-Yang/GitHub/BlockChain/gui/dialog.cpp \
   ../../Qt/5.10.0/ios/include/QtCore/qthread.h \
   /Users/CK-Yang/GitHub/BlockChain/factory.h \
   /Users/CK-Yang/GitHub/BlockChain/blockchain/blockChain.h \
-  /Users/CK-Yang/GitHub/BlockChain/network/talk.h
+  /Users/CK-Yang/GitHub/BlockChain/network/talk.h \
+  /Users/CK-Yang/GitHub/BlockChain/blockchain/block.h

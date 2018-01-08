@@ -19,6 +19,9 @@
 #include "factory.h"
 #include "blockchain.h"
 #include "talk.h"
+#include "block.h"
+
+#define VELIDATION_NUMBER 2
 
 dialog::dialog(QWidget *parent, QApplication* app)
 :QDialog(parent), m_app(app)
@@ -41,7 +44,7 @@ dialog::dialog(QWidget *parent, QApplication* app)
     m_addBlockLayout->setStretchFactor(m_addBlockButton, 1);
     m_addBlockLayout->setStretchFactor(m_addBlockNameEdit, 999);
     m_addBlockLayout->setStretchFactor(m_addBlockLabel, 1);
-    connect(m_addBlockButton, SIGNAL(clicked()), this, SLOT(addBlock()));
+    connect(m_addBlockButton, SIGNAL(clicked()), this, SLOT(verifyBlock()));
 
     m_blockChainListLayout = new QVBoxLayout(this);
     m_blockChainTitleLabel = new QLabel("Current Block Chain");
@@ -75,6 +78,8 @@ dialog::dialog(QWidget *parent, QApplication* app)
     connect(m_controller, SIGNAL(resultReadyAppendLog(QString)), this, SLOT(handleAppendLog(QString)));
     connect(this, SIGNAL(updateBlockChainList()), m_controller, SLOT(operateUpdateBlockChainList()));
     connect(m_controller, SIGNAL(resultReadyUpdateBlockChainList()), this, SLOT(handleUpdateBlockChainList()));
+    connect(this, SIGNAL(accumulateVerify(QString)), m_controller, SLOT(operateAccumulateVerify(QString)));
+    connect(m_controller, SIGNAL(resultReadyAccumulateVerify(QString)), this, SLOT(handleAccumulateVerify(QString)));
     workerThread.start();
 }
 
@@ -98,17 +103,36 @@ dialog::~dialog()
     delete(m_controller);
 }
 
-void dialog::addBlock()
+void dialog::verifyBlock()
 {
 //    m_addBlockLabel->setMovie(m_loadingMovie);
 //    m_loadingMovie->start();
 
-    blockChain* blockChainObject = factory::GetBlockChain();
-    blockChainObject->addBlock(blockChainObject->generateNextBlock(m_addBlockNameEdit->text().toUtf8().constData()), true);
+    m_addBlockLabel->setText("Verifying...");
+    block* newBlock = factory::GetBlockChain()->generateNextBlock(m_addBlockNameEdit->text().toUtf8().constData());
+    m_verifyBlockHash[newBlock->getHash()] = make_pair(0, newBlock);
+    talk::Broadcast(string(REMOTE_COMMAND_ASK_VERIFY) + " " + newBlock->getBlockInfo());
     m_addBlockNameEdit->clear();
-    updateBlockChainList();
+}
 
-    m_addBlockLabel->setPixmap(*m_tickPix);
+void dialog::handleAccumulateVerify(const QString& hash)
+{
+    string curHash = hash.toUtf8().constData();
+    if(m_verifyBlockHash.find(curHash) == m_verifyBlockHash.end())
+        return;
+
+    ++m_verifyBlockHash[curHash].first;
+
+    if(VELIDATION_NUMBER == m_verifyBlockHash[curHash].first)
+    {
+        factory::GetBlockChain()->addBlock(m_verifyBlockHash[curHash].second);
+        m_verifyBlockHash.erase(curHash);
+        updateBlockChainList();
+        m_addBlockLabel->setText("OK!");
+        //    m_addBlockLabel->setPixmap(*m_tickPix);
+    }
+    else
+        m_addBlockLabel->setText(QString("+").append(to_string(m_verifyBlockHash[curHash].first).c_str()));
 }
 
 void dialog::handleUpdateBlockChainList()
@@ -139,4 +163,9 @@ void dialog_controller::operateAppendLog(const QString& log)
 void dialog_controller::operateUpdateBlockChainList()
 {
     emit resultReadyUpdateBlockChainList();
+}
+
+void dialog_controller::operateAccumulateVerify(const QString& hash)
+{
+    emit resultReadyAccumulateVerify(hash);
 }

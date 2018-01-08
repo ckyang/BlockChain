@@ -12,6 +12,8 @@
 #include <string>
 #include <unordered_map>
 
+#define REMOTE_COMMAND_ASK_VERIFY "ASK_VERIFY"
+#define REMOTE_COMMAND_CONFIRM_VERIFY "COMFIRM_VERIFY"
 #define REMOTE_COMMAND_NEW "NEW"
 #define REMOTE_COMMAND_GET_LAST "GET_LAST"
 #define REMOTE_COMMAND_GET_ALL "GET_ALL"
@@ -30,7 +32,6 @@ class talk
 public:
     talk(){};
 
-    static void Broadcast(block* const bk);
     static void Broadcast(const string& message);
     static void Broadcast(const char* str, int len);
     static void BroadcastPublicKey();

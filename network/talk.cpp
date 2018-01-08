@@ -56,14 +56,13 @@ void talk::Response(int sock_fd, short event, void *arg)
 
     blockChain* blockChainObject = factory::GetBlockChain();
 
-    //NEW blockInfo
-    if(StartWith(readBuf, len, REMOTE_COMMAND_NEW))
+    //ASK_VERIFY blockInfo
+    if(StartWith(readBuf, len, REMOTE_COMMAND_ASK_VERIFY))
     {
         int index;
         string preHash, data, hash;
         time_t timeStamp;
-        string tmp(readBuf + strlen(REMOTE_COMMAND_NEW) + 1);
-        tmp[len - strlen(REMOTE_COMMAND_NEW)] = '\0';
+        string tmp(readBuf + strlen(REMOTE_COMMAND_ASK_VERIFY) + 1, len - strlen(REMOTE_COMMAND_ASK_VERIFY) - 1);
         block::TransferInfo(tmp, index, preHash, timeStamp, data, hash);
 
         //If this block is already the top of blockchain, do nothing
@@ -79,11 +78,21 @@ void talk::Response(int sock_fd, short event, void *arg)
         {
             blockChainObject->addBlock(new block(index, preHash, timeStamp, data, hash));
             factory::GetDialog()->updateBlockChainList();
+            string writeBuf = string(REMOTE_COMMAND_CONFIRM_VERIFY) + " " + hash;
+            SendMsg(sock_fd, &client_addr, writeBuf);
             return;
         }
 
         string writeBuf = REMOTE_COMMAND_GET_ALL;
         SendMsg(sock_fd, &client_addr, writeBuf);
+        return;
+    }
+
+    //COMFIRM_VERIFY hash
+    if(StartWith(readBuf, len, REMOTE_COMMAND_CONFIRM_VERIFY))
+    {
+        string hash(readBuf + strlen(REMOTE_COMMAND_CONFIRM_VERIFY) + 1, len - strlen(REMOTE_COMMAND_CONFIRM_VERIFY) - 1);
+        factory::GetDialog()->accumulateVerify(QString(hash.c_str()));
         return;
     }
 
@@ -187,11 +196,6 @@ void talk::connect()
     event_dispatch();
     shutdown(sock_fd, 2);
     close(sock_fd);
-}
-
-void talk::Broadcast(block* const bk)
-{
-    Broadcast(string("NEW ") + bk->getBlockInfo());
 }
 
 void talk::Broadcast(const string& message)

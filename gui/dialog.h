@@ -11,6 +11,7 @@
 #include <QDialog>
 #include <QThread>
 #include <string>
+#include <unordered_map>
 
 using namespace std;
 
@@ -25,6 +26,7 @@ class QLineEdit;
 class QPixmap;
 class QPMovie;
 class dialog_controller;
+class block;
 
 class dialog : public QDialog
 {
@@ -38,14 +40,16 @@ public:
 signals:
     void appendLog(const QString& log);
     void updateBlockChainList();
+    void accumulateVerify(const QString& hash);
 
 // Below functions are Qt internal only, don't call them directly.
 public slots:
     void handleAppendLog(const QString &);
     void handleUpdateBlockChainList();
+    void handleAccumulateVerify(const QString&);
 
 private slots:
-    void addBlock();
+    void verifyBlock();
 
 private:
     QLabel *m_addBlockLabel, *m_blockChainTitleLabel, *m_blockChainListLabel, *m_logLabel;
@@ -58,6 +62,7 @@ private:
     QLineEdit *m_addBlockNameEdit;
     QMovie *m_loadingMovie;
     QPixmap *m_tickPix;
+    unordered_map<string, pair<int, block*>> m_verifyBlockHash;
 
     dialog_controller *m_controller;
 };
@@ -70,10 +75,12 @@ class dialog_controller : public QObject
 public slots:
     void operateAppendLog(const QString& log);
     void operateUpdateBlockChainList();
+    void operateAccumulateVerify(const QString& hash);
 
 signals:
     void resultReadyAppendLog(const QString& log);
     void resultReadyUpdateBlockChainList();
+    void resultReadyAccumulateVerify(const QString& hash);
 };
 
 #endif /* dialog_h */

@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_dialog_t {
-    QByteArrayData data[8];
-    char stringdata0[95];
+    QByteArrayData data[11];
+    char stringdata0[143];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,14 +36,18 @@ QT_MOC_LITERAL(1, 7, 9), // "appendLog"
 QT_MOC_LITERAL(2, 17, 0), // ""
 QT_MOC_LITERAL(3, 18, 3), // "log"
 QT_MOC_LITERAL(4, 22, 20), // "updateBlockChainList"
-QT_MOC_LITERAL(5, 43, 15), // "handleAppendLog"
-QT_MOC_LITERAL(6, 59, 26), // "handleUpdateBlockChainList"
-QT_MOC_LITERAL(7, 86, 8) // "addBlock"
+QT_MOC_LITERAL(5, 43, 16), // "accumulateVerify"
+QT_MOC_LITERAL(6, 60, 4), // "hash"
+QT_MOC_LITERAL(7, 65, 15), // "handleAppendLog"
+QT_MOC_LITERAL(8, 81, 26), // "handleUpdateBlockChainList"
+QT_MOC_LITERAL(9, 108, 22), // "handleAccumulateVerify"
+QT_MOC_LITERAL(10, 131, 11) // "verifyBlock"
 
     },
     "dialog\0appendLog\0\0log\0updateBlockChainList\0"
-    "handleAppendLog\0handleUpdateBlockChainList\0"
-    "addBlock"
+    "accumulateVerify\0hash\0handleAppendLog\0"
+    "handleUpdateBlockChainList\0"
+    "handleAccumulateVerify\0verifyBlock"
 };
 #undef QT_MOC_LITERAL
 
@@ -53,29 +57,33 @@ static const uint qt_meta_data_dialog[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       2,       // signalCount
+       3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   39,    2, 0x06 /* Public */,
-       4,    0,   42,    2, 0x06 /* Public */,
+       1,    1,   49,    2, 0x06 /* Public */,
+       4,    0,   52,    2, 0x06 /* Public */,
+       5,    1,   53,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    1,   43,    2, 0x0a /* Public */,
-       6,    0,   46,    2, 0x0a /* Public */,
-       7,    0,   47,    2, 0x08 /* Private */,
+       7,    1,   56,    2, 0x0a /* Public */,
+       8,    0,   59,    2, 0x0a /* Public */,
+       9,    1,   60,    2, 0x0a /* Public */,
+      10,    0,   63,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    6,
 
  // slots: parameters
     QMetaType::Void, QMetaType::QString,    2,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    2,
     QMetaType::Void,
 
        0        // eod
@@ -89,9 +97,11 @@ void dialog::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         switch (_id) {
         case 0: _t->appendLog((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 1: _t->updateBlockChainList(); break;
-        case 2: _t->handleAppendLog((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 3: _t->handleUpdateBlockChainList(); break;
-        case 4: _t->addBlock(); break;
+        case 2: _t->accumulateVerify((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 3: _t->handleAppendLog((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 4: _t->handleUpdateBlockChainList(); break;
+        case 5: _t->handleAccumulateVerify((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 6: _t->verifyBlock(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -107,6 +117,13 @@ void dialog::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
             typedef void (dialog::*_t)();
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&dialog::updateBlockChainList)) {
                 *result = 1;
+                return;
+            }
+        }
+        {
+            typedef void (dialog::*_t)(const QString & );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&dialog::accumulateVerify)) {
+                *result = 2;
                 return;
             }
         }
@@ -138,13 +155,13 @@ int dialog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 7)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 5;
+        _id -= 7;
     }
     return _id;
 }
@@ -161,9 +178,16 @@ void dialog::updateBlockChainList()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
 }
+
+// SIGNAL 2
+void dialog::accumulateVerify(const QString & _t1)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 2, _a);
+}
 struct qt_meta_stringdata_dialog_controller_t {
-    QByteArrayData data[7];
-    char stringdata0[121];
+    QByteArrayData data[10];
+    char stringdata0[178];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -177,13 +201,18 @@ QT_MOC_LITERAL(1, 18, 20), // "resultReadyAppendLog"
 QT_MOC_LITERAL(2, 39, 0), // ""
 QT_MOC_LITERAL(3, 40, 3), // "log"
 QT_MOC_LITERAL(4, 44, 31), // "resultReadyUpdateBlockChainList"
-QT_MOC_LITERAL(5, 76, 16), // "operateAppendLog"
-QT_MOC_LITERAL(6, 93, 27) // "operateUpdateBlockChainList"
+QT_MOC_LITERAL(5, 76, 27), // "resultReadyAccumulateVerify"
+QT_MOC_LITERAL(6, 104, 4), // "hash"
+QT_MOC_LITERAL(7, 109, 16), // "operateAppendLog"
+QT_MOC_LITERAL(8, 126, 27), // "operateUpdateBlockChainList"
+QT_MOC_LITERAL(9, 154, 23) // "operateAccumulateVerify"
 
     },
     "dialog_controller\0resultReadyAppendLog\0"
     "\0log\0resultReadyUpdateBlockChainList\0"
-    "operateAppendLog\0operateUpdateBlockChainList"
+    "resultReadyAccumulateVerify\0hash\0"
+    "operateAppendLog\0operateUpdateBlockChainList\0"
+    "operateAccumulateVerify"
 };
 #undef QT_MOC_LITERAL
 
@@ -193,28 +222,32 @@ static const uint qt_meta_data_dialog_controller[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       2,       // signalCount
+       3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   34,    2, 0x06 /* Public */,
-       4,    0,   37,    2, 0x06 /* Public */,
+       1,    1,   44,    2, 0x06 /* Public */,
+       4,    0,   47,    2, 0x06 /* Public */,
+       5,    1,   48,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    1,   38,    2, 0x0a /* Public */,
-       6,    0,   41,    2, 0x0a /* Public */,
+       7,    1,   51,    2, 0x0a /* Public */,
+       8,    0,   54,    2, 0x0a /* Public */,
+       9,    1,   55,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    6,
 
  // slots: parameters
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    6,
 
        0        // eod
 };
@@ -227,8 +260,10 @@ void dialog_controller::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         switch (_id) {
         case 0: _t->resultReadyAppendLog((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 1: _t->resultReadyUpdateBlockChainList(); break;
-        case 2: _t->operateAppendLog((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 3: _t->operateUpdateBlockChainList(); break;
+        case 2: _t->resultReadyAccumulateVerify((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 3: _t->operateAppendLog((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 4: _t->operateUpdateBlockChainList(); break;
+        case 5: _t->operateAccumulateVerify((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -244,6 +279,13 @@ void dialog_controller::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
             typedef void (dialog_controller::*_t)();
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&dialog_controller::resultReadyUpdateBlockChainList)) {
                 *result = 1;
+                return;
+            }
+        }
+        {
+            typedef void (dialog_controller::*_t)(const QString & );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&dialog_controller::resultReadyAccumulateVerify)) {
+                *result = 2;
                 return;
             }
         }
@@ -275,13 +317,13 @@ int dialog_controller::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 6)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 4;
+        _id -= 6;
     }
     return _id;
 }
@@ -297,6 +339,13 @@ void dialog_controller::resultReadyAppendLog(const QString & _t1)
 void dialog_controller::resultReadyUpdateBlockChainList()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
+}
+
+// SIGNAL 2
+void dialog_controller::resultReadyAccumulateVerify(const QString & _t1)
+{
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 2, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE
