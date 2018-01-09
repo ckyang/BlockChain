@@ -24,9 +24,10 @@ public:
     crypto();
     ~crypto();
 
-    static string HASH(const char* data, const int len);
+    static string HASH(const char* data, const unsigned int len);
 
     void getPublicKey(unsigned char *pubKey, unsigned int& pubKeyLen);
+    const string& getAddress();
     void sign(const char* msg, const int len, unsigned char *signature, unsigned int& signatureLen);
     bool verify(const char* msg, const int len, const unsigned char *signature, const unsigned int signatureLen, const unsigned char *pubKey, const unsigned int pubKeyLen);
 
@@ -34,6 +35,7 @@ private:
     void generateKeyPair();
 
     EC_KEY* m_pECCKeyPair;
+    string m_address;
 };
 
 #endif /* crypto_h */

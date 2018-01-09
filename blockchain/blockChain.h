@@ -30,7 +30,7 @@ public:
     void addBlock(block *newBlock);
     unsigned long long length(){return len;}
     block *getLatestBlock(){return tail;}
-    block *getBlock(const string& hash){return hashList[hash];}
+    block *getBlock(const string& hash){return blockHash[hash];}
     void replaceChain(blockChain * const chain);
     string getChainInfo(const bool bWithTitle = false);
 
@@ -42,7 +42,7 @@ private:
 
     block *head;
     block *tail;
-    unordered_map<string, block*> hashList;
+    unordered_map<string, block*> blockHash;
     unsigned long long len;
 };
 

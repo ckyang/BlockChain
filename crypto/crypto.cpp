@@ -19,6 +19,7 @@
 crypto::crypto()
 {
     generateKeyPair();
+    m_address.clear();
 }
 
 crypto::~crypto()
@@ -26,7 +27,7 @@ crypto::~crypto()
     EC_KEY_free(m_pECCKeyPair);
 }
 
-string crypto::HASH(const char* data, const int len)
+string crypto::HASH(const char* data, const unsigned int len)
 {
     char outputBuffer[65];
     unsigned char hash[SHA256_DIGEST_LENGTH];
@@ -76,6 +77,20 @@ void crypto::getPublicKey(unsigned char *pubKey, unsigned int& pubKeyLen)
     pubKeyLen = i2o_ECPublicKey(m_pECCKeyPair, NULL);
     unsigned char *endBuf = pubKey;
     i2o_ECPublicKey(m_pECCKeyPair, &endBuf);
+}
+
+const string& crypto::getAddress()
+{
+    if(m_address.empty())
+    {
+        unsigned char pubKey[MAX_PUBLICKEY_LEN] = {'\0'};
+        unsigned int pubKeyLen = 0;
+        getPublicKey(pubKey, pubKeyLen);
+        m_address = HASH((char*)pubKey, pubKeyLen);
+        factory::GetDialog()->updateAddress(m_address.c_str());
+    }
+
+    return m_address;
 }
 
 void crypto::sign(const char* msg, const int len, unsigned char *signature, unsigned int& signatureLen)

@@ -42,9 +42,6 @@ void talk::Response(int sock_fd, short event, void *arg)
     if(!RcvMsg(sock_fd, &client_addr, readBuf, len))
         return;
 
-    dialog->appendLog(QString("Received packet from ").append(inet_ntoa(client_addr.sin_addr)).append(" : ").append(to_string(ntohs(client_addr.sin_port)).c_str()));
-    dialog->appendLog(QString("Received: ").append(readBuf));
-
     client_addr.sin_port = htons(SENDER_PORT);
 
     if(len < 7)
@@ -92,7 +89,7 @@ void talk::Response(int sock_fd, short event, void *arg)
     if(StartWith(readBuf, len, REMOTE_COMMAND_CONFIRM_VERIFY))
     {
         string hash(readBuf + strlen(REMOTE_COMMAND_CONFIRM_VERIFY) + 1, len - strlen(REMOTE_COMMAND_CONFIRM_VERIFY) - 1);
-        factory::GetDialog()->accumulateVerify(QString(hash.c_str()));
+        factory::GetDialog()->accumulateValidation(QString(hash.c_str()));
         return;
     }
 
@@ -149,14 +146,18 @@ void talk::Response(int sock_fd, short event, void *arg)
         return;
     }
 
-    //REMOTE_COMMAND_REPLY_PUBKEY publicKey
+    //REMOTE_COMMAND_REPLY_PUBKEY address publicKey
     if(StartWith(readBuf, len, REMOTE_COMMAND_REPLY_PUBKEY))
     {
-        string senderIP = string(inet_ntoa(client_addr.sin_addr));
-        int pubKeyLen = len - strlen(REMOTE_COMMAND_REPLY_PUBKEY) - 1;
+        crypto* crypto = factory::GetCrypto();
+        char *senderAddress = (char*)malloc((crypto->getAddress().size() + 1) * sizeof(char));
+        memcpy(senderAddress, readBuf + strlen(REMOTE_COMMAND_REPLY_PUBKEY) + 1, crypto->getAddress().size());
+        senderAddress[crypto->getAddress().size()] = '\0';
+        int pubKeyLen = len - strlen(REMOTE_COMMAND_REPLY_PUBKEY) - 1 - (int)crypto->getAddress().size();
         unsigned char* pubKey = (unsigned char*)malloc(sizeof(unsigned char) * pubKeyLen);
-        memcpy(pubKey, readBuf + strlen(REMOTE_COMMAND_REPLY_PUBKEY) + 1, pubKeyLen);
-        pubKeyHash[senderIP] = make_pair(pubKey, pubKeyLen);
+        memcpy(pubKey, readBuf + strlen(REMOTE_COMMAND_REPLY_PUBKEY) + 1 + crypto->getAddress().size(), pubKeyLen);
+        pubKeyHash[senderAddress] = make_pair(pubKey, pubKeyLen);
+        free(senderAddress);
         return;
     }
 }
@@ -268,23 +269,24 @@ void talk::SendMsg(const int sock_fd, const struct sockaddr_in* sock_in, const c
 
     unsigned char signature[MAX_SIGNATURE_LEN] = {'\0'};
     unsigned int signatureLen = 0;
-    factory::GetCrypto()->sign(msg, len, signature, signatureLen);
+    crypto* crypto = factory::GetCrypto();
+    crypto->sign(msg, len, signature, signatureLen);
 
     static char message[MAX_BUF_SIZE], lenHex[4] = {'0'};
 
     ItoHex(len, lenHex);
     memset(message, '\0', MAX_BUF_SIZE);
     memcpy(message, BLOCKCHAIN_HEADER, strlen(BLOCKCHAIN_HEADER));
-    memcpy(message + strlen(BLOCKCHAIN_HEADER), lenHex, 4);
-    memcpy(message + strlen(BLOCKCHAIN_HEADER) + 4, msg, len);
-    memcpy(message + strlen(BLOCKCHAIN_HEADER) + 4 + len, signature, signatureLen);
+    memcpy(message + strlen(BLOCKCHAIN_HEADER), crypto->getAddress().c_str(), crypto->getAddress().size());
+    memcpy(message + strlen(BLOCKCHAIN_HEADER) + crypto->getAddress().size(), lenHex, 4);
+    memcpy(message + strlen(BLOCKCHAIN_HEADER) + crypto->getAddress().size() + 4, msg, len);
+    memcpy(message + strlen(BLOCKCHAIN_HEADER) + crypto->getAddress().size() + 4 + len, signature, signatureLen);
 
-    sendto(sock_fd, message, strlen(BLOCKCHAIN_HEADER) + 4 + len + signatureLen + 1, 0, (struct sockaddr *)sock_in, sizeof(struct sockaddr_in));
+    sendto(sock_fd, message, strlen(BLOCKCHAIN_HEADER) + crypto->getAddress().size() + 4 + len + signatureLen + 1, 0, (struct sockaddr *)sock_in, sizeof(struct sockaddr_in));
 }
 
 bool talk::RcvMsg(const int sock_fd, struct sockaddr_in* client_addr, char* msg, int& len)
 {
-    static string g_localIP;
     static char rbuf[MAX_BUF_SIZE];
     int size = sizeof(struct sockaddr), receiveLen;
     memset(rbuf, '\0', MAX_BUF_SIZE);
@@ -293,47 +295,52 @@ bool talk::RcvMsg(const int sock_fd, struct sockaddr_in* client_addr, char* msg,
     if((receiveLen = (int)recvfrom(sock_fd, rbuf, (size_t)sizeof(rbuf), 0, (struct sockaddr *)client_addr, (socklen_t *)&size) - 1) < 0)
         return false;
 
-    if(g_localIP.empty() || g_localIP == inet_ntoa(client_addr->sin_addr))
-    {
-        if(g_localIP.empty())
-        {
-            g_localIP = inet_ntoa(client_addr->sin_addr);
-            dialog->appendLog(QString("Local IP : ").append(g_localIP.c_str()));
-        }
-
-        dialog->appendLog("Received packet is from myself, ignore it.");
-        return false;
-    }
-
     if(!StartWith(rbuf, receiveLen, BLOCKCHAIN_HEADER))
         return false;
 
-    HextoI(len, rbuf + strlen(BLOCKCHAIN_HEADER));
-    memcpy(msg, rbuf + strlen(BLOCKCHAIN_HEADER) + 4, len);
+    crypto* crypto = factory::GetCrypto();
+
+    char *senderAddress = (char*)malloc((crypto->getAddress().size() + 1) * sizeof(char));
+    memcpy(senderAddress, rbuf + strlen(BLOCKCHAIN_HEADER), crypto->getAddress().size());
+    senderAddress[crypto->getAddress().size()] = '\0';
+
+    if(crypto->getAddress() == senderAddress)
+    {
+        dialog->appendLog("Received packet from myself, ignore it.");
+        free(senderAddress);
+        return false;
+    }
+
+    HextoI(len, rbuf + strlen(BLOCKCHAIN_HEADER) + crypto->getAddress().size());
+    memcpy(msg, rbuf + strlen(BLOCKCHAIN_HEADER) + crypto->getAddress().size() + 4, len);
+
+    dialog->appendLog(QString("Received packet from [").append(senderAddress).append("]"));
+    dialog->appendLog(QString("Received: ").append(msg));
 
     //Don't validate signature with REMOTE_COMMAND_REPLY_PUBKEY
     if(StartWith(msg, len, REMOTE_COMMAND_REPLY_PUBKEY))
         return true;
 
     unsigned char signature[MAX_SIGNATURE_LEN] = {'\0'};
-    unsigned int signatureLen = receiveLen - strlen(BLOCKCHAIN_HEADER) - 4 - len - ('\n' == rbuf[receiveLen - 1] ? 1 : 0);
-    memcpy(signature, rbuf + strlen(BLOCKCHAIN_HEADER) + 4 + len, signatureLen);
+    unsigned int signatureLen = receiveLen - strlen(BLOCKCHAIN_HEADER) - (int)crypto->getAddress().size() - 4 - len - ('\n' == rbuf[receiveLen - 1] ? 1 : 0);
+    memcpy(signature, rbuf + strlen(BLOCKCHAIN_HEADER) + crypto->getAddress().size() + 4 + len, signatureLen);
 
-    string senderIP = string(inet_ntoa(client_addr->sin_addr));
-
-    if(pubKeyHash.find(senderIP) == pubKeyHash.end())
+    if(pubKeyHash.find(senderAddress) == pubKeyHash.end())
     {
         dialog->appendLog("No public key, cannot validate!");
+        free(senderAddress);
         return false;
     }
 
-    if(!factory::GetCrypto()->verify(msg, len, signature, signatureLen, pubKeyHash[senderIP].first, pubKeyHash[senderIP].second))
+    if(!factory::GetCrypto()->verify(msg, len, signature, signatureLen, pubKeyHash[senderAddress].first, pubKeyHash[senderAddress].second))
     {
         dialog->appendLog("Verify NG!");
+        free(senderAddress);
         return false;
     }
 
     dialog->appendLog("Verify OK!");
+    free(senderAddress);
     return true;
 }
 
@@ -363,10 +370,12 @@ void talk::GetReplyPublicKey(char* writeBuf, int& len)
 {
     unsigned char pubKey[MAX_PUBLICKEY_LEN] = {'\0'};
     unsigned int pubKeyLen = 0;
-    factory::GetCrypto()->getPublicKey(pubKey, pubKeyLen);
+    crypto* crypto = factory::GetCrypto();
+    crypto->getPublicKey(pubKey, pubKeyLen);
     memcpy(writeBuf, REMOTE_COMMAND_REPLY_PUBKEY, strlen(REMOTE_COMMAND_REPLY_PUBKEY));
     writeBuf[strlen(REMOTE_COMMAND_REPLY_PUBKEY)] = ' ';
-    len = strlen(REMOTE_COMMAND_REPLY_PUBKEY) + 1 + pubKeyLen;
-    memcpy(writeBuf + strlen(REMOTE_COMMAND_REPLY_PUBKEY) + 1, pubKey, pubKeyLen);
+    memcpy(writeBuf + strlen(REMOTE_COMMAND_REPLY_PUBKEY) + 1, crypto->getAddress().c_str(), crypto->getAddress().size());
+    memcpy(writeBuf + strlen(REMOTE_COMMAND_REPLY_PUBKEY) + 1 + crypto->getAddress().size(), pubKey, pubKeyLen);
+    len = strlen(REMOTE_COMMAND_REPLY_PUBKEY) + 1 + (int)crypto->getAddress().size() + pubKeyLen;
 }
 

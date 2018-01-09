@@ -64,7 +64,7 @@ void blockChain::addBlock(block *newBlock)
 
     head = !head ? newBlock : head;
     tail = newBlock;
-    hashList[newBlock->getHash()] = newBlock;
+    blockHash[newBlock->getHash()] = newBlock;
     ++len;
 }
 
@@ -134,9 +134,9 @@ void blockChain::replaceChain(blockChain * const newChain)
     while(cur)
     {
         block *pre = newChain->getBlock(cur->getPreHash());
-        hashList[cur->getHash()] = new block(cur);
-        tail = !tail ? hashList[cur->getHash()] : tail;
-        head = hashList[cur->getHash()];
+        blockHash[cur->getHash()] = new block(cur);
+        tail = !tail ? blockHash[cur->getHash()] : tail;
+        head = blockHash[cur->getHash()];
         cur = pre;
     }
 
@@ -212,12 +212,12 @@ void blockChain::removeAll()
     
     while(cur)
     {
-        block *pre = hashList[cur->getPreHash()];
+        block *pre = blockHash[cur->getPreHash()];
         delete cur;
         cur = pre;
     }
     
-    hashList.clear();
+    blockHash.clear();
     len = 0;
     tail = NULL;
 }

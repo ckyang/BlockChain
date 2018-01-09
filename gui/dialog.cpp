@@ -20,6 +20,7 @@
 #include "blockchain.h"
 #include "talk.h"
 #include "block.h"
+#include "crypto.h"
 
 #define VELIDATION_NUMBER 2
 
@@ -47,7 +48,7 @@ dialog::dialog(QWidget *parent, QApplication* app)
     connect(m_addBlockButton, SIGNAL(clicked()), this, SLOT(verifyBlock()));
 
     m_blockChainListLayout = new QVBoxLayout(this);
-    m_blockChainTitleLabel = new QLabel("Current Block Chain");
+    m_blockChainTitleLabel = new QLabel("Address: []");
     m_blockChainListLabel = new QLabel("Empty");
     m_blockChainScrollArea = new QScrollArea;
     m_blockChainScrollArea->setStyleSheet("background-color:lightcyan;");
@@ -74,12 +75,16 @@ dialog::dialog(QWidget *parent, QApplication* app)
     m_controller = new dialog_controller();
     m_controller->moveToThread(&workerThread);
     connect(&workerThread, SIGNAL(finished()), m_controller, SLOT(deleteLater()));
+
     connect(this, SIGNAL(appendLog(QString)), m_controller, SLOT(operateAppendLog(QString)));
     connect(m_controller, SIGNAL(resultReadyAppendLog(QString)), this, SLOT(handleAppendLog(QString)));
     connect(this, SIGNAL(updateBlockChainList()), m_controller, SLOT(operateUpdateBlockChainList()));
     connect(m_controller, SIGNAL(resultReadyUpdateBlockChainList()), this, SLOT(handleUpdateBlockChainList()));
-    connect(this, SIGNAL(accumulateVerify(QString)), m_controller, SLOT(operateAccumulateVerify(QString)));
-    connect(m_controller, SIGNAL(resultReadyAccumulateVerify(QString)), this, SLOT(handleAccumulateVerify(QString)));
+    connect(this, SIGNAL(accumulateValidation(QString)), m_controller, SLOT(operateAccumulateValidation(QString)));
+    connect(m_controller, SIGNAL(resultReadyAccumulateValidation(QString)), this, SLOT(handleAccumulateValidation(QString)));
+    connect(this, SIGNAL(updateAddress(QString)), m_controller, SLOT(operateUpdateAddress(QString)));
+    connect(m_controller, SIGNAL(resultReadyUpdateAddress(QString)), this, SLOT(handleUpdateAddress(QString)));
+
     workerThread.start();
 }
 
@@ -108,31 +113,31 @@ void dialog::verifyBlock()
 //    m_addBlockLabel->setMovie(m_loadingMovie);
 //    m_loadingMovie->start();
 
-    m_addBlockLabel->setText("Verifying...");
+    m_addBlockLabel->setText("Validating...");
     block* newBlock = factory::GetBlockChain()->generateNextBlock(m_addBlockNameEdit->text().toUtf8().constData());
-    m_verifyBlockHash[newBlock->getHash()] = make_pair(0, newBlock);
+    m_validatingBlockHash[newBlock->getHash()] = make_pair(0, newBlock);
     talk::Broadcast(string(REMOTE_COMMAND_ASK_VERIFY) + " " + newBlock->getBlockInfo());
     m_addBlockNameEdit->clear();
 }
 
-void dialog::handleAccumulateVerify(const QString& hash)
+void dialog::handleAccumulateValidation(const QString& hash)
 {
     string curHash = hash.toUtf8().constData();
-    if(m_verifyBlockHash.find(curHash) == m_verifyBlockHash.end())
+    if(m_validatingBlockHash.find(curHash) == m_validatingBlockHash.end())
         return;
 
-    ++m_verifyBlockHash[curHash].first;
+    ++m_validatingBlockHash[curHash].first;
 
-    if(VELIDATION_NUMBER == m_verifyBlockHash[curHash].first)
+    if(VELIDATION_NUMBER == m_validatingBlockHash[curHash].first)
     {
-        factory::GetBlockChain()->addBlock(m_verifyBlockHash[curHash].second);
-        m_verifyBlockHash.erase(curHash);
+        factory::GetBlockChain()->addBlock(m_validatingBlockHash[curHash].second);
+        m_validatingBlockHash.erase(curHash);
         updateBlockChainList();
         m_addBlockLabel->setText("OK!");
         //    m_addBlockLabel->setPixmap(*m_tickPix);
     }
     else
-        m_addBlockLabel->setText(QString("+").append(to_string(m_verifyBlockHash[curHash].first).c_str()));
+        m_addBlockLabel->setText(QString("+").append(to_string(m_validatingBlockHash[curHash].first).c_str()));
 }
 
 void dialog::handleUpdateBlockChainList()
@@ -155,6 +160,11 @@ void dialog::handleAppendLog(const QString& log)
     m_logScrollArea->horizontalScrollBar()->setValue(m_logScrollArea->horizontalScrollBar()->minimum());
 }
 
+void dialog::handleUpdateAddress(const QString& address)
+{
+    m_blockChainTitleLabel->setText(QString("Address: [").append(address).append("]"));
+}
+
 void dialog_controller::operateAppendLog(const QString& log)
 {
     emit resultReadyAppendLog(log);
@@ -165,7 +175,12 @@ void dialog_controller::operateUpdateBlockChainList()
     emit resultReadyUpdateBlockChainList();
 }
 
-void dialog_controller::operateAccumulateVerify(const QString& hash)
+void dialog_controller::operateAccumulateValidation(const QString& hash)
 {
-    emit resultReadyAccumulateVerify(hash);
+    emit resultReadyAccumulateValidation(hash);
+}
+
+void dialog_controller::operateUpdateAddress(const QString& address)
+{
+    emit resultReadyUpdateAddress(address);
 }

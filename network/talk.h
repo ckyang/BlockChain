@@ -14,7 +14,6 @@
 
 #define REMOTE_COMMAND_ASK_VERIFY "ASK_VERIFY"
 #define REMOTE_COMMAND_CONFIRM_VERIFY "COMFIRM_VERIFY"
-#define REMOTE_COMMAND_NEW "NEW"
 #define REMOTE_COMMAND_GET_LAST "GET_LAST"
 #define REMOTE_COMMAND_GET_ALL "GET_ALL"
 #define REMOTE_COMMAND_GET_PUBKEY "GET_PUBKEY"
@@ -42,8 +41,9 @@ private:
     static void Response(int sock_fd, short event, void *arg);
     static bool StartWith(const char* str, int len, const char* start_str);
 
-    //Message Format: [BLOCKCHAIN_HEADER][MessageLen][Message][Signature]
+    //Message Format: [BLOCKCHAIN_HEADER][ADDRESS][MessageLen][Message][Signature]
     //BLOCKCHAIN_HEADER : strlen(BLOCKCHAIN_HEADER)
+    //Address : 64
     //MessageLen : 4 (0000 ~ FFFF)
     //Message : MessageLen
     //Signature : Remained characters

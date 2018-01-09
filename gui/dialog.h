@@ -40,13 +40,15 @@ public:
 signals:
     void appendLog(const QString& log);
     void updateBlockChainList();
-    void accumulateVerify(const QString& hash);
+    void accumulateValidation(const QString& hash);
+    void updateAddress(const QString& address);
 
 // Below functions are Qt internal only, don't call them directly.
 public slots:
     void handleAppendLog(const QString &);
     void handleUpdateBlockChainList();
-    void handleAccumulateVerify(const QString&);
+    void handleAccumulateValidation(const QString&);
+    void handleUpdateAddress(const QString& address);
 
 private slots:
     void verifyBlock();
@@ -62,7 +64,7 @@ private:
     QLineEdit *m_addBlockNameEdit;
     QMovie *m_loadingMovie;
     QPixmap *m_tickPix;
-    unordered_map<string, pair<int, block*>> m_verifyBlockHash;
+    unordered_map<string, pair<int, block*>> m_validatingBlockHash;
 
     dialog_controller *m_controller;
 };
@@ -75,12 +77,14 @@ class dialog_controller : public QObject
 public slots:
     void operateAppendLog(const QString& log);
     void operateUpdateBlockChainList();
-    void operateAccumulateVerify(const QString& hash);
+    void operateAccumulateValidation(const QString& hash);
+    void operateUpdateAddress(const QString& address);
 
 signals:
     void resultReadyAppendLog(const QString& log);
     void resultReadyUpdateBlockChainList();
-    void resultReadyAccumulateVerify(const QString& hash);
+    void resultReadyAccumulateValidation(const QString& hash);
+    void resultReadyUpdateAddress(const QString& address);
 };
 
 #endif /* dialog_h */
