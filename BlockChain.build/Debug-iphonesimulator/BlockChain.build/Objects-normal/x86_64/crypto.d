@@ -29,6 +29,7 @@ dependencies: /Users/CK-Yang/GitHub/BlockChain/crypto/crypto.cpp \
   /Users/CK-Yang/iOS_Library/openssl/include/openssl/x509_vfy.h \
   /Users/CK-Yang/iOS_Library/openssl/include/openssl/pkcs7.h \
   /Users/CK-Yang/iOS_Library/openssl/include/openssl/pem2.h \
+  /Users/CK-Yang/iOS_Library/openssl/include/openssl/ripemd.h \
   /Users/CK-Yang/GitHub/BlockChain/crypto/crypto.h \
   /Users/CK-Yang/GitHub/BlockChain/factory.h \
   /Users/CK-Yang/GitHub/BlockChain/gui/dialog.h \

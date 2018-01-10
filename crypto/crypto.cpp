@@ -10,6 +10,7 @@
 #include <openssl/bio.h>
 #include <openssl/err.h>
 #include <openssl/pem.h>
+#include <openssl/ripemd.h>
 #include "crypto.h"
 #include "factory.h"
 #include "dialog.h"
@@ -27,20 +28,35 @@ crypto::~crypto()
     EC_KEY_free(m_pECCKeyPair);
 }
 
-string crypto::HASH(const char* data, const unsigned int len)
+string crypto::SHA256(const char* data, const unsigned int len)
 {
-    char outputBuffer[65];
     unsigned char hash[SHA256_DIGEST_LENGTH];
-
     SHA256_CTX sha256;
     SHA256_Init(&sha256);
     SHA256_Update(&sha256, data, len);
     SHA256_Final(hash, &sha256);
+    char outputBuffer[SHA256_DIGEST_LENGTH * 2 + 1];
 
     for(int i = 0; i < SHA256_DIGEST_LENGTH; i++)
         sprintf(outputBuffer + (i * 2), "%02x", hash[i]);
 
-    outputBuffer[64] = 0;
+    outputBuffer[SHA256_DIGEST_LENGTH * 2] = 0;
+    return string(outputBuffer);
+}
+
+string crypto::RIPEMD160(const char* data, const unsigned int len)
+{
+    unsigned char digest[RIPEMD160_DIGEST_LENGTH];
+    RIPEMD160_CTX ctx;
+    RIPEMD160_Init(&ctx);
+    RIPEMD160_Update(&ctx, data, len);
+    RIPEMD160_Final(digest, &ctx);
+    char outputBuffer[RIPEMD160_DIGEST_LENGTH * 2 + 1];
+
+    for (int i = 0; i < RIPEMD160_DIGEST_LENGTH; i++)
+        sprintf(&outputBuffer[i * 2], "%02x", (unsigned int)digest[i]);
+
+    outputBuffer[RIPEMD160_DIGEST_LENGTH * 2] = 0;
     return string(outputBuffer);
 }
 
@@ -86,7 +102,8 @@ const string& crypto::getAddress()
         unsigned char pubKey[MAX_PUBLICKEY_LEN] = {'\0'};
         unsigned int pubKeyLen = 0;
         getPublicKey(pubKey, pubKeyLen);
-        m_address = HASH((char*)pubKey, pubKeyLen);
+        string tmp = SHA256((char*)pubKey, pubKeyLen);
+        m_address = RIPEMD160(tmp.c_str(), (int)tmp.size());
         factory::GetDialog()->updateAddress(m_address.c_str());
     }
 
@@ -95,7 +112,7 @@ const string& crypto::getAddress()
 
 void crypto::sign(const char* msg, const int len, unsigned char *signature, unsigned int& signatureLen)
 {
-    string digest = HASH(msg, len);
+    string digest = SHA256(msg, len);
     signatureLen = ECDSA_size(m_pECCKeyPair);
     ECDSA_sign(0, (unsigned char*)digest.c_str(), (int)digest.size(), signature, &signatureLen, m_pECCKeyPair);
 }
@@ -108,7 +125,7 @@ bool crypto::verify(const char* msg, const int len, const unsigned char *signatu
         return false;
     }
 
-    string digest = HASH(msg, len);
+    string digest = SHA256(msg, len);
 
     const unsigned char** pubKeyVCpp = &pubKey;
     EC_KEY *curPubKey = EC_KEY_new_by_curve_name(OBJ_txt2nid(ECCTYPE));

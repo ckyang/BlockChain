@@ -24,7 +24,8 @@ public:
     crypto();
     ~crypto();
 
-    static string HASH(const char* data, const unsigned int len);
+    static string SHA256(const char* data, const unsigned int len);
+    static string RIPEMD160(const char* data, const unsigned int len);
 
     void getPublicKey(unsigned char *pubKey, unsigned int& pubKeyLen);
     const string& getAddress();
