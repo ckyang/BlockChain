@@ -134,6 +134,7 @@ void dialog::handleAccumulateValidation(const QString& hash)
         m_validatingBlockHash.erase(curHash);
         updateBlockChainList();
         m_addBlockLabel->setText("OK!");
+        talk::Broadcast(string(REMOTE_COMMAND_NEW) + " " + factory::GetBlockChain()->getLatestBlock()->getBlockInfo());
         //    m_addBlockLabel->setPixmap(*m_tickPix);
     }
     else

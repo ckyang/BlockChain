@@ -69,12 +69,10 @@ void talk::Response(int sock_fd, short event, void *arg)
             return;
         }
 
-        //If this block (coming from remote) is valid, just add into currnet blockchain.
-        //If it's invalid, ignore this block and request other node's blockchain
+        //If this block (coming from remote) is valid, return validate +1.
+        //If it's invalid, request the whole blockchain.
         if(blockChain::IsValidBlock(index, preHash, timeStamp, data, hash, blockChainObject->getLatestBlock()))
         {
-            blockChainObject->addBlock(new block(index, preHash, timeStamp, data, hash));
-            factory::GetDialog()->updateBlockChainList();
             string writeBuf = string(REMOTE_COMMAND_CONFIRM_VERIFY) + " " + hash;
             SendMsg(sock_fd, &client_addr, writeBuf);
             return;
@@ -90,6 +88,31 @@ void talk::Response(int sock_fd, short event, void *arg)
     {
         string hash(readBuf + strlen(REMOTE_COMMAND_CONFIRM_VERIFY) + 1, len - strlen(REMOTE_COMMAND_CONFIRM_VERIFY) - 1);
         factory::GetDialog()->accumulateValidation(QString(hash.c_str()));
+        return;
+    }
+
+    //NEW blockInfo
+    if(StartWith(readBuf, len, REMOTE_COMMAND_NEW))
+    {
+        int index;
+        string preHash, data, hash;
+        time_t timeStamp;
+        string tmp(readBuf + strlen(REMOTE_COMMAND_NEW) + 1, len - strlen(REMOTE_COMMAND_NEW) - 1);
+        block::TransferInfo(tmp, index, preHash, timeStamp, data, hash);
+
+        //If this block (coming from remote) is valid, add this block.
+        //If it's invalid, request the whole blockchain.
+        if(blockChain::IsValidBlock(index, preHash, timeStamp, data, hash, blockChainObject->getLatestBlock()))
+        {
+            factory::GetBlockChain()->addBlock(new block(index, preHash, timeStamp, data, hash));
+            factory::GetDialog()->updateBlockChainList();
+        }
+        else
+        {
+            string writeBuf = REMOTE_COMMAND_GET_ALL;
+            SendMsg(sock_fd, &client_addr, writeBuf);
+        }
+
         return;
     }
 
