@@ -43,11 +43,11 @@ private:
     static bool StartWith(const char* str, int len, const char* start_str);
 
     //Message Format: [BLOCKCHAIN_HEADER][ADDRESS][MessageLen][Message][Signature]
-    //BLOCKCHAIN_HEADER : strlen(BLOCKCHAIN_HEADER)
-    //Address : 64
-    //MessageLen : 4 (0000 ~ FFFF)
-    //Message : MessageLen
-    //Signature : Remained characters
+    //BLOCKCHAIN_HEADER(strlen(BLOCKCHAIN_HEADER)): "__ThisIsBlockChainPacketByClarkYang__", to avoid conflicting to other network packets
+    //Address(40): Identify the user of this protocol
+    //MessageLen(4): (0000 ~ FFFF) Indicate message length
+    //Message(MessageLen): Transferred message
+    //Signature(-) : Message signature
 
     static void SendMsg(const int sock_fd, const struct sockaddr_in* sock_in, const string& msg);
     static void SendMsg(const int sock_fd, const struct sockaddr_in* sock_in, const char* msg, const int len);
