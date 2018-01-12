@@ -5,7 +5,8 @@ This program is a Qt-based iOS App implementing blockchain fundamental features 
 It includes: "Publish Public Key", "Publish Address", "Sign Network Protocol", and "Validate New Block."
 
 # Overview
-![alt text](https://user-images.githubusercontent.com/13886288/34774611-f09cd64e-f64a-11e7-8d13-6d2fb6e9f844.png)
+![alt text](https://user-images.githubusercontent.com/13886288/34879252-8f536788-f7e7-11e7-8dd2-e660f6480f92.png)
+
 
 1. Block name input: Input a new block name (space is NOT allowed)
 
