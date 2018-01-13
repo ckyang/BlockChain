@@ -2,7 +2,7 @@
 
 This program is a Qt-based iOS App implementing blockchain fundamental features using libevent and OpenSSL.
 
-1. Decentralization distributed database.
+1. Decentralized distributed database.
 
 2. Network of nodes, real-time validation and incorruptible chain.
 
