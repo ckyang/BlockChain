@@ -2,7 +2,13 @@
 
 This program is a Qt-based iOS App implementing blockchain fundamental features using libevent and OpenSSL.
 
-It includes: "Publish Public Key", "Publish Address", "Sign Network Protocol", and "Validate New Block."
+1. Decentralization distributed database.
+
+2. Network of nodes, real-time validation and incorruptible chain.
+
+3. Cross-platform framework with iOS/Android Apps and desktop application.
+
+4. Includes following features: "Publish Public Key", "Publish Address", "Sign Network Protocol", and "Validate New Block."
 
 # Overview
 ![alt text](https://user-images.githubusercontent.com/13886288/34879252-8f536788-f7e7-11e7-8dd2-e660f6480f92.png)
